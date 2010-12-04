@@ -12,6 +12,7 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		931228EF12AAF17B007F96F5 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 931228EE12AAF17B007F96F5 /* COPYING */; };
 		93A3D63812A1F192004946BD /* FrSky Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A3D63712A1F192004946BD /* FrSky Controller.m */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* FrSky_Terminal-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FrSky_Terminal-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* FrSky Terminal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FrSky Terminal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		931228EE12AAF17B007F96F5 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		93A3D63612A1F192004946BD /* FrSky Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FrSky Controller.h"; sourceTree = "<group>"; };
 		93A3D63712A1F192004946BD /* FrSky Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FrSky Controller.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				931228EE12AAF17B007F96F5 /* COPYING */,
 				93A3D63612A1F192004946BD /* FrSky Controller.h */,
 				93A3D63712A1F192004946BD /* FrSky Controller.m */,
 				256AC3F00F4B6AF500CF3369 /* FrSky_Terminal_Prefix.pch */,
@@ -176,6 +179,7 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				931228EF12AAF17B007F96F5 /* COPYING in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
