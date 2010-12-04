@@ -1,671 +1,0 @@
-TFrSky Terminal
-v7
-r0
-t313111861.683169
-cCheck dependencies
-cProcessInfoPlistFile "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Info.plist" FrSky_Terminal-Info.plist
-cCopyStringsFile "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/InfoPlist.strings" English.lproj/InfoPlist.strings
-cCompileXIB "/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib"
-cProcessPCH /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-dytefwbxajfpbycoqtmcfnivlonh/FrSky_Terminal_Prefix.pch.gch FrSky_Terminal_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/main.o" "/Users/bryan/Documents/FrSky Terminal/main.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky_TerminalAppDelegate.o" "/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Controller.o" "/Users/bryan/Documents/FrSky Terminal/FrSky Controller.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-cLd "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal" normal x86_64
-cTouch "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app"
-
-N/Developer/SDKs/MacOSX10.5.sdk
-c000000004CDFB3FE00000000000000EE
-t1289729022
-s238
-
-N/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
-c0000000040C4AA6800000000000001E5
-t1086630504
-s485
-
-N/Developer/SDKs/MacOSX10.5.sdk/usr/include/errno.h
-c0000000047BA993000000000000003EB
-t1203411248
-s1003
-
-N/Developer/SDKs/MacOSX10.5.sdk/usr/include/fcntl.h
-c0000000047BA993000000000000003EA
-t1203411248
-s1002
-
-N/Developer/SDKs/MacOSX10.5.sdk/usr/include/stdio.h
-c0000000047BA99310000000000003D1D
-t1203411249
-s15645
-
-N/Developer/SDKs/MacOSX10.5.sdk/usr/include/stdlib.h
-c0000000047BA99310000000000002A79
-t1203411249
-s10873
-
-N/Developer/SDKs/MacOSX10.5.sdk/usr/include/string.h
-c0000000047BA99320000000000001731
-t1203411250
-s5937
-
-N/Developer/SDKs/MacOSX10.5.sdk/usr/include/sys/ioctl.h
-c0000000047E883CF00000000000011D1
-t1206420431
-s4561
-
-N/Developer/SDKs/MacOSX10.5.sdk/usr/include/termios.h
-c0000000047BA993000000000000004D4
-t1203411248
-s1236
-
-N/Developer/SDKs/MacOSX10.5.sdk/usr/include/unistd.h
-c0000000047BA993200000000000053FF
-t1203411250
-s21503
-
-N/Developer/SDKs/MacOSX10.6.sdk
-c000000004CDFB3FF00000000000000EE
-t1289729023
-s238
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
-c0000000040C4AA6800000000000001E5
-t1086630504
-s485
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/errno.h
-c000000004A5C14A600000000000003EB
-t1247548582
-s1003
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/fcntl.h
-c000000004A5C14A600000000000003EA
-t1247548582
-s1002
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdio.h
-c000000004A5C14A70000000000004174
-t1247548583
-s16756
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdlib.h
-c000000004A5C14A70000000000002DF5
-t1247548583
-s11765
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/string.h
-c000000004A5C14A70000000000001731
-t1247548583
-s5937
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/sys/ioctl.h
-c000000004A73D651000000000000116C
-t1249105489
-s4460
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/termios.h
-c000000004A5C14A600000000000004D4
-t1247548582
-s1236
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/unistd.h
-c000000004A5C14A7000000000000563E
-t1247548583
-s22078
-
-N/System/Library/Frameworks/Cocoa.framework/Cocoa
-c000000004A1F2D63000000000000A5E0
-t1243557219
-s42464
-
-N/Users/bryan/Documents/FrSky Terminal/Controller.h
-c000000004CF1B07B00000000000000CE
-t1290907771
-s206
-i<Cocoa/Cocoa.h>
-
-N/Users/bryan/Documents/FrSky Terminal/Controller.m
-c000000004CF1AA7D00000000000000C2
-t1290906237
-s194
-i"Controller.h"
-
-N/Users/bryan/Documents/FrSky Terminal/DataParser.cpp
-c000000004CF1FE5F000000000000008A
-t1290927711
-s138
-
-N/Users/bryan/Documents/FrSky Terminal/DataParser.h
-c000000004CF1FE51000000000000008A
-t1290927697
-s138
-
-N/Users/bryan/Documents/FrSky Terminal/DataParser.m
-c000000004CF1FD030000000000000A24
-t1290927363
-s2596
-i"DataParser.h"
-
-N/Users/bryan/Documents/FrSky Terminal/English.lproj/InfoPlist.strings
-c000000004CF19D39000000000000002D
-t1290902841
-s45
-
-N/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib
-c000000004CF97DB2000000000005CDD5
-t1291419058
-s380373
-
-N/Users/bryan/Documents/FrSky Terminal/FrSky Controller.h
-c000000004CF977020000000000000799
-t1291417346
-s1945
-i<Cocoa/Cocoa.h>
-
-N/Users/bryan/Documents/FrSky Terminal/FrSky Controller.m
-c000000004CF97DA00000000000002CBC
-t1291419040
-s11452
-i"FrSky Controller.h"
-i<stdio.h>
-i<string.h>
-i<unistd.h>
-i<fcntl.h>
-i<errno.h>
-i<termios.h>
-i<stdlib.h>
-i<sys/ioctl.h>
-
-N/Users/bryan/Documents/FrSky Terminal/FrSky Model.h
-c000000004CF1BCE800000000000000ED
-t1290910952
-s237
-i<Cocoa/Cocoa.h>
-
-N/Users/bryan/Documents/FrSky Terminal/FrSky Model.m
-c000000004CF1C02200000000000000E7
-t1290911778
-s231
-i"FrSky Model.h"
-
-N/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.h
-c000000004CF19D390000000000000147
-t1290902841
-s327
-i<Cocoa/Cocoa.h>
-
-N/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m
-c000000004CF19D390000000000000183
-t1290902841
-s387
-i"FrSky_TerminalAppDelegate.h"
-
-N/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch
-c000000004CF19D39000000000000009F
-t1290902841
-s159
-i<Cocoa/Cocoa.h>
-
-N/Users/bryan/Documents/FrSky Terminal/SerialInput.h
-c000000004CF1A5750000000000000138
-t1290904949
-s312
-i<Cocoa/Cocoa.h>
-
-N/Users/bryan/Documents/FrSky Terminal/SerialInput.m
-c000000004CF1AAC8000000000000010A
-t1290906312
-s266
-i"SerialInput.h"
-
-N/Users/bryan/Documents/FrSky Terminal/TimerController.h
-c000000004CF1EB9700000000000001C7
-t1290922903
-s455
-i<Cocoa/Cocoa.h>
-
-N/Users/bryan/Documents/FrSky Terminal/TimerController.m
-c000000004CF1F75B0000000000000295
-t1290925915
-s661
-i"TimerController.h"
-i"FrSky Controller.h"
-
-N/Users/bryan/Documents/FrSky Terminal/UserDataTextBox.h
-c000000004CF1B13B00000000000000DC
-t1290907963
-s220
-i<Cocoa/Cocoa.h>
-
-N/Users/bryan/Documents/FrSky Terminal/UserDataTextBox.m
-c000000004CF1B11700000000000000D1
-t1290907927
-s209
-i"UserDataTextBox.h"
-
-N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app
-t1291419061
-s102
-
-N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Info.plist
-t1291413987
-s902
-
-N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal
-t1291419061
-s35720
-
-N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/PkgInfo
-t1291413987
-s8
-
-N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/InfoPlist.strings
-t1290903691
-s92
-
-N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/MainMenu.nib
-t1291419061
-s73753
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/FrSky Controller.o
-t1291369339
-s35716
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/FrSky Terminal.LinkFileList
-c000000004CF8BB770000000000000186
-t1291369335
-s390
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/FrSky_TerminalAppDelegate.o
-t1291369337
-s15424
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/main.o
-t1291369337
-s4860
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/Controller.o
-t1290907772
-s5440
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/DataParser.o
-t1290927728
-s1420
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Controller.o
-t1291419061
-s50340
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Model.o
-t1290910996
-s6640
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Terminal.LinkFileList
-c000000004CF1FFBF000000000000018C
-t1290928063
-s396
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky_TerminalAppDelegate.o
-t1291413988
-s21332
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/SerialInput.o
-t1290906313
-s8444
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/TimerController.o
-t1290922947
-s18040
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/UserDataTextBox.o
-t1290908018
-s5532
-
-N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/main.o
-t1291413988
-s4992
-
-N/Users/bryan/Documents/FrSky Terminal/main.m
-c000000004CF19D3900000000000000FB
-t1290902841
-s251
-i<Cocoa/Cocoa.h>
-
-N/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch.gch
-t1290903695
-s54265616
-
-N/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-dytefwbxajfpbycoqtmcfnivlonh/FrSky_Terminal_Prefix.pch.gch
-t1290973569
-s54273808
-
-N/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-fzxgpdjzorjublgjhywzyhaxauvj/FrSky_Terminal_Prefix.pch.gch
-t1290927403
-s2523504
-
-N/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfcllxnualrcbnbrshkbzkltojpy/FrSky_Terminal_Prefix.pch.gch
-t1291413868
-s51179824
-
-N/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfrqxfbokheewsghyolpetbrqatl/FrSky_Terminal_Prefix.pch.gch
-t1291369337
-s56911664
-
-NFrSky_Terminal-Info.plist
-c000000004CF34F4200000000000003E5
-t1291013954
-s997
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies313111860#313111860#0(0"0(0#1#0"8624027648#0"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/FrSky Controller.o" "/Users/bryan/Documents/FrSky Terminal/FrSky Controller.m" normal i386 objective-c com.apple.compilers.gcc.4_2
-s313062137.854929
-e313062139.021872
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/FrSky Controller.o
-x/Users/bryan/Documents/FrSky Terminal/FrSky Controller.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@64"Compile /Users/bryan/Documents/FrSky Terminal/FrSky Controller.m313062137#313062139#0(0"0(0#0#56"/Users/bryan/Documents/FrSky Terminal/FrSky Controller.m8603139296#1629"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/i386" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfrqxfbokheewsghyolpetbrqatl/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/FrSky Controller.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/FrSky Controller.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/FrSky_TerminalAppDelegate.o" "/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m" normal i386 objective-c com.apple.compilers.gcc.4_2
-s313062137.708496
-e313062138.856051
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/FrSky_TerminalAppDelegate.o
-x/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@73"Compile /Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m313062137#313062138#0(0"0(0#0#65"/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m8601133056#1647"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/i386" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfrqxfbokheewsghyolpetbrqatl/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/FrSky_TerminalAppDelegate.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/main.o" "/Users/bryan/Documents/FrSky Terminal/main.m" normal i386 objective-c com.apple.compilers.gcc.4_2
-s313062137.707634
-e313062137.854846
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/main.o
-x/Users/bryan/Documents/FrSky Terminal/main.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@52"Compile /Users/bryan/Documents/FrSky Terminal/main.m313062137#313062137#0(0"0(0#0#44"/Users/bryan/Documents/FrSky Terminal/main.m8319383698887823360#1605"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/i386" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfrqxfbokheewsghyolpetbrqatl/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/main.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/main.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/Controller.o" "/Users/bryan/Documents/FrSky Terminal/Controller.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s312600572.032114
-e312600572.134148
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/Controller.o
-x/Users/bryan/Documents/FrSky Terminal/Controller.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@58"Compile /Users/bryan/Documents/FrSky Terminal/Controller.m312600572#312600572#0(0"0(0#0#50"/Users/bryan/Documents/FrSky Terminal/Controller.m8621956416#1613"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/Controller.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/Controller.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/DataParser.o" "/Users/bryan/Documents/FrSky Terminal/DataParser.cpp" normal x86_64 c++ com.apple.compilers.gcc.4_2
-s312620527.741427
-e312620528.780806
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/DataParser.o
-x/Users/bryan/Documents/FrSky Terminal/DataParser.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@60"Compile /Users/bryan/Documents/FrSky Terminal/DataParser.cpp312620527#312620528#0(0"0(0#0#52"/Users/bryan/Documents/FrSky Terminal/DataParser.cpp8621195136#1624"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-fzxgpdjzorjublgjhywzyhaxauvj/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/DataParser.cpp" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/DataParser.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/DataParser.o" "/Users/bryan/Documents/FrSky Terminal/DataParser.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s312620189.455520
-e312620189.565439
-r0
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/DataParser.o
-x/Users/bryan/Documents/FrSky Terminal/DataParser.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m: In function 'processByte':
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m:12: error: old-style parameter declarations in prototyped function definition
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m:17: warning: 'return' with a value, in function returning void
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m:37: warning: 'return' with a value, in function returning void
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m: At top level:
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m:43: error: redefinition of 'processByte'
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m:12: error: previous definition of 'processByte' was here
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m: In function 'processByte':
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m:70: warning: case label value exceeds maximum value for type
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m:74: warning: case label value exceeds maximum value for type
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m:78: warning: case label value exceeds maximum value for type
-o/Users/bryan/Documents/FrSky Terminal/DataParser.m:87: warning: case label value exceeds maximum value for type
-lSLF07#2@58"Compile /Users/bryan/Documents/FrSky Terminal/DataParser.m312620189#312620189#0(1229"/Users/bryan/Documents/FrSky Terminal/DataParser.m: In function 'processByte':/Users/bryan/Documents/FrSky Terminal/DataParser.m:12: error: old-style parameter declarations in prototyped function definition/Users/bryan/Documents/FrSky Terminal/DataParser.m:17: warning: 'return' with a value, in function returning void/Users/bryan/Documents/FrSky Terminal/DataParser.m:37: warning: 'return' with a value, in function returning void/Users/bryan/Documents/FrSky Terminal/DataParser.m: At top level:/Users/bryan/Documents/FrSky Terminal/DataParser.m:43: error: redefinition of 'processByte'/Users/bryan/Documents/FrSky Terminal/DataParser.m:12: error: previous definition of 'processByte' was here/Users/bryan/Documents/FrSky Terminal/DataParser.m: In function 'processByte':/Users/bryan/Documents/FrSky Terminal/DataParser.m:70: warning: case label value exceeds maximum value for type/Users/bryan/Documents/FrSky Terminal/DataParser.m:74: warning: case label value exceeds maximum value for type/Users/bryan/Documents/FrSky Terminal/DataParser.m:78: warning: case label value exceeds maximum value for type/Users/bryan/Documents/FrSky Terminal/DataParser.m:87: warning: case label value exceeds maximum value for type10(4@66"Old-style parameter declarations in prototyped function definition312620189#79#129#0(6@50"/Users/bryan/Documents/FrSky Terminal/DataParser.m312620163#12#0#12#0#0"0(22@49"'return' with a value, in function returning void312620189#208#114#0(6@50"/Users/bryan/Documents/FrSky Terminal/DataParser.m312620163#17#0#17#0#0"0(22@49"'return' with a value, in function returning void312620189#322#114#0(6@50"/Users/bryan/Documents/FrSky Terminal/DataParser.m312620163#37#0#37#0#0"0(23@13"At top level:312620189#436#66#0(6@50"/Users/bryan/Documents/FrSky Terminal/DataParser.m312620163#0#0#0#0#0"0(4@29"Redefinition of 'processByte'312620189#502#92#0(6@50"/Users/bryan/Documents/FrSky Terminal/DataParser.m312620163#43#0#43#0#19"redefinition of '*'0(13@45"Previous definition of 'processByte' was here312620189#594#108#0(6@50"/Users/bryan/Documents/FrSky Terminal/DataParser.m312620163#12#0#12#0#35"previous definition of '*' was here0(22@47"Case label value exceeds maximum value for type312620189#781#112#0(6@50"/Users/bryan/Documents/FrSky Terminal/DataParser.m312620163#70#0#70#0#0"0(22@47"Case label value exceeds maximum value for type312620189#893#112#0(6@50"/Users/bryan/Documents/FrSky Terminal/DataParser.m312620163#74#0#74#0#0"0(22@47"Case label value exceeds maximum value for type312620189#1005#112#0(6@50"/Users/bryan/Documents/FrSky Terminal/DataParser.m312620163#78#0#78#0#0"0(22@47"Case label value exceeds maximum value for type312620189#1117#112#0(6@50"/Users/bryan/Documents/FrSky Terminal/DataParser.m312620163#87#0#87#0#0"0(0#0#50"/Users/bryan/Documents/FrSky Terminal/DataParser.m8621496160#1613"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/DataParser.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/DataParser.o"1#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Controller.o" "/Users/bryan/Documents/FrSky Terminal/FrSky Controller.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s313111861.295346
-e313111861.650031
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Controller.o
-x/Users/bryan/Documents/FrSky Terminal/FrSky Controller.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@64"Compile /Users/bryan/Documents/FrSky Terminal/FrSky Controller.m313111861#313111861#0(0"0(0#0#56"/Users/bryan/Documents/FrSky Terminal/FrSky Controller.m8622562080#1635"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-dytefwbxajfpbycoqtmcfnivlonh/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/FrSky Controller.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Controller.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Model.o" "/Users/bryan/Documents/FrSky Terminal/FrSky Model.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s312603796.338619
-e312603796.657047
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Model.o
-x/Users/bryan/Documents/FrSky Terminal/FrSky Model.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@59"Compile /Users/bryan/Documents/FrSky Terminal/FrSky Model.m312603796#312603796#0(0"0(0#0#51"/Users/bryan/Documents/FrSky Terminal/FrSky Model.m8624859296#1615"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/FrSky Model.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Model.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky_TerminalAppDelegate.o" "/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s313106788.524977
-e313106788.661014
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky_TerminalAppDelegate.o
-x/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@73"Compile /Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m313106788#313106788#0(0"0(0#0#65"/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m8618402752#1653"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-dytefwbxajfpbycoqtmcfnivlonh/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky_TerminalAppDelegate.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/SerialInput.o" "/Users/bryan/Documents/FrSky Terminal/SerialInput.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s312599112.852673
-e312599113.167689
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/SerialInput.o
-x/Users/bryan/Documents/FrSky Terminal/SerialInput.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@59"Compile /Users/bryan/Documents/FrSky Terminal/SerialInput.m312599112#312599113#0(0"0(0#0#51"/Users/bryan/Documents/FrSky Terminal/SerialInput.m8624197408#1615"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/SerialInput.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/SerialInput.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/TimerController.o" "/Users/bryan/Documents/FrSky Terminal/TimerController.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s312615747.648723
-e312615747.918603
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/TimerController.o
-x/Users/bryan/Documents/FrSky Terminal/TimerController.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/bryan/Documents/FrSky Terminal/TimerController.m: In function '-[TimerController startRepeatingTimer:]':
-o/Users/bryan/Documents/FrSky Terminal/TimerController.m:22: warning: 'FrSky_Controller' may not respond to '+populateTextView'
-o/Users/bryan/Documents/FrSky Terminal/TimerController.m:22: warning: (Messages without a matching method signature
-o/Users/bryan/Documents/FrSky Terminal/TimerController.m:22: warning: will be assumed to return 'id' and accept
-o/Users/bryan/Documents/FrSky Terminal/TimerController.m:22: warning: '...' as arguments.)
-o/Users/bryan/Documents/FrSky Terminal/TimerController.m: In function '-[TimerController timerFireMethod:]':
-o/Users/bryan/Documents/FrSky Terminal/TimerController.m:32: warning: 'FrSky_Controller' may not respond to '+populateTextView'
-lSLF07#2@63"Compile /Users/bryan/Documents/FrSky Terminal/TimerController.m312615747#312615747#0(790"/Users/bryan/Documents/FrSky Terminal/TimerController.m: In function '-[TimerController startRepeatingTimer:]':/Users/bryan/Documents/FrSky Terminal/TimerController.m:22: warning: 'FrSky_Controller' may not respond to '+populateTextView'/Users/bryan/Documents/FrSky Terminal/TimerController.m:22: warning: (Messages without a matching method signature/Users/bryan/Documents/FrSky Terminal/TimerController.m:22: warning: will be assumed to return 'id' and accept/Users/bryan/Documents/FrSky Terminal/TimerController.m:22: warning: '...' as arguments.)/Users/bryan/Documents/FrSky Terminal/TimerController.m: In function '-[TimerController timerFireMethod:]':/Users/bryan/Documents/FrSky Terminal/TimerController.m:32: warning: 'FrSky_Controller' may not respond to '+populateTextView'3(22@57"'FrSky_Controller' may not respond to '+populateTextView'312615747#112#127#0(6@55"/Users/bryan/Documents/FrSky Terminal/TimerController.m312615747#22#0#22#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)312615747#239#115#0(6@55"/Users/bryan/Documents/FrSky Terminal/TimerController.m312615747#22#0#22#0#0"0(22@57"'FrSky_Controller' may not respond to '+populateTextView'312615747#663#127#0(6@55"/Users/bryan/Documents/FrSky Terminal/TimerController.m312615747#32#0#32#0#26"'*' may not respond to '*'0(0#0#55"/Users/bryan/Documents/FrSky Terminal/TimerController.m8614552352#1623"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/TimerController.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/TimerController.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/UserDataTextBox.o" "/Users/bryan/Documents/FrSky Terminal/UserDataTextBox.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s312600818.653843
-e312600818.756197
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/UserDataTextBox.o
-x/Users/bryan/Documents/FrSky Terminal/UserDataTextBox.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@63"Compile /Users/bryan/Documents/FrSky Terminal/UserDataTextBox.m312600818#312600818#0(0"0(0#0#55"/Users/bryan/Documents/FrSky Terminal/UserDataTextBox.m8622980448#1623"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/UserDataTextBox.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/UserDataTextBox.o"0#
-
-CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/main.o" "/Users/bryan/Documents/FrSky Terminal/main.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s313106788.524091
-e313106788.643563
-r1
-xCompileC
-xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/main.o
-x/Users/bryan/Documents/FrSky Terminal/main.m
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@52"Compile /Users/bryan/Documents/FrSky Terminal/main.m313106788#313106788#0(0"0(0#0#44"/Users/bryan/Documents/FrSky Terminal/main.m8619088096#1611"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-dytefwbxajfpbycoqtmcfnivlonh/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/main.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/main.o"0#
-
-CCompileXIB "/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib"
-s313111860.796216
-e313111861.294980
-r1
-xCompileXIB
-x/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib
-o/* com.apple.ibtool.document.notices */
-o/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib:833: note: This view is clipping its content.
-lSLF07#2@37"CompileXIB English.lproj/MainMenu.xib313111860#313111861#0(151"/* com.apple.ibtool.document.notices *//Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib:833: note: This view is clipping its content.1(13@34"This view is clipping its content.313111861#18446744073709551615#0#0(6@64"/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib313111858#833#0#833#0#0"0(0#0#64"/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib8601828768#374"    cd "/Users/bryan/Documents/FrSky Terminal"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/MainMenu.nib" "/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib" --sdk /Developer/SDKs/MacOSX10.6.sdk0#
-
-CCopyStringsFile "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/InfoPlist.strings" English.lproj/InfoPlist.strings
-s312596491.157969
-e312596491.684985
-r1
-xCopyStringsFile
-x/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/InfoPlist.strings
-xEnglish.lproj/InfoPlist.strings
-lSLF07#2@36"Copy English.lproj/InfoPlist.strings312596491#312596491#0(0"0(0#0#69"/Users/bryan/Documents/FrSky Terminal/English.lproj/InfoPlist.strings8617901152#374"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj"0#
-
-CLd "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal" normal i386
-s313062139.021950
-e313062139.053205
-r1
-xLd
-x/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal
-xnormal
-xi386
-lSLF07#2@103"Link /Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal313062139#313062139#0(0"0(0#0#0"8602772288#578"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/bryan/Documents/FrSky Terminal/build/Debug" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" -filelist "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/i386/FrSky Terminal.LinkFileList" -mmacosx-version-min=10.6 -framework Cocoa -o "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal"0#
-
-CLd "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal" normal x86_64
-s313111861.650105
-e313111861.680802
-r1
-xLd
-x/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal
-xnormal
-xx86_64
-lSLF07#2@103"Link /Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal313111861#313111861#0(0"0(0#0#0"8626166592#582"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/bryan/Documents/FrSky Terminal/build/Debug" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" -filelist "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Terminal.LinkFileList" -mmacosx-version-min=10.6 -framework Cocoa -o "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal"0#
-
-CProcessInfoPlistFile "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Info.plist" FrSky_Terminal-Info.plist
-s313106787.979707
-e313106788.008259
-r1
-xProcessInfoPlistFile
-x/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Info.plist
-xFrSky_Terminal-Info.plist
-lSLF07#2@33"Process FrSky_Terminal-Info.plist313106787#313106788#0(0"0(0#0#63"/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal-Info.plist8616901312#334"    cd "/Users/bryan/Documents/FrSky Terminal"    builtin-infoPlistUtility FrSky_Terminal-Info.plist -genpkginfo "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/PkgInfo" -expandbuildsettings -platform macosx -o "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Info.plist"0#
-
-CProcessPCH /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch.gch FrSky_Terminal_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s312596492.024656
-e312596495.888173
-r1
-xProcessPCH
-x/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch.gch
-xFrSky_Terminal_Prefix.pch
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@36"Precompile FrSky_Terminal_Prefix.pch312596492#312596495#0(0"0(0#0#63"/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch8603118592#1499"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -c "/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch" -o /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch.gch0#
-
-CProcessPCH /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-dytefwbxajfpbycoqtmcfnivlonh/FrSky_Terminal_Prefix.pch.gch FrSky_Terminal_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s312666365.359033
-e312666369.207562
-r1
-xProcessPCH
-x/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-dytefwbxajfpbycoqtmcfnivlonh/FrSky_Terminal_Prefix.pch.gch
-xFrSky_Terminal_Prefix.pch
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@36"Precompile FrSky_Terminal_Prefix.pch312666365#312666369#0(0"0(0#0#63"/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch7886477310532611072#1509"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -c "/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch" -o /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-dytefwbxajfpbycoqtmcfnivlonh/FrSky_Terminal_Prefix.pch.gch0#
-
-CProcessPCH /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfcllxnualrcbnbrshkbzkltojpy/FrSky_Terminal_Prefix.pch.gch FrSky_Terminal_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
-s313106666.160176
-e313106668.129850
-r1
-xProcessPCH
-x/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfcllxnualrcbnbrshkbzkltojpy/FrSky_Terminal_Prefix.pch.gch
-xFrSky_Terminal_Prefix.pch
-xnormal
-xx86_64
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@36"Precompile FrSky_Terminal_Prefix.pch313106666#313106668#0(0"0(0#0#63"/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch8613664416#1509"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fobjc-gc -mmacosx-version-min=10.5 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -c "/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch" -o /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfcllxnualrcbnbrshkbzkltojpy/FrSky_Terminal_Prefix.pch.gch0#
-
-CProcessPCH /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfrqxfbokheewsghyolpetbrqatl/FrSky_Terminal_Prefix.pch.gch FrSky_Terminal_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
-s313062135.317842
-e313062137.707489
-r1
-xProcessPCH
-x/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfrqxfbokheewsghyolpetbrqatl/FrSky_Terminal_Prefix.pch.gch
-xFrSky_Terminal_Prefix.pch
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@36"Precompile FrSky_Terminal_Prefix.pch313062135#313062137#0(0"0(0#0#63"/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch7886477310532611072#1505"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/i386" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -c "/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch" -o /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-hfrqxfbokheewsghyolpetbrqatl/FrSky_Terminal_Prefix.pch.gch0#
-
-CProcessPCH++ /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-fzxgpdjzorjublgjhywzyhaxauvj/FrSky_Terminal_Prefix.pch.gch FrSky_Terminal_Prefix.pch normal x86_64 c++ com.apple.compilers.gcc.4_2
-s312620203.266926
-e312620203.327929
-r1
-xProcessPCH++
-x/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-fzxgpdjzorjublgjhywzyhaxauvj/FrSky_Terminal_Prefix.pch.gch
-xFrSky_Terminal_Prefix.pch
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@36"Precompile FrSky_Terminal_Prefix.pch312620203#312620203#0(0"0(0#0#63"/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch8603507360#1508"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++-header -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -c "/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch" -o /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-fzxgpdjzorjublgjhywzyhaxauvj/FrSky_Terminal_Prefix.pch.gch0#
-
-CTouch "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app"
-s313111861.680883
-e313111861.683136
-r1
-xTouch
-x/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app
-lSLF07#2@74"Touch /Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app313111861#313111861#0(0"0(0#0#0"8626101088#140"    cd "/Users/bryan/Documents/FrSky Terminal"    /usr/bin/touch -c "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app"0#
-
