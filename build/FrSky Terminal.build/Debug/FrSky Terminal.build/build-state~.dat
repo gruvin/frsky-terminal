@@ -1,0 +1,196 @@
+TFrSky Terminal
+v7
+r0
+t312596497.506006
+cCheck dependencies
+cProcessInfoPlistFile "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Info.plist" FrSky_Terminal-Info.plist
+cCopyStringsFile "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/InfoPlist.strings" English.lproj/InfoPlist.strings
+cCompileXIB "/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib"
+cProcessPCH /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch.gch FrSky_Terminal_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/main.o" "/Users/bryan/Documents/FrSky Terminal/main.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky_TerminalAppDelegate.o" "/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cLd "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal" normal x86_64
+cTouch "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app"
+
+N/Developer/SDKs/MacOSX10.6.sdk
+c000000004CDFB3FF00000000000000EE
+t1289729023
+s238
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
+c0000000040C4AA6800000000000001E5
+t1086630504
+s485
+
+N/System/Library/Frameworks/Cocoa.framework/Cocoa
+c000000004A1F2D63000000000000A5E0
+t1243557219
+s42464
+
+N/Users/bryan/Documents/FrSky Terminal/English.lproj/InfoPlist.strings
+c000000004CF19D39000000000000002D
+t1290902841
+s45
+
+N/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib
+c000000004CF1A088000000000002F1EA
+t1290903688
+s193002
+
+N/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.h
+c000000004CF19D390000000000000147
+t1290902841
+s327
+i<Cocoa/Cocoa.h>
+
+N/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m
+c000000004CF19D390000000000000183
+t1290902841
+s387
+i"FrSky_TerminalAppDelegate.h"
+
+N/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch
+c000000004CF19D39000000000000009F
+t1290902841
+s159
+i<Cocoa/Cocoa.h>
+
+N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app
+t1290903697
+s102
+
+N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Info.plist
+t1290903691
+s907
+
+N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal
+t1290903697
+s14648
+
+N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/PkgInfo
+t1290903691
+s8
+
+N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/InfoPlist.strings
+t1290903691
+s92
+
+N/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/MainMenu.nib
+t1290903692
+s38538
+
+N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Terminal.LinkFileList
+c000000004CF1A08B0000000000000107
+t1290903691
+s263
+
+N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky_TerminalAppDelegate.o
+t1290903697
+s21272
+
+N/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/main.o
+t1290903696
+s4984
+
+N/Users/bryan/Documents/FrSky Terminal/main.m
+c000000004CF19D3900000000000000FB
+t1290902841
+s251
+i<Cocoa/Cocoa.h>
+
+N/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch.gch
+t1290903695
+s54265616
+
+NFrSky_Terminal-Info.plist
+c000000004CF19D3900000000000003EA
+t1290902841
+s1002
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies312596491#312596491#0(0"0(0#1#0"29836824280170608#0"0#
+
+CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky_TerminalAppDelegate.o" "/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s312596495.889198
+e312596497.042908
+r1
+xCompileC
+xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky_TerminalAppDelegate.o
+x/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@73"Compile /Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m312596495#312596497#0(0"0(0#0#65"/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m8616492000#1643"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/FrSky_TerminalAppDelegate.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky_TerminalAppDelegate.o"0#
+
+CCompileC "build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/main.o" "/Users/bryan/Documents/FrSky Terminal/main.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s312596495.888339
+e312596496.087171
+r1
+xCompileC
+xbuild/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/main.o
+x/Users/bryan/Documents/FrSky Terminal/main.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@52"Compile /Users/bryan/Documents/FrSky Terminal/main.m312596495#312596496#0(0"0(0#0#44"/Users/bryan/Documents/FrSky Terminal/main.m8617840960#1601"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -include /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch -c "/Users/bryan/Documents/FrSky Terminal/main.m" -o "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/main.o"0#
+
+CCompileXIB "/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib"
+s312596491.194459
+e312596492.024491
+r1
+xCompileXIB
+x/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib
+lSLF07#2@37"CompileXIB English.lproj/MainMenu.xib312596491#312596492#0(0"0(0#0#64"/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib8617884096#374"    cd "/Users/bryan/Documents/FrSky Terminal"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/MainMenu.nib" "/Users/bryan/Documents/FrSky Terminal/English.lproj/MainMenu.xib" --sdk /Developer/SDKs/MacOSX10.6.sdk0#
+
+CCopyStringsFile "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/InfoPlist.strings" English.lproj/InfoPlist.strings
+s312596491.157969
+e312596491.684985
+r1
+xCopyStringsFile
+x/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj/InfoPlist.strings
+xEnglish.lproj/InfoPlist.strings
+lSLF07#2@36"Copy English.lproj/InfoPlist.strings312596491#312596491#0(0"0(0#0#69"/Users/bryan/Documents/FrSky Terminal/English.lproj/InfoPlist.strings8617901152#374"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Resources/English.lproj"0#
+
+CLd "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal" normal x86_64
+s312596497.042997
+e312596497.503382
+r1
+xLd
+x/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal
+xnormal
+xx86_64
+lSLF07#2@103"Link /Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal312596497#312596497#0(0"0(0#0#0"8610264928#582"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/bryan/Documents/FrSky Terminal/build/Debug" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" -filelist "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/Objects-normal/x86_64/FrSky Terminal.LinkFileList" -mmacosx-version-min=10.6 -framework Cocoa -o "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/MacOS/FrSky Terminal"0#
+
+CProcessInfoPlistFile "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Info.plist" FrSky_Terminal-Info.plist
+s312596491.113976
+e312596491.157762
+r1
+xProcessInfoPlistFile
+x/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Info.plist
+xFrSky_Terminal-Info.plist
+lSLF07#2@33"Process FrSky_Terminal-Info.plist312596491#312596491#0(0"0(0#0#63"/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal-Info.plist7454972945256899584#334"    cd "/Users/bryan/Documents/FrSky Terminal"    builtin-infoPlistUtility FrSky_Terminal-Info.plist -genpkginfo "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/PkgInfo" -expandbuildsettings -platform macosx -o "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app/Contents/Info.plist"0#
+
+CProcessPCH /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch.gch FrSky_Terminal_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s312596492.024656
+e312596495.888173
+r1
+xProcessPCH
+x/var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch.gch
+xFrSky_Terminal_Prefix.pch
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@36"Precompile FrSky_Terminal_Prefix.pch312596492#312596495#0(0"0(0#0#63"/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch8603118592#1499"    cd "/Users/bryan/Documents/FrSky Terminal"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-generated-files.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-own-target-headers.hmap" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-all-target-headers.hmap" -iquote "/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/FrSky Terminal-project-headers.hmap" "-F/Users/bryan/Documents/FrSky Terminal/build/Debug" "-I/Users/bryan/Documents/FrSky Terminal/build/Debug/include" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources/x86_64" "-I/Users/bryan/Documents/FrSky Terminal/build/FrSky Terminal.build/Debug/FrSky Terminal.build/DerivedSources" -c "/Users/bryan/Documents/FrSky Terminal/FrSky_Terminal_Prefix.pch" -o /var/folders/tT/tTPfGpLBF1iLIoatrRVNC++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/FrSky_Terminal_Prefix-bdneqykxztpttdalublraknlxwgz/FrSky_Terminal_Prefix.pch.gch0#
+
+CTouch "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app"
+s312596497.503527
+e312596497.505961
+r1
+xTouch
+x/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app
+lSLF07#2@74"Touch /Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app312596497#312596497#0(0"0(0#0#0"8617919424#140"    cd "/Users/bryan/Documents/FrSky Terminal"    /usr/bin/touch -c "/Users/bryan/Documents/FrSky Terminal/build/Debug/FrSky Terminal.app"0#
+
