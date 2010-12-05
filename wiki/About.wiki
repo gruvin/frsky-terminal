@@ -1,4 +1,5 @@
 #summary About this program
+#labels Featured,Phase-Deploy
 
 = About Fr-Sky Terminal =
 
@@ -14,7 +15,9 @@ The purpose of this program is to provide similar (and potentially more useful) 
 
 Please see the [http://code.google.com/p/frsky-terminal/downloads FrSky Terminal project download area]
 
-NOTE: This application is the author's first such production under Apple's Xcode. I have tried to ensure that it will run on Mac OS X down to about version 10.3 and also n Intel or PPC machines. Unfortunately I have no way to actually test such compatibility, other than user feedback. Please let me know if you encounter issues.
+NOTE: This application is the author's first such production under Apple's Xcode. I have tried to ensure that it will run on Mac OS X down to about version 10.3 and also n Intel or PPC machines. Unfortunately I have no way to actually test such compatibility, other than user feedback. Please let me know if you encounter any issues.
+
+Oh dear -- as of this writing, the Google Code system for obtaining owner email addresses is broken. Hopefully, Google will fix this very soon. Normally, you would visit my Google Projects [http://code.google.com/u/gruvin/ user profile], then click the '...' in gru...@gmail.com to reveal the full address. On the other hand, if you're very clever, you might just be able to work that out for yourself. Hint: My user name is "gruvin", not "gru...". ;-) 
 
 = Usage =
 
@@ -52,5 +55,3 @@ How about an iPhone app? Well, sure. If and when I ever get myself an iPhone ($$
 
 == Add Stuff Yourself! ==
 Of course, if you know how or are keen to learn how to program in Apple's Xcode, then you're more than welcome to use this program as a starting platform and do whatever yo want with it. The terms of the license encourage you to share whatever you might do back to the open source community -- and we eagerly look forward to any such input. :-D
-
-
