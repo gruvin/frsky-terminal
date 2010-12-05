@@ -1,5 +1,0 @@
-#summary Download FrSky Terminal
-
-= Download Fr-Sky Terminal =
-
-[http://frsky-terminal.googlecode.com/svn/wiki/Download.attach/FrSky%20Terminal.dmg Downoad FrSky Terminal.dmg]
