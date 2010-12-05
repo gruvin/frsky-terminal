@@ -10,6 +10,10 @@ The purpose of this program is to provide similar (and potentially more useful) 
 
 [http://frsky-terminal.googlecode.com/svn/wiki/About.attach/screenshot.png]
 
+= Download =
+
+Please see the [http://code.google.com/p/frsky-terminal/downloads FrSky Terminal project download area]
+
 = Usage =
 
 The program displays values from three analogue sources at the RC receiver - A1, A2 and RSSI (Received Signal Strength Indicator). RSSI is also translated and presented as a horrizontal signal strength bar for easy visual recognition.
@@ -46,8 +50,6 @@ How about an iPhone app? Well, sure. If and when I ever get myself an iPhone ($$
 
 == Add Stuff Yourself! ==
 Of course, if you know how or are keen to learn how to program in Apple's Xcode, then you're more than welcome to use this program as a starting platform and do whatever yo want with it. The terms of the license encourage you to share whatever you might do back to the open source community -- and we eagerly look forward to any such input. :-D
-
-
 
 
 
