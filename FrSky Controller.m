@@ -128,7 +128,7 @@
 			[textA1 setIntValue:packetBuf[1]];
 			[textA2 setIntValue:packetBuf[2]];
 			[textRSSI setIntValue:lastRSSI = (lastRSSI == 0) ? packetBuf[3] : 
-				(lastRSSI = (packetBuf[3] + ((unsigned int)lastRSSI * 9)) / 10)];
+				(lastRSSI = (packetBuf[3] + ((unsigned int)lastRSSI * 15)) >> 4)];
 			[signalLevel setIntValue:((lastRSSI/2) < 16) ? 16 : lastRSSI / 2];
 			break;
 			
