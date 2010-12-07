@@ -127,7 +127,8 @@
 		case 0xfe: // A1/A2/RSSI values
 			[textA1 setIntValue:packetBuf[1]];
 			[textA2 setIntValue:packetBuf[2]];
-			[textRSSI setIntValue:lastRSSI = (lastRSSI == 0) ? packetBuf[3] : (packetBuf[3] + (lastRSSI*9)) / 10];
+			[textRSSI setIntValue:lastRSSI = (lastRSSI == 0) ? packetBuf[3] : 
+				(lastRSSI = (packetBuf[3] + ((unsigned int)lastRSSI * 9)) / 10)];
 			[signalLevel setIntValue:((lastRSSI/2) < 16) ? 16 : lastRSSI / 2];
 			break;
 			
@@ -278,6 +279,7 @@
 - (void)timerFireMethod:(NSTimer*)theTimer
 {
 	static int timeoutCounter = 0;
+	static BOOL dataStreamLost = NO;
 	
 	timerBusy = YES;
 	
@@ -293,10 +295,15 @@
 		if (timeoutCounter >= 10) {
 			timeoutCounter--; // prevent counter going any higher and eventually wrapping around zero
 			[dataStreamIndicator setIntValue:3]; // critical (red)
+			dataStreamLost = YES;
 		}
 	} else {
 		timeoutCounter = 0;
 		[dataStreamIndicator setIntValue:1]; // good (green)
+		if (dataStreamLost) {
+			dataStreamLost = NO;
+			[self alarmRefresh:self];
+		}
 	}
 	
 	timerBusy = NO;
