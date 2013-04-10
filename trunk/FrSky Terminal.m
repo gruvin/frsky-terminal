@@ -316,17 +316,18 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
 }
 
 
--(void)applicationDidFinishLaunching:(NSNotification*)aNotification {
-
-    fd = -1; // initialise file-device register to less than zero to prevent problems later
-
+-(void)refreshSerialPortsList
+{
+    // Empty the current list
+    [self.serialDeviceCombo removeAllItems];
+    
     // Ask IOKit for a list (dictionary) of available serial ports
     io_iterator_t   serialPortIterator;
     kern_return_t   kernResult;
     char        deviceFilePath[1024];
-
+    
     kernResult = findSerialPorts(&serialPortIterator);
-     
+    
     deviceFilePath[0] = '\0';
     io_object_t     serialPortService;
     // Load the file paths of all available serial ports from the dictionary into our port combobox
@@ -338,15 +339,15 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
                                                                    CFSTR(kIOCalloutDeviceKey),
                                                                    kCFAllocatorDefault,
                                                                    0);
-     
+        
         if (deviceFilePathAsCFString) // if we got a string ...
         {
             Boolean result = CFStringGetCString(deviceFilePathAsCFString,
-                                        deviceFilePath,
-                                        sizeof(deviceFilePath),
-                                        kCFStringEncodingASCII);
+                                                deviceFilePath,
+                                                sizeof(deviceFilePath),
+                                                kCFStringEncodingASCII);
             CFRelease(deviceFilePathAsCFString);
-
+            
             if (result)
             {
                 // Add this device path's base name only, to the combo box (we'll prepend /dev/ again in openPort:)
@@ -354,9 +355,14 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
             }
         }
     }
-       
+}
+
+-(void)applicationDidFinishLaunching:(NSNotification*)aNotification {
+
+    fd = -1; // initialise file-device register to less than zero to prevent problems later
+
+    [self refreshSerialPortsList];
     
-    // There must be a "bindings" method of setting default values. But I don't know it ..
 	[self.serialDeviceCombo setStringValue:@"Select serial port ..."];
 
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.1
@@ -436,6 +442,10 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
 	
 	timerBusy = NO;
 
+}
+
+- (IBAction)refreshButton:(id)sender {
+    [self refreshSerialPortsList];
 }
 
 - (IBAction)alarmSetCh1A:(id)sender

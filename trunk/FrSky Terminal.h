@@ -97,6 +97,7 @@
 	
 }
 
+- (void)refreshSerialPortsList;
 - (BOOL) openPort;
 - (void) closePort;
 - (void) processByte: ( unsigned char) c;
@@ -105,6 +106,7 @@
 
 - (void)timerFireMethod:(NSTimer*)theTimer;
 
+- (IBAction)refreshButton:(id)sender;
 - (IBAction)alarmSetCh1A:(id)sender;
 - (IBAction)alarmSetCh1B:(id)sender;
 - (IBAction)alarmSetCh2A:(id)sender;
