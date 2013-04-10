@@ -1,5 +1,5 @@
 //
-//  FrSky Controller.m
+//  FrSky Terminal.m
 //  FrSky Terminal
 //
 //  Created by Bryan on 28/11/10.

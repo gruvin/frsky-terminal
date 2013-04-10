@@ -3042,7 +3042,7 @@
 																	<string>public.url</string>
 																</object>
 															</object>
-															<string key="NSFrameSize">{440, 223}</string>
+															<string key="NSFrameSize">{455, 223}</string>
 															<reference key="NSSuperview" ref="525664716"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="640135017"/>
@@ -3082,7 +3082,7 @@
 																	<nil key="NSDelegate"/>
 																</object>
 																<reference key="NSTextView" ref="739302040"/>
-																<double key="NSWidth">440</double>
+																<double key="NSWidth">455</double>
 																<int key="NSTCFlags">1</int>
 															</object>
 															<object class="NSTextViewSharedData" key="NSSharedData">
@@ -3144,7 +3144,7 @@
 															<nil key="NSDelegate"/>
 														</object>
 													</object>
-													<string key="NSFrame">{{1, 1}, {440, 223}}</string>
+													<string key="NSFrame">{{1, 1}, {455, 223}}</string>
 													<reference key="NSSuperview" ref="639321114"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="739302040"/>
@@ -3176,7 +3176,7 @@
 												<object class="NSScroller" id="640135017">
 													<reference key="NSNextResponder" ref="639321114"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{441, 1}, {15, 223}}</string>
+													<string key="NSFrame">{{440, 1}, {16, 223}}</string>
 													<reference key="NSSuperview" ref="639321114"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="65624528"/>
@@ -3336,7 +3336,7 @@
 								<object class="NSComboTableView" key="NSTableView" id="555002414">
 									<reference key="NSNextResponder"/>
 									<int key="NSvFlags">274</int>
-									<string key="NSFrameSize">{15, 0}</string>
+									<string key="NSFrameSize">{13, 0}</string>
 									<reference key="NSSuperview"/>
 									<reference key="NSWindow"/>
 									<string key="NSReuseIdentifierKey">_NS:24</string>
@@ -3346,7 +3346,7 @@
 									<object class="NSMutableArray" key="NSTableColumns">
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<object class="NSTableColumn">
-											<double key="NSWidth">12</double>
+											<double key="NSWidth">10</double>
 											<double key="NSMinWidth">10</double>
 											<double key="NSMaxWidth">1000</double>
 											<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -3397,7 +3397,7 @@
 									</object>
 									<double key="NSRowHeight">19</double>
 									<string key="NSAction">tableViewAction:</string>
-									<int key="NSTvFlags">-767524864</int>
+									<int key="NSTvFlags">-765427712</int>
 									<reference key="NSDelegate" ref="237473531"/>
 									<reference key="NSDataSource" ref="237473531"/>
 									<reference key="NSTarget" ref="237473531"/>
@@ -3442,7 +3442,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="287669588"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -7625,6 +7625,91 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/FrSky_Terminal.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSDocument</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>printDocument:</string>
+							<string>revertDocumentToSaved:</string>
+							<string>runPageLayout:</string>
+							<string>saveDocument:</string>
+							<string>saveDocumentAs:</string>
+							<string>saveDocumentTo:</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>printDocument:</string>
+							<string>revertDocumentToSaved:</string>
+							<string>runPageLayout:</string>
+							<string>saveDocument:</string>
+							<string>saveDocumentAs:</string>
+							<string>saveDocumentTo:</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">printDocument:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">revertDocumentToSaved:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">runPageLayout:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">saveDocument:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">saveDocumentAs:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">saveDocumentTo:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSDocument.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSTextView</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">toggleQuickLookPreviewPanel:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">toggleQuickLookPreviewPanel:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">toggleQuickLookPreviewPanel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSTextView.h</string>
 					</object>
 				</object>
 			</object>
