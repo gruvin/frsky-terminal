@@ -1,5 +1,5 @@
 //
-//  FrSky Controller.h
+//  FrSky Terminal.h
 //  FrSky Terminal
 //
 //  Created by Bryan on 28/11/10.

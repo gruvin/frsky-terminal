@@ -12,9 +12,9 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		931228EF12AAF17B007F96F5 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 931228EE12AAF17B007F96F5 /* COPYING */; };
+		93499A16171564AF003369D9 /* FrSky Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 93499A15171564AF003369D9 /* FrSky Terminal.m */; };
+		93499A1817156559003369D9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93499A1717156559003369D9 /* IOKit.framework */; };
 		9364F4C712AC53B3007D8945 /* FrSky Terminal Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9364F4C612AC53B3007D8945 /* FrSky Terminal Icon.icns */; };
-		936AEDC91715203F0070100A /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936AEDC81715203F0070100A /* IOKit.framework */; };
-		93A3D63812A1F192004946BD /* FrSky Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A3D63712A1F192004946BD /* FrSky Terminal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,10 +29,10 @@
 		8D1107310486CEB800E47090 /* FrSky_Terminal-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FrSky_Terminal-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* FrSky Terminal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FrSky Terminal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		931228EE12AAF17B007F96F5 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		93499A15171564AF003369D9 /* FrSky Terminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FrSky Terminal.m"; sourceTree = "<group>"; };
+		93499A1717156559003369D9 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		9364F4C612AC53B3007D8945 /* FrSky Terminal Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "FrSky Terminal Icon.icns"; sourceTree = "<group>"; };
-		936AEDC81715203F0070100A /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 		93A3D63612A1F192004946BD /* FrSky Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FrSky Terminal.h"; sourceTree = "<group>"; };
-		93A3D63712A1F192004946BD /* FrSky Terminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FrSky Terminal.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				936AEDC91715203F0070100A /* IOKit.framework in Frameworks */,
+				93499A1817156559003369D9 /* IOKit.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,8 +51,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				93499A15171564AF003369D9 /* FrSky Terminal.m */,
 				93A3D63612A1F192004946BD /* FrSky Terminal.h */,
-				93A3D63712A1F192004946BD /* FrSky Terminal.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -60,6 +60,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93499A1717156559003369D9 /* IOKit.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -86,7 +87,6 @@
 		29B97314FDCFA39411CA2CEA /* FrSky Terminal */ = {
 			isa = PBXGroup;
 			children = (
-				936AEDC81715203F0070100A /* IOKit.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -195,7 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
-				93A3D63812A1F192004946BD /* FrSky Terminal.m in Sources */,
+				93499A16171564AF003369D9 /* FrSky Terminal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
