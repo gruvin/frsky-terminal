@@ -58,11 +58,13 @@
 
 @interface FrSky_Terminal : NSObject <NSApplicationDelegate, NSComboBoxDelegate> {
 
-    int fd; /* File descriptor for the port */
-	char buffer[255];  /* Input buffer */
-	int  nbytes;       /* Number of bytes read */
+    // Primitive C class variables
+    int fd;             // File descriptor for the serial port
+	char buffer[255];   // Input buffer
+	int  nbytes;        // Number of bytes read
 	char devicePath[1024];
 
+    // Window form objects
     NSComboBox *_serialDeviceCombo;
 	NSTextView *_userData;
 	NSTextField *_myLabel;
@@ -73,7 +75,6 @@
 	NSLevelIndicatorCell *_bufferCount;
 	NSLevelIndicatorCell *_dataStreamIndicator;
 	NSPopUpButton *_displayMode;
-	
 	NSPopUpButton *_alarmCh1ALevel;
 	NSPopUpButton *_alarmCh1BLevel;
 	NSPopUpButton *_alarmCh2ALevel;
@@ -91,21 +92,26 @@
 	NSStepper *_alarmCh2AStepper;
 	NSStepper *_alarmCh2BStepper;
 	
+    // Other objects
 	NSTimer *repeatingTimer;
 	
+    // Class variables
 	BOOL timerBusy;
 	
 }
 
+
+// Methods
 - (void)refreshSerialPortsList;
-- (BOOL) openPort;
-- (void) closePort;
-- (void) processByte: ( unsigned char) c;
-- (void) processPacket:(unsigned char *)packetBuf;
-- (void) sendPacket: (unsigned char *)packetBuf : (int)length;
+- (BOOL)openSerialPort;
+- (void)closeSerialPort;
+- (void)processByte: ( unsigned char) c;
+- (void)processPacket:(unsigned char *)packetBuf;
+- (void)sendPacket: (unsigned char *)packetBuf : (int)length;
 
-- (void)timerFireMethod:(NSTimer*)theTimer;
+- (void)timerFiredEvent:(NSTimer*)theTimer;
 
+// Action Methods
 - (IBAction)refreshButton:(id)sender;
 - (IBAction)alarmSetCh1A:(id)sender;
 - (IBAction)alarmSetCh1B:(id)sender;
@@ -113,8 +119,10 @@
 - (IBAction)alarmSetCh2B:(id)sender;
 - (IBAction)alarmRefresh:(id)sender;
 
-
+// Xcode supplied property
 @property (assign) IBOutlet NSWindow *window;
+
+// Form object properties
 @property (strong) IBOutlet NSComboBox *serialDeviceCombo;
 @property (strong) IBOutlet NSTextView *userData;
 @property (strong) IBOutlet NSTextField *myLabel;
@@ -125,7 +133,6 @@
 @property (strong) IBOutlet NSLevelIndicatorCell *bufferCount;
 @property (strong) IBOutlet NSLevelIndicatorCell *dataStreamIndicator;
 @property (strong) IBOutlet NSPopUpButton *displayMode;
-
 @property (strong) IBOutlet NSPopUpButton *alarmCh1ALevel;
 @property (strong) IBOutlet NSPopUpButton *alarmCh1BLevel;
 @property (strong) IBOutlet NSPopUpButton *alarmCh2ALevel;
