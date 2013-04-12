@@ -362,7 +362,7 @@ enum FrSkyDataState {
 -(void)applicationDidFinishLaunching:(NSNotification*)aNotification {
 
     fd = -1; // initialise file-device register to less than zero to prevent problems later
-
+    
     [self refreshSerialPortsList];
     
 	[self.serialDeviceCombo setStringValue:@"Select serial port ..."];
@@ -450,6 +450,7 @@ enum FrSkyDataState {
 
 - (IBAction)refreshButton:(id)sender {
     [self refreshSerialPortsList];
+    [self.userData insertText:@"test123"];
 }
 
 - (IBAction)alarmSetCh1A:(id)sender
