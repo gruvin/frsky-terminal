@@ -61,7 +61,7 @@
 
 ///////////////////////////////
 ///// C UTILITY FUNCTIONS /////
-
+// test
 static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
 {
     kern_return_t       kernResult;
