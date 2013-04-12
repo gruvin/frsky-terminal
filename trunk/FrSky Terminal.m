@@ -100,34 +100,33 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
 ///////////////////////////////////
 
 
-// Atempt to open the serial port (low level system calls. Seems to work OK.)
+/*
+ * Open the serial port to get file descriptor (fd). Use system open() function
+ * to have granular control of baud rate, stop bits, parity, etc.
+*/
 - (BOOL)openPort
 {
-	sprintf(devicePath, "/dev/%s", [[self.serialDeviceCombo itemObjectValueAtIndex:[self.serialDeviceCombo indexOfSelectedItem]] cStringUsingEncoding:NSASCIIStringEncoding]);
+	sprintf(devicePath, "/dev/%s", [[self.serialDeviceCombo objectValueOfSelectedItem] cStringUsingEncoding:NSASCIIStringEncoding]);
     
 	fd = open(devicePath, O_RDWR | O_NOCTTY | O_NONBLOCK);
 	if (fd == -1) {
 		NSLog(@"Could not open serial device %s", devicePath);
-		[self.userData insertText:[[NSString alloc] initWithFormat:@"open_port: Unable to open %s", devicePath]];
 		return false;
 	} else	{
-		NSLog(@"Serial port opened OK on %s", devicePath);
-		
-		// fcntl not needed due to O_NONBLOCK arg in open() above
-		// fcntl(fd, F_SETFL, FNDELAY); // no delay. return 0 if nothing in buffer
+		NSLog(@"Serial device %s opened OK", devicePath);
 		
 		struct termios options;
 		tcgetattr(fd, &options);
 		cfsetispeed(&options, B9600);
 		cfsetospeed(&options, B9600);
 		options.c_cflag |= (CLOCAL | CREAD);
-		options.c_cflag &= ~CSIZE; /* Mask the character size bits */
-		options.c_cflag |= CS8;    /* Select 8 data bits */
-		options.c_cflag &= ~CRTSCTS; // diasble hardware flow control
+		options.c_cflag &= ~CSIZE;                          // mask the character size bits
+		options.c_cflag |= CS8;                             // 8 data bits
+		options.c_cflag &= ~CRTSCTS;                        // diasble hardware flow control
 		options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); // raw input
-		options.c_oflag &= ~OPOST; // raw output (just in case we do some output)
+		options.c_oflag &= ~OPOST;                          // raw output
 		options.c_cc[VMIN] = 0;
-		options.c_cc[VTIME] = 10;     // 1 sec timeout
+		options.c_cc[VTIME] = 10;                           // 1 sec timeout
 		tcsetattr(fd, TCSANOW, &options);
 		return true;
 	}
@@ -142,7 +141,14 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
     }
 }
 
-// NOTE: packetBuf should not contain start/end 0x7e's
+#define PACKET_LINK         0xfe
+#define PACKET_USER_DATA    0xfd
+#define PACKET_ALARM_A1a    0xfb
+#define PACKET_ALARM_A1b    0xfc
+#define PACKET_ALARM_A2a    0xf9
+#define PACKET_ALARM_A2b    0xfa
+
+// NOTE: packetBuf has been "de-byte-stuffed" already, so 0x7e and 0x7f are decoded to their natural values
 - (void) processPacket:(unsigned char *)packetBuf
 {
 	static unsigned char lastRSSI = 0; // for running average calculation
@@ -150,14 +156,14 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
 	// process the frame
 	switch (packetBuf[0])
 	{
-		case 0xf9:
-		case 0xfa:
-		case 0xfb:
-		case 0xfc:
+		case PACKET_ALARM_A1a:
+		case PACKET_ALARM_A1b:
+		case PACKET_ALARM_A2a:
+		case PACKET_ALARM_A2b:
 			if (DEBUG) {
-				if (packetBuf[0] == 0xfb) NSLog(@"ALARM A1a ");
-				else if (packetBuf[0] == 0xfc) NSLog(@"ALARM A1b ");
-				else if (packetBuf[0] == 0xf9) NSLog(@"ALARM A2a ");
+				if (packetBuf[0] == PACKET_ALARM_A1a) NSLog(@"ALARM A1a ");
+				else if (packetBuf[0] == PACKET_ALARM_A1b) NSLog(@"ALARM A1b ");
+				else if (packetBuf[0] == PACKET_ALARM_A2a) NSLog(@"ALARM A2a ");
 				else NSLog(@"ALARM A2b ");
 				
 				NSLog(@" - LEVEL:%u GT:%u VAL:%u\n",
@@ -189,15 +195,15 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
 			}
 			break;
 			
-		case 0xfe: // A1/A2/RSSI values
+		case PACKET_LINK: // A1/A2/RSSI values
 			[self.textA1 setIntValue:packetBuf[1]];
 			[self.textA2 setIntValue:packetBuf[2]];
 			[self.textRSSI setIntValue:lastRSSI = (lastRSSI == 0) ? packetBuf[3] :
-             (lastRSSI = (packetBuf[3] + ((unsigned int)lastRSSI * 15)) >> 4)];
+             (lastRSSI = (packetBuf[3] + ((unsigned int)lastRSSI * 15)) >> 4)]; // averaging filter to prevent RSSI figure from jumping about too much on screen
 			[self.signalLevel setIntValue:((lastRSSI/2) < 16) ? 16 : lastRSSI / 2];
 			break;
 			
-		case 0xfd: // User Data packet
+		case PACKET_USER_DATA: // User Data packet
 			if (DEBUG) [self.userData insertText:@"DATA:"];
 			
 			switch ([self.displayMode indexOfSelectedItem]) {
@@ -208,13 +214,13 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
 					
 				case 1: // HEX
 					for (int i=0; i< packetBuf[1]; i++)
-						[self.userData insertText:[[NSString alloc] initWithFormat:@"<%02x>", (packetBuf[i+3])]];
+						[self.userData insertText:[NSString stringWithFormat:@"<%02x>", (packetBuf[i+3])]];
 					break;
 					
 				case 2: // BCD
 					for (int i=0; i< packetBuf[1]; i++) {
-						[self.userData insertText:[[NSString alloc] initWithFormat:@":%1u", ((packetBuf[i+3])&0x0f)]];
-						[self.userData insertText:[[NSString alloc] initWithFormat:@"%1u", (((packetBuf[i+3])&0xf0)>>4)]];
+						[self.userData insertText:[NSString stringWithFormat:@":%1u", ((packetBuf[i+3])&0x0f)]];
+						[self.userData insertText:[NSString stringWithFormat:@"%1u", (((packetBuf[i+3])&0xf0)>>4)]];
 					}
 					break;
 			}
@@ -227,91 +233,102 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
 			break;
 			
 		default:
-			[self.userData insertText:[[NSString alloc]
-                                       initWithFormat:@"UNKNWON FRAME TYPE: %x\n",
-                                       packetBuf[0]] ];
+			NSLog(@"UNKNWON FRAME TYPE: %x\n", packetBuf[0]);
 			
 	}
 }
 
-// Receive buffer state machine defs
-#define userDataIdle	0
-#define userDataStart	1
-#define userDataInFrame 2
-#define userDataXOR		3
+
+// Receive buffer state machine state enum
+enum FrSkyDataState {
+    STATE_DATA_IDLE,
+    STATE_DATA_START,
+    STATE_DATA_IN_FRAME,
+    STATE_DATA_XOR,
+};
+
+#define START_STOP      0x7e
+#define BYTE_STUFF      0x7d
+#define STUFF_MASK      0x20
+
+#define USER_DATA_BUFFER_SIZE   30
 
 - (void) processByte:(unsigned char) c
 {
-	static unsigned char packetBuf[30];
+	static unsigned char packetBuf[USER_DATA_BUFFER_SIZE];
 	static int numPktBytes = 0;
-	static unsigned char dataState = userDataIdle;
+	static unsigned char dataState = STATE_DATA_IDLE;
 	
 	switch (dataState) {
 			
-		case userDataStart:
-			if (c == 0x7e) break; // Remain in userDataStart if possible 0x7e,0x7e doublet found.
+		case STATE_DATA_START:
+			if (c == START_STOP) break; // Remain in STATE_DATA_START if possible 0x7e,0x7e doublet found.
             
-			if (DEBUG) [self.userData insertText:@"START FRAME "];
-			if (DEBUG) [self.userData insertText:[[NSString alloc] initWithFormat:@"%02x ", c]];
+			if (DEBUG) NSLog(@"START FRAME %02x ", c);
             
 			packetBuf[numPktBytes++] = c;
-			dataState = userDataInFrame;
+
+			dataState = STATE_DATA_IN_FRAME;
 			break;
 			
-		case userDataInFrame:
-			if (c == 0x7d) {
-				dataState = userDataXOR; // XOR next byte
+		case STATE_DATA_IN_FRAME:
+			if (c == BYTE_STUFF) {
+				dataState = STATE_DATA_XOR; // XOR next byte
 				break;
 			}
-			if (c == 0x7e) { // end of frame detected
-				if (DEBUG) [self.userData insertText:@"END FRAME\n"];
+			if (c == START_STOP) { // end of frame detected
+				if (DEBUG) NSLog(@"END FRAME\n");
 				
 				[self processPacket:packetBuf];
 				
-				dataState = userDataIdle;
+				dataState = STATE_DATA_IDLE;
 				break;
 			}
-			if (DEBUG) [self.userData insertText:[[NSString alloc] initWithFormat:@"%02x ", c]];
+			if (DEBUG) NSLog(@"%02x ", c);
 			packetBuf[numPktBytes++] = c;
 			break;
 			
-		case userDataXOR:
-			if (DEBUG) [self.userData insertText:[[NSString alloc] initWithFormat:@"[%02x] ", c ^ 0x20]];
-			packetBuf[numPktBytes++] = c ^ 0x20;
-			dataState = userDataInFrame;
+		case STATE_DATA_XOR:
+			if (DEBUG) NSLog(@"[%02x] ", c ^ STUFF_MASK);
+			packetBuf[numPktBytes++] = c ^ STUFF_MASK;
+			dataState = STATE_DATA_IN_FRAME;
 			break;
             
-		case userDataIdle:
-			if (c == 0x7e) {
+		case STATE_DATA_IDLE:
+			if (c == START_STOP) {
 				numPktBytes = 0;
-				dataState = userDataStart;
+				dataState = STATE_DATA_START;
 			}
 			break;
 	} // switch
 	
-	if (numPktBytes > 30) {
+	if (numPktBytes > USER_DATA_BUFFER_SIZE) {
 		numPktBytes = 0;
-		dataState = userDataIdle;
-		[self.userData insertText:@"ERROR!: packetBuf overrun!\n\n"];
+		dataState = STATE_DATA_IDLE;
+		NSLog(@"OOPS!: packetBuf overrun!"); // TODO: some kind of in program visual flag
 	}
 	
 }
 
 - (void) sendPacket: (unsigned char *)packetBuf : (int)length
 {
-	unsigned char stuff7e[2] = {0x7d,0x5e};
-	unsigned char stuff7d[2] = {0x7d,0x5d};
-	unsigned char frame[1] = {0x7e};
-	
+    // We can only send serial chars using pointers to buffers. So we need a couple buffered, const chars ...
+    char bufBYTE_STUFF = BYTE_STUFF;
+    char bufSTART_STOP = START_STOP;
+    
 	if (fd > 0) {
-		write(fd, frame, 1);
+		write(fd, &bufSTART_STOP, 1);
 		for (int i = 0; i < length; i++) {
-			if (packetBuf[i] == 0x7e) write(fd, stuff7e, 2);
-			else if (packetBuf[i] == 0x7d) write(fd, stuff7d, 2);
-			else write(fd, (packetBuf+i), 1);
-			if (DEBUG) [self.userData insertText:[[NSString alloc] initWithFormat:@"%02x ", packetBuf[i]]];
+            if ((packetBuf[i] == START_STOP) || (packetBuf[i] == BYTE_STUFF))
+            {
+                write(fd, &bufBYTE_STUFF, 1);   // send (insert) byte-stuff char before buffered char
+                packetBuf[i] &= ~STUFF_MASK;    // convert 0x7e or 0x7d char to 0x5e or 0x5d
+            }
+            write(fd, &packetBuf[i], 1);        // send the buffered char
+            
+			if (DEBUG) NSLog(@"%02x ", packetBuf[i]);
 		}
-		write(fd, frame, 1);
+		write(fd, &bufSTART_STOP, 1);
 	}
 }
 
@@ -429,6 +446,7 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
 		if (timeoutCounter >= 10) {
 			timeoutCounter--; // prevent counter going any higher and eventually wrapping around zero
 			[self.dataStreamIndicator setIntValue:3]; // critical (red)
+            [self.signalLevel setIntValue:0];
 			dataStreamLost = YES;
 		}
 	} else {
