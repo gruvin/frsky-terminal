@@ -15,6 +15,7 @@
 		93499A16171564AF003369D9 /* FrSky Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 93499A15171564AF003369D9 /* FrSky Terminal.m */; };
 		93499A1817156559003369D9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93499A1717156559003369D9 /* IOKit.framework */; };
 		9364F4C712AC53B3007D8945 /* FrSky Terminal Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9364F4C612AC53B3007D8945 /* FrSky Terminal Icon.icns */; };
+		93FB16DD171858BB004DF6DB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FB16DC171858BB004DF6DB /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		93499A1717156559003369D9 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		9364F4C612AC53B3007D8945 /* FrSky Terminal Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "FrSky Terminal Icon.icns"; sourceTree = "<group>"; };
 		93A3D63612A1F192004946BD /* FrSky Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FrSky Terminal.h"; sourceTree = "<group>"; };
+		93FB16DC171858BB004DF6DB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93FB16DD171858BB004DF6DB /* WebKit.framework in Frameworks */,
 				93499A1817156559003369D9 /* IOKit.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 			);
@@ -87,6 +90,7 @@
 		29B97314FDCFA39411CA2CEA /* FrSky Terminal */ = {
 			isa = PBXGroup;
 			children = (
+				93FB16DC171858BB004DF6DB /* WebKit.framework */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
