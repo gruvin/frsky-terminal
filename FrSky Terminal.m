@@ -58,53 +58,11 @@
 @synthesize alarmCh2BStepper = _alarmCh2BStepper;
 
 
-
-///////////////////////////////
-///// C UTILITY FUNCTIONS /////
-
-static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
-{
-    kern_return_t       kernResult;
-    mach_port_t         masterPort;
-    CFMutableDictionaryRef  classesToMatch;
-    
-    kernResult = IOMasterPort(MACH_PORT_NULL, &masterPort);
-    if (KERN_SUCCESS != kernResult)
-    {
-        printf("ERROR: IOMasterPort returned %d\n", kernResult);
-    }
-    else {
-        
-        // Serial devices are instances of class IOSerialBSDClient.
-        classesToMatch = IOServiceMatching(kIOSerialBSDServiceValue);
-        if (classesToMatch == NULL)
-        {
-            printf("ERROR: IOServiceMatching returned a NULL dictionary.\n");
-        }
-        else {
-            CFDictionarySetValue(classesToMatch,
-                                 CFSTR(kIOSerialBSDTypeKey),
-                                 CFSTR(kIOSerialBSDRS232Type));
-        }
-        
-        kernResult = IOServiceGetMatchingServices(masterPort, classesToMatch, matchingServices);
-        if (KERN_SUCCESS != kernResult)
-        {
-            printf("IOServiceGetMatchingServices returned %d\n", kernResult);
-        }
-    }
-    
-    return kernResult;
-}
-///// END C UTILITY FUNCTIONS /////
-///////////////////////////////////
-
-
 /*
- * Open the serial port to get file descriptor (fd). Use system open() function
- * to have granular control of baud rate, stop bits, parity, etc.
+ * Open a serial port file descriptor (fd) using system open() function
+ * to obtain granular control of baud rate, stop bits, parity, etc.
 */
-- (BOOL)openPort
+- (BOOL)openSerialPort
 {
 	sprintf(devicePath, "/dev/%s", [[self.serialDeviceCombo objectValueOfSelectedItem] cStringUsingEncoding:NSASCIIStringEncoding]);
     
@@ -132,7 +90,7 @@ static kern_return_t findSerialPorts(io_iterator_t *matchingServices)
 	}
 }
 
-- (void) closePort
+- (void) closeSerialPort
 {
 	if (fd > 0)
     {
@@ -310,7 +268,7 @@ enum FrSkyDataState {
 	
 }
 
-- (void) sendPacket: (unsigned char *)packetBuf : (int)length
+- (void)sendPacket: (unsigned char *)packetBuf : (int)length
 {
     // We can only send serial chars using pointers to buffers. So we need a couple buffered, const chars ...
     char bufBYTE_STUFF = BYTE_STUFF;
@@ -343,10 +301,37 @@ enum FrSkyDataState {
     kern_return_t   kernResult;
     char        deviceFilePath[1024];
     
-    kernResult = findSerialPorts(&serialPortIterator);
+    mach_port_t         masterPort;
+    CFMutableDictionaryRef  classesToMatch;
     
+    kernResult = IOMasterPort(MACH_PORT_NULL, &masterPort);
+    if (KERN_SUCCESS != kernResult)
+    {
+        NSLog(@"ERROR: IOMasterPort returned error code %d, during serial port device look-up", kernResult);
+        return;
+    }
+    
+    // Serial devices are instances of class IOSerialBSDClient.
+    classesToMatch = IOServiceMatching(kIOSerialBSDServiceValue);
+    if (classesToMatch == NULL)
+    {
+        NSLog(@"ERROR: IOServiceMatching returned a NULL dictionary, during serial port device look-up (no serial ports available?)");
+        return;
+    }
+    CFDictionarySetValue(classesToMatch,
+                         CFSTR(kIOSerialBSDTypeKey),
+                         CFSTR(kIOSerialBSDRS232Type));
+
+    kernResult = IOServiceGetMatchingServices(masterPort, classesToMatch, &serialPortIterator);
+    if (KERN_SUCCESS != kernResult)
+    {
+        NSLog(@"IOServiceGetMatchingServices returned error code %d, during serial port device look-up", kernResult);
+        return;
+    }
+
     deviceFilePath[0] = '\0';
     io_object_t     serialPortService;
+
     // Load the file paths of all available serial ports from the dictionary into our port combobox
     while ((serialPortService = IOIteratorNext(serialPortIterator)))
     {
@@ -363,11 +348,11 @@ enum FrSkyDataState {
                                                 deviceFilePath,
                                                 sizeof(deviceFilePath),
                                                 kCFStringEncodingASCII);
-            CFRelease(deviceFilePathAsCFString);
+            CFRelease(deviceFilePathAsCFString);    // free the memory allocated by CFStringGetCString
             
             if (result)
             {
-                // Add this device path's base name only, to the combo box (we'll prepend /dev/ again in openPort:)
+                // Add this device path's base name to the combo box. We'll prepend /dev/ again in openSerialPort:
                 [self.serialDeviceCombo addItemWithObjectValue:[NSString stringWithCString:basename(deviceFilePath) encoding:NSUTF8StringEncoding]];
             }
         }
@@ -383,7 +368,7 @@ enum FrSkyDataState {
 	[self.serialDeviceCombo setStringValue:@"Select serial port ..."];
 
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.1
-							target:self selector:@selector(timerFireMethod:)
+                                                      target:self selector:@selector(timerFiredEvent:)
 							userInfo:nil repeats:YES];
     repeatingTimer = timer;
 
@@ -392,8 +377,8 @@ enum FrSkyDataState {
 
 -(void)comboBoxSelectionDidChange:(NSNotification *)notification
 {
-    [self closePort];
-    [self openPort];
+    [self closeSerialPort];
+    [self openSerialPort];
 }
 
 
@@ -424,10 +409,10 @@ enum FrSkyDataState {
 		while (timerBusy); // hmmm. Should be OK. :/
 	}
 
-	[self closePort];
+	[self closeSerialPort];
 }
 
-- (void)timerFireMethod:(NSTimer*)theTimer
+- (void)timerFiredEvent:(NSTimer*)theTimer
 {
 	static int timeoutCounter = 0;
 	static BOOL dataStreamLost = NO;
@@ -471,7 +456,7 @@ enum FrSkyDataState {
 	unsigned char packet[15];
 	int i = 0;
 	
-	packet[i++] = 0xfb; // Analog 1 alarm 1
+	packet[i++] = 0xfb; // A1 alarm A
 	packet[i++] = (unsigned char)[self.alarmCh1AValue intValue];
 	packet[i++] = (unsigned char)[self.alarmCh1AGreater indexOfSelectedItem];
 	packet[i++] = (unsigned char)[self.alarmCh1ALevel indexOfSelectedItem];
@@ -489,7 +474,7 @@ enum FrSkyDataState {
 	unsigned char packet[15];
 	int i = 0;
 	
-	packet[i++] = 0xfc; // Analog 1 alarm 2
+	packet[i++] = 0xfc; // A1 alarm B
 	packet[i++] = (unsigned char)[self.alarmCh1BValue intValue];
 	packet[i++] = (unsigned char)[self.alarmCh1BGreater indexOfSelectedItem];
 	packet[i++] = (unsigned char)[self.alarmCh1BLevel indexOfSelectedItem];
@@ -507,7 +492,7 @@ enum FrSkyDataState {
 	unsigned char packet[15];
 	int i = 0;
 	
-	packet[i++] = 0xf9; // Analog 2 alarm 1
+	packet[i++] = 0xf9; // A2 alarm A
 	packet[i++] = (unsigned char)[self.alarmCh2AValue intValue];
 	packet[i++] = (unsigned char)[self.alarmCh2AGreater indexOfSelectedItem];
 	packet[i++] = (unsigned char)[self.alarmCh2ALevel indexOfSelectedItem];
@@ -525,7 +510,7 @@ enum FrSkyDataState {
 	unsigned char packet[15];
 	int i = 0;
 	
-	packet[i++] = 0xfa; // Analog 2 alarm 2
+	packet[i++] = 0xfa; // A2 alarm B
 	packet[i++] = (unsigned char)[self.alarmCh2BValue intValue];
 	packet[i++] = (unsigned char)[self.alarmCh2BGreater indexOfSelectedItem];
 	packet[i++] = (unsigned char)[self.alarmCh2BLevel indexOfSelectedItem];
