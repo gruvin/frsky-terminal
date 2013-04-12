@@ -405,8 +405,9 @@ enum FrSkyDataState {
 	if (repeatingTimer) {
 		[repeatingTimer invalidate];
 		repeatingTimer = nil;
-		// Need to wait until any currnet timer call compeltes, somehow
-		while (timerBusy); // hmmm. Should be OK. :/
+        
+		// Need to wait until any currnet timer eent execution completes, somehow ...
+		while (timerBusy); // This seems to do the trick, without issue.
 	}
 
 	[self closeSerialPort];
@@ -417,7 +418,7 @@ enum FrSkyDataState {
 	static int timeoutCounter = 0;
 	static BOOL dataStreamLost = NO;
 	
-	timerBusy = YES;
+	timerBusy = YES;    // used to prevent app quitting while this function is in progress
 	
 	if ((nbytes = read(fd, buffer, 255)) > 0) {
 		for(int i = 0; i < nbytes; i++) 
