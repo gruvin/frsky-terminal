@@ -406,7 +406,7 @@ enum FrSkyDataState {
 		[repeatingTimer invalidate];
 		repeatingTimer = nil;
         
-		// Need to wait until any currnet timer eent execution completes, somehow ...
+		// Need to wait until any currnet timer event execution completes, somehow ...
 		while (timerBusy); // This seems to do the trick, without issue.
 	}
 
