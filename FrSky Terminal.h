@@ -85,7 +85,10 @@
 	NSStepper *_alarmCh1BStepper;
 	NSStepper *_alarmCh2AStepper;
 	NSStepper *_alarmCh2BStepper;
-	
+    NSScrollView *_userDataTextView;
+    NSBox *_telemetryBox;
+    NSBox *_frskyHubBox;
+    
     // Other objects
 	NSTimer *repeatingTimer;
 	
@@ -145,5 +148,8 @@
 @property (strong) IBOutlet NSStepper *alarmCh1BStepper;
 @property (strong) IBOutlet NSStepper *alarmCh2AStepper;
 @property (strong) IBOutlet NSStepper *alarmCh2BStepper;
+@property (strong) IBOutlet NSBox *telemetryBox;
+@property (strong) IBOutlet NSScrollView *userDataTextView;
+@property (strong) IBOutlet NSBox *frskyHubBox;
 
 @end
