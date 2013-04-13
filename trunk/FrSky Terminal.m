@@ -28,41 +28,11 @@
 
 // The "new thing", is to make all our outlet object properties and use dot notation (self.blah). There ARE good reasons for it. ;-)
 
-@synthesize userData = _userData;
-@synthesize serialDeviceCombo = _serialDeviceCombo;
-
-@synthesize myLabel =_myLabel;
-@synthesize textA1 = _textA1;
-@synthesize textA2 = _textA2;
-@synthesize textRSSI = _textRSSI;
-@synthesize signalLevel = _signalLevel;
-@synthesize bufferCount = _bufferCount;
-@synthesize dataStreamIndicator = _dataStreamIndicator;
-@synthesize displayMode = _displayMode;
-
-@synthesize alarmCh1ALevel = _alarmCh1ALevel;
-@synthesize alarmCh1BLevel = _alarmCh1BLevel;
-@synthesize alarmCh2ALevel = _alarmCh2ALevel;
-@synthesize alarmCh2BLevel = _alarmCh2BLevel;
-@synthesize alarmCh1AGreater = _alarmCh1AGreater;
-@synthesize alarmCh1BGreater = _alarmCh1BGreater;
-@synthesize alarmCh2AGreater = _alarmCh2AGreater;
-@synthesize alarmCh2BGreater = _alarmCh2BGreater;
-@synthesize alarmCh1AValue = _alarmCh1AValue;
-@synthesize alarmCh1BValue = _alarmCh1BValue;
-@synthesize alarmCh2AValue = _alarmCh2AValue;
-@synthesize alarmCh2BValue = _alarmCh2BValue;
-@synthesize alarmCh1AStepper = _alarmCh1AStepper;
-@synthesize alarmCh1BStepper = _alarmCh1BStepper;
-@synthesize alarmCh2AStepper = _alarmCh2AStepper;
-@synthesize alarmCh2BStepper = _alarmCh2BStepper;
-
-
 /*
  * Open a serial port file descriptor (fd) using system open() function
  * to obtain granular control of baud rate, stop bits, parity, etc.
 */
-- (BOOL)openSerialPort
+- (BOOL) openSerialPort
 {
 	sprintf(devicePath, "/dev/%s", [[self.serialDeviceCombo objectValueOfSelectedItem] cStringUsingEncoding:NSASCIIStringEncoding]);
     
@@ -166,7 +136,8 @@
             
 			if (DEBUG) [self.userData insertText:@"DATA:"];
 			
-			switch ([self.displayMode indexOfSelectedItem]) {
+			switch ([self.displayMode indexOfSelectedItem])
+            {
 				case 0:
 					[self.userData insertText:[[NSString alloc] initWithBytes:&packetBuf[3] length:packetBuf[1]
                                                                      encoding:NSASCIIStringEncoding]];
@@ -183,6 +154,13 @@
 						[self.userData insertText:[NSString stringWithFormat:@":%1u ", (((packetBuf[i+3])&0xf0)>>4)]];
 					}
 					break;
+                    
+                case 3: // Fr-Sky Hub packet decoding
+                    for (int i=3; i < (3 + (packetBuf[1] & 0x07)); i++)
+                    {
+                        [self parseTelemHubByte: packetBuf[i]];
+                    }
+                    break;
 			}
 			
 			if (DEBUG) [self.userData insertText:@"\n"];
@@ -199,7 +177,6 @@
 			
 	}
 }
-
 
 // Receive buffer state machine state enum
 enum FrSkyDataState {
@@ -272,7 +249,81 @@ enum FrSkyDataState {
 	
 }
 
-- (void)sendPacket: (unsigned char *)packetBuf : (int)length
+//////////////////////////////////////////////////////
+// Start of Fr-Sky Hub Data Processing
+
+- (unsigned char) parseTelemHubIndex: (unsigned char) index
+{
+    // Bertrand's little trick to point to the right structure element, using only
+    // the data-type header code from the Hub packet data
+    if (index > 0x26)
+        index = 0; // invalid index
+    if (index > 0x21)
+        index -= 5;
+    if (index > 0x0f)
+        index -= 6;
+    if (index > 0x08)
+        index -= 2;
+    return 2*(index-1);
+}
+
+typedef enum {
+    TS_IDLE = 0,  // waiting for 0x5e frame marker
+    TS_DATA_ID,   // waiting for dataID
+    TS_DATA_LOW,  // waiting for data low byte
+    TS_DATA_HIGH, // waiting for data high byte
+    TS_XOR = 0x80 // decode stuffed byte
+} TS_STATE;
+
+- (void) parseTelemHubByte: (unsigned char) byte
+{
+    static unsigned char structPos;
+    static TS_STATE state = TS_IDLE;
+    
+    if (byte == 0x5e) {
+        state = TS_DATA_ID;
+        return;
+    }
+    if (state == TS_IDLE) {
+        return;
+    }
+    if (state & TS_XOR) {
+        byte = byte ^ 0x60;
+        state = (TS_STATE)(state - TS_XOR);
+    }
+    if (byte == 0x5d) {
+        state = (TS_STATE)(state | TS_XOR);
+        return;
+    }
+    if (state == TS_DATA_ID) {
+        structPos = [self parseTelemHubIndex: byte];
+        state = TS_DATA_LOW;
+        if (structPos < 0)
+            state = TS_IDLE;
+        return;
+    }
+    if (state == TS_DATA_LOW) {
+        ((unsigned char *)&frskyHubDataStruct)[structPos] = byte;
+        state = TS_DATA_HIGH;
+        return;
+    }
+    
+    // state == TS_DATA_HIGH.
+    // NOTE: All fields have a high byte, so this state should always be reached (last) when each packet are arrives
+    ((unsigned char *)&frskyHubDataStruct)[structPos+1] = byte;
+    
+    // TODO: Update on-screen data fields from hub data structure
+    // This is where a separate "model" object might use delegation or notification to have the View Controller update the display. But nah.
+    [self updateFrSkyHubViews];
+
+    state = TS_IDLE;
+}
+
+// End of Fr-Sky Hub Data Processing
+//////////////////////////////////////////////////////
+
+
+- (void) sendPacket: (unsigned char *)packetBuf : (int)length
 {
     // We can only send serial chars using pointers to buffers. So we need a couple buffered, const chars ...
     char bufBYTE_STUFF = BYTE_STUFF;
@@ -295,7 +346,7 @@ enum FrSkyDataState {
 }
 
 
--(void)refreshSerialPortsList
+- (void) refreshSerialPortsList
 {
     // Empty the current list
     [self.serialDeviceCombo removeAllItems];
@@ -363,7 +414,7 @@ enum FrSkyDataState {
     }
 }
 
--(void)clearUserDataText
+- (void) clearUserDataText
 {
     [self.userData setEditable:YES]; // this is dumb. shouldn't have to set editable for progrmatic text input!
     [self.userData setString:@""];
@@ -371,7 +422,45 @@ enum FrSkyDataState {
     [self.userData setEditable:NO];
 }
 
--(void)applicationDidFinishLaunching:(NSNotification*)aNotification {
+// TODO: Oh what a mess. (Nothing a bunch of, "refactoring" won't fix ;-)  Unlike the main packet processing
+// functions elsewhere in this ever messy coding project, I went and decided to let the Fr-Sky Hub packet data
+// get parsed into a C struct (by simply copying source from the openTx project) and later translate that to
+// displayed view objects. This method of course is more suitabed to separating the low level comms and packet
+// parsing off into its own "Model" class, which I should probably do some day. For now though, it's all in one
+// big, messy class and this is the function that would otherwise be a degate. (Not notification, because I do
+// want the parsing of and display of packet data to be fully synchornous.)
+- (void) updateFrSkyHubViews
+{
+    char gpsLatitudeDirection = (frskyHubDataStruct.gpsLatitudeNS == ' ') ? '-' : frskyHubDataStruct.gpsLatitudeNS;
+    char gpsLongitudeDirection = (frskyHubDataStruct.gpsLongitudeEW == ' ') ? '-' : frskyHubDataStruct.gpsLongitudeEW;
+    
+    [self.frskyHubLattitude setStringValue:[NSString stringWithFormat:@"%3dº%02d'%02d.%03d %c",
+                                            frskyHubDataStruct.gpsLatitude_bp/100,
+                                            frskyHubDataStruct.gpsLatitude_bp%100,
+                                            frskyHubDataStruct.gpsLatitude_ap * 6 / 1000,
+                                            frskyHubDataStruct.gpsLatitude_ap * 6 % 1000,
+                                            gpsLatitudeDirection
+                                            ]];
+    [self.frskyHubLongitude setStringValue:[NSString stringWithFormat:@"%3dº%02d'%02d.%03d %c",
+                                            frskyHubDataStruct.gpsLongitude_bp/100,
+                                            frskyHubDataStruct.gpsLongitude_bp%100,
+                                            frskyHubDataStruct.gpsLongitude_ap * 6 / 1000,
+                                            frskyHubDataStruct.gpsLongitude_ap * 6 % 1000,
+                                            gpsLongitudeDirection
+                                            ]];
+    [self.frskyHubHeading setStringValue:[NSString stringWithFormat:@"  %03dº", frskyHubDataStruct.gpsCourse_bp]];
+    [self.frskyHubSpeed setStringValue:[NSString stringWithFormat:@"%3d.%03d", frskyHubDataStruct.gpsSpeed_bp, frskyHubDataStruct.gpsSpeed_ap]];
+    [self.frskyHubAltitude setStringValue:[NSString stringWithFormat:@"%3d.%02d", frskyHubDataStruct.gpsAltitude_bp, frskyHubDataStruct.gpsAltitude_ap]];
+    
+    [self.frskyHubFuel setStringValue:[NSString stringWithFormat:@"%5u", frskyHubDataStruct.fuelLevel]];
+    [self.frskyHubRPM setStringValue:[NSString stringWithFormat:@"%5u", frskyHubDataStruct.rpm]];
+    [self.frskyHubVolts setStringValue:[NSString stringWithFormat:@"%5u", frskyHubDataStruct.volts]];
+    [self.frskyHubTemp1 setStringValue:[NSString stringWithFormat:@"%5d", frskyHubDataStruct.temperature1]];
+    [self.frskyHubTemp2 setStringValue:[NSString stringWithFormat:@"%5d", frskyHubDataStruct.temperature2]];
+    [self.frskyHubBaroAlt setStringValue:[NSString stringWithFormat:@"%5d", -frskyHubDataStruct.baroAltitude]];
+}
+
+- (void) applicationDidFinishLaunching:(NSNotification*)aNotification {
 
     fd = -1; // initialise file-device register to less than zero to prevent problems later
     [self clearUserDataText];
@@ -382,13 +471,13 @@ enum FrSkyDataState {
 
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                       target:self selector:@selector(timerFiredEvent:)
-							userInfo:nil repeats:YES];
+                                                    userInfo:nil repeats:YES];
     repeatingTimer = timer;
 
 	[self alarmRefresh:self];
 }
 
--(void)comboBoxSelectionDidChange:(NSNotification *)notification
+- (void) comboBoxSelectionDidChange:(NSNotification *)notification
 {
     [self closeSerialPort];
     [self openSerialPort];
@@ -402,31 +491,33 @@ enum FrSkyDataState {
 }
 
 // NOTE: windowsShouldClose doesn't happen if app is directly Quit (as opposed to closing the main window)!
-- (BOOL)windowShouldClose:(id)sender
+- (BOOL) windowShouldClose:(id)sender
 {
 	if (repeatingTimer) {
 		[repeatingTimer invalidate];
 		repeatingTimer = nil;
 		// Need to wait until any currnet timer call completes, somehow
+        // TODO:Investigate the return value, NSTerminateLater and how it is intended to operate.
 		while (timerBusy); // hmmm. Should be OK. :/
 	}
 	return YES;
 }
 
-- (void)applicationWillTerminate:(NSNotification *)aNotification
+- (void) applicationWillTerminate:(NSNotification *)aNotification
 {
 	if (repeatingTimer) {
 		[repeatingTimer invalidate];
 		repeatingTimer = nil;
         
 		// Need to wait until any currnet timer event execution completes, somehow ...
+        // TODO:Investigate the return value, NSTerminateLater and how it is intended to operate.
 		while (timerBusy); // This seems to do the trick, without issue.
 	}
 
 	[self closeSerialPort];
 }
 
-- (void)timerFiredEvent:(NSTimer*)theTimer
+- (void) timerFiredEvent:(NSTimer*)theTimer
 {
 	static int timeoutCounter = 0;
 	static BOOL dataStreamLost = NO;
@@ -461,11 +552,11 @@ enum FrSkyDataState {
 
 }
 
-- (IBAction)refreshButton:(id)sender {
+- (IBAction) refreshButton:(id)sender {
     [self refreshSerialPortsList];
 }
 
-- (IBAction)alarmSetCh1A:(id)sender
+- (IBAction) alarmSetCh1A:(id)sender
 {
 	unsigned char packet[15];
 	int i = 0;
@@ -483,7 +574,7 @@ enum FrSkyDataState {
 	[self sendPacket:packet:9];
 }
 
-- (IBAction)alarmSetCh1B:(id)sender
+- (IBAction) alarmSetCh1B:(id)sender
 {
 	unsigned char packet[15];
 	int i = 0;
@@ -501,7 +592,7 @@ enum FrSkyDataState {
 	[self sendPacket:packet:9];
 }
 
-- (IBAction)alarmSetCh2A:(id)sender
+- (IBAction) alarmSetCh2A:(id)sender
 {
 	unsigned char packet[15];
 	int i = 0;
@@ -519,7 +610,7 @@ enum FrSkyDataState {
 	[self sendPacket:packet:9];
 }
 
-- (IBAction)alarmSetCh2B:(id)sender
+- (IBAction) alarmSetCh2B:(id)sender
 {
 	unsigned char packet[15];
 	int i = 0;
@@ -538,7 +629,7 @@ enum FrSkyDataState {
 	
 }
 
-- (IBAction)alarmRefresh:(id)sender
+- (IBAction) alarmRefresh:(id)sender
 {
 	unsigned char packet[15];
 	int i = 0;
@@ -556,11 +647,11 @@ enum FrSkyDataState {
 	[self sendPacket:packet:9];
 }
 
-- (IBAction)clearUserData:(id)sender {
+- (IBAction) clearUserData:(id)sender {
     [self clearUserDataText];
 }
 
-- (IBAction)dataModeSelected:(id)sender {
+- (IBAction) dataModeSelected:(id)sender {
     if ([self.displayMode indexOfSelectedItem] == 3) // hub view
     {
         [self.frskyHubBox setFrame:[self.userDataTextView frame]];
