@@ -162,6 +162,8 @@
 			break;
 			
 		case PACKET_USER_DATA: // User Data packet
+            [self.userData setEditable:YES];
+            
 			if (DEBUG) [self.userData insertText:@"DATA:"];
 			
 			switch ([self.displayMode indexOfSelectedItem]) {
@@ -171,19 +173,21 @@
 					break;
 					
 				case 1: // HEX
-					for (int i=0; i< packetBuf[1]; i++)
-						[self.userData insertText:[NSString stringWithFormat:@"<%02x>", (packetBuf[i+3])]];
+					for (int i=0; i < packetBuf[1]; i++)
+						[self.userData insertText:[NSString stringWithFormat:@"%02x ", (packetBuf[i+3])]];
 					break;
 					
 				case 2: // BCD
-					for (int i=0; i< packetBuf[1]; i++) {
-						[self.userData insertText:[NSString stringWithFormat:@":%1u", ((packetBuf[i+3])&0x0f)]];
-						[self.userData insertText:[NSString stringWithFormat:@"%1u", (((packetBuf[i+3])&0xf0)>>4)]];
+					for (int i=0; i < packetBuf[1]; i++) {
+						[self.userData insertText:[NSString stringWithFormat:@"%1u", ((packetBuf[i+3])&0x0f)]];
+						[self.userData insertText:[NSString stringWithFormat:@":%1u ", (((packetBuf[i+3])&0xf0)>>4)]];
 					}
 					break;
 			}
 			
 			if (DEBUG) [self.userData insertText:@"\n"];
+            
+            [self.userData setEditable:NO];
             
 			break;
 			
@@ -359,9 +363,18 @@ enum FrSkyDataState {
     }
 }
 
+-(void)clearUserDataText
+{
+    [self.userData setEditable:YES]; // this is dumb. shouldn't have to set editable for progrmatic text input!
+    [self.userData setString:@""];
+    [self.userData setFont:[NSFont fontWithName:@"Monaco" size:12.0]];
+    [self.userData setEditable:NO];
+}
+
 -(void)applicationDidFinishLaunching:(NSNotification*)aNotification {
 
     fd = -1; // initialise file-device register to less than zero to prevent problems later
+    [self clearUserDataText];
     
     [self refreshSerialPortsList];
     
@@ -450,7 +463,6 @@ enum FrSkyDataState {
 
 - (IBAction)refreshButton:(id)sender {
     [self refreshSerialPortsList];
-    [self.userData insertText:@"test123"];
 }
 
 - (IBAction)alarmSetCh1A:(id)sender
@@ -542,6 +554,14 @@ enum FrSkyDataState {
 	packet[i++] = 0x00;
 	
 	[self sendPacket:packet:9];
+}
+
+- (IBAction)clearUserData:(id)sender {
+    [self clearUserDataText];
+}
+
+- (IBAction)dataModeSelected:(id)sender {
+    [self clearUserDataText];
 }
 
 

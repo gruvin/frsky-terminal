@@ -28,30 +28,24 @@
     This app was originally thrown together in a blur of trying to learn Xcode v3.2. It
     was later updated to use Xcode 4 conventions, namely 'propertyizing' all outlets, etc.
  
-    This app does NOT comply with MVC model ideals (at all) because to separate the low level comms
-    data processing into a sepoarate model would have meant implementing protocols and
-    notifications, just to keep the tony amount amount of data separate from the view 
-    controller. For a small app like this, that just didn't make an ounce of sense, 
-    to me. Doing so would have also made execution less efficient, by doubling up
-    on data variables and needing more code to process it.
+    This app does NOT comply with MVC model ideals (at all) because to separate the low 
+    level comms data processing into a sepoarate model would have meant implementing 
+    protocols and notifications, just to keep the tony amount amount of data separate 
+    from the view controller. For a small app like this, that just didn't make an ounce 
+    of sense, to me. Doing so would have also made execution less efficient, by doubling 
+    up on data variables and needing more code to process it.
                                                                              -- Gruvin.
  */
 
 
 #import <Cocoa/Cocoa.h>
 
-// We are going to be dropping down into pure C for serial comms, so we need some old fashioned includes ...
-#include <stdio.h>   /* Standard input/output definitions */
-#include <string.h>  /* String function definitions */
-#include <unistd.h>  /* UNIX standard function definitions */
-#include <fcntl.h>   /* File control definitions */
-#include <errno.h>   /* Error number definitions */
-#include <termios.h> /* POSIX terminal control definitions */
-#include <stdlib.h>
-#include <sys/ioctl.h>
+// We are going to use pure C system calls for serial comms ...
+#include <fcntl.h>      /* File control definitions */
+#include <termios.h>    /* POSIX terminal control definitions (baud, flow, data format constants) */
+#include <libgen.h>     /* for basename() */
 
 #include <IOKit/serial/IOSerialKeys.h>
-#include <libgen.h>
 
 
 #define DEBUG 0
@@ -118,6 +112,8 @@
 - (IBAction)alarmSetCh2A:(id)sender;
 - (IBAction)alarmSetCh2B:(id)sender;
 - (IBAction)alarmRefresh:(id)sender;
+- (IBAction)clearUserData:(id)sender;
+- (IBAction)dataModeSelected:(id)sender;
 
 // Xcode supplied property
 @property (assign) IBOutlet NSWindow *window;
