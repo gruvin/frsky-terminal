@@ -26,7 +26,7 @@
 
 @implementation FrSky_Terminal
 
-// The "new thing", is to make all our outlet object properties and use dot notation (self.blah). There ARE good reasons for it. ;-)
+// All our view property objects are auto-synthesized in Xcode 4. No need to labourously do that ourselves here, thank, umm Steve? :-P
 
 /*
  * Open a serial port file descriptor (fd) using system open() function
