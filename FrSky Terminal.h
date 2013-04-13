@@ -174,6 +174,9 @@ struct FrskyHubData {
 // Xcode supplied property
 @property (assign) IBOutlet NSWindow *window;
 
+// The "new thing" (Xcode 4) is to make all our outlet objects into properties and use dot notation (self.blah)
+// Fortunately, Apple also added auto-synthesis magic to this scheme, so we don't have to do that tedium.
+
 // Form object properties
 @property (strong) IBOutlet NSComboBox *serialDeviceCombo;
 @property (strong) IBOutlet NSTextView *userData;
