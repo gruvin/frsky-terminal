@@ -561,7 +561,18 @@ enum FrSkyDataState {
 }
 
 - (IBAction)dataModeSelected:(id)sender {
-    [self clearUserDataText];
+    if ([self.displayMode indexOfSelectedItem] == 3) // hub view
+    {
+        [self.frskyHubBox setFrame:[self.userDataTextView frame]];
+        [self.telemetryBox replaceSubview:self.userDataTextView with:self.frskyHubBox];
+    }
+    else
+    {
+        [self.telemetryBox replaceSubview:self.frskyHubBox with:self.userDataTextView];
+
+        [self clearUserDataText];
+    }
+
 }
 
 
