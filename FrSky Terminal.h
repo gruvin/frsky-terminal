@@ -50,6 +50,37 @@
 
 #define DEBUG 0
 
+// Primitive C data structures
+struct FrskyHubData {
+    int16_t  gpsAltitude_bp;   // before punct
+    int16_t  temperature1;     // -20 .. 250 deg. celcius
+    uint16_t rpm;              // 0..60,000 revs. per minute
+    uint16_t fuelLevel;        // 0, 25, 50, 75, 100 percent
+    int16_t  temperature2;     // -20 .. 250 deg. celcius
+    uint16_t volts;            // 1/500V increments (0..4.2V)
+    int16_t  gpsAltitude_ap;   // after punct
+    int16_t  baroAltitude;     // 0..9,999 meters
+    uint16_t gpsSpeed_bp;      // before punct
+    uint16_t gpsLongitude_bp;  // before punct
+    uint16_t gpsLatitude_bp;   // before punct
+    uint16_t gpsCourse_bp;     // before punct (0..359.99 deg. -- seemingly 2-decimal precision)
+    uint8_t  day;
+    uint8_t  month;
+    uint16_t year;
+    uint8_t  hour;
+    uint8_t  min;
+    uint16_t sec;
+    uint16_t gpsSpeed_ap;
+    uint16_t gpsLongitude_ap;
+    uint16_t gpsLatitude_ap;
+    uint16_t gpsCourse_ap;
+    uint16_t gpsLongitudeEW;   // East/West
+    uint16_t gpsLatitudeNS;    // North/South
+    int16_t  accelX;           // 1/256th gram (-8g ~ +8g)
+    int16_t  accelY;           // 1/256th gram (-8g ~ +8g)
+    int16_t  accelZ;           // 1/256th gram (-8g ~ +8g)
+};
+
 @interface FrSky_Terminal : NSObject <NSApplicationDelegate, NSComboBoxDelegate> {
 
     // Primitive C class variables
@@ -57,7 +88,10 @@
 	char buffer[255];   // Input buffer
 	int  nbytes;        // Number of bytes read
 	char devicePath[1024];
-
+    
+    // Fr-Sky Hub data struct
+    struct FrskyHubData frskyHubDataStruct;
+    
     // Window form objects
     NSComboBox *_serialDeviceCombo;
 	NSTextView *_userData;
@@ -88,35 +122,54 @@
     NSScrollView *_userDataTextView;
     NSBox *_telemetryBox;
     NSBox *_frskyHubBox;
+
+    // Fr-Sky Views
+    NSTextField *_frskyHubLattitude;
+    NSTextField *_frskyHubLongitude;
+    NSTextField *_frskyHubHeading;
+    NSTextField *_frskyHubSpeed;
+    NSTextField *_frskyHubAltitude;
+    NSTextField *_frskyHubFuel;
+    NSTextField *_frskyHubRPM;
+    NSTextField *_frskyHubVolts;
+    NSTextField *_frskyHubTemp1;
+    NSTextField *_frskyHubTemp2;
+    NSTextField *_frskyHubBaroAlt;
+    NSTextField *_frskyHubData;
     
     // Other objects
 	NSTimer *repeatingTimer;
 	
     // Class variables
 	BOOL timerBusy;
-	
+
 }
 
 
 // Methods
-- (void)refreshSerialPortsList;
-- (BOOL)openSerialPort;
-- (void)closeSerialPort;
-- (void)processByte: ( unsigned char) c;
-- (void)processPacket:(unsigned char *)packetBuf;
-- (void)sendPacket: (unsigned char *)packetBuf : (int)length;
+- (BOOL) openSerialPort;
+- (void) closeSerialPort;
+- (void) processByte:  (unsigned char) c;
+- (void) processPacket:(unsigned char *)packetBuf;
+- (unsigned char) parseTelemHubIndex: (unsigned char) index;
+- (void) parseTelemHubByte: (unsigned char) byte;
+- (void) sendPacket: (unsigned char *)packetBuf : (int)length;
+- (void) refreshSerialPortsList;
+- (void) clearUserDataText;
+- (void) updateFrSkyHubViews;
+
 
 - (void)timerFiredEvent:(NSTimer*)theTimer;
 
 // Action Methods
-- (IBAction)refreshButton:(id)sender;
-- (IBAction)alarmSetCh1A:(id)sender;
-- (IBAction)alarmSetCh1B:(id)sender;
-- (IBAction)alarmSetCh2A:(id)sender;
-- (IBAction)alarmSetCh2B:(id)sender;
-- (IBAction)alarmRefresh:(id)sender;
-- (IBAction)clearUserData:(id)sender;
-- (IBAction)dataModeSelected:(id)sender;
+- (IBAction) refreshButton:(id)sender;
+- (IBAction) alarmSetCh1A:(id)sender;
+- (IBAction) alarmSetCh1B:(id)sender;
+- (IBAction) alarmSetCh2A:(id)sender;
+- (IBAction) alarmSetCh2B:(id)sender;
+- (IBAction) alarmRefresh:(id)sender;
+- (IBAction) clearUserData:(id)sender;
+- (IBAction) dataModeSelected:(id)sender;
 
 // Xcode supplied property
 @property (assign) IBOutlet NSWindow *window;
@@ -151,5 +204,18 @@
 @property (strong) IBOutlet NSBox *telemetryBox;
 @property (strong) IBOutlet NSScrollView *userDataTextView;
 @property (strong) IBOutlet NSBox *frskyHubBox;
+
+@property (strong) IBOutlet NSTextField *frskyHubLattitude;
+@property (strong) IBOutlet NSTextField *frskyHubLongitude;
+@property (strong) IBOutlet NSTextField *frskyHubHeading;
+@property (strong) IBOutlet NSTextField *frskyHubSpeed;
+@property (strong) IBOutlet NSTextField *frskyHubAltitude;
+@property (strong) IBOutlet NSTextField *frskyHubFuel;
+@property (strong) IBOutlet NSTextField *frskyHubRPM;
+@property (strong) IBOutlet NSTextField *frskyHubVolts;
+@property (strong) IBOutlet NSTextField *frskyHubTemp1;
+@property (strong) IBOutlet NSTextField *frskyHubTemp2;
+@property (strong) IBOutlet NSTextField *frskyHubData;
+@property (strong) IBOutlet NSTextField *frskyHubBaroAlt;
 
 @end
