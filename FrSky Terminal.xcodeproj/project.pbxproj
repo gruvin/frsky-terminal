@@ -15,6 +15,7 @@
 		93499A16171564AF003369D9 /* FrSky Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 93499A15171564AF003369D9 /* FrSky Terminal.m */; };
 		93499A1817156559003369D9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93499A1717156559003369D9 /* IOKit.framework */; };
 		9364F4C712AC53B3007D8945 /* FrSky Terminal Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9364F4C612AC53B3007D8945 /* FrSky Terminal Icon.icns */; };
+		93A76409171B9872000C89EF /* Telemetry Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A76408171B9871000C89EF /* Telemetry Parser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		93499A1717156559003369D9 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		9364F4C612AC53B3007D8945 /* FrSky Terminal Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "FrSky Terminal Icon.icns"; sourceTree = "<group>"; };
 		93A3D63612A1F192004946BD /* FrSky Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FrSky Terminal.h"; sourceTree = "<group>"; };
+		93A76407171B9871000C89EF /* Telemetry Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Telemetry Parser.h"; sourceTree = "<group>"; };
+		93A76408171B9871000C89EF /* Telemetry Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Telemetry Parser.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +56,8 @@
 			children = (
 				93499A15171564AF003369D9 /* FrSky Terminal.m */,
 				93A3D63612A1F192004946BD /* FrSky Terminal.h */,
+				93A76407171B9871000C89EF /* Telemetry Parser.h */,
+				93A76408171B9871000C89EF /* Telemetry Parser.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				93499A16171564AF003369D9 /* FrSky Terminal.m in Sources */,
+				93A76409171B9872000C89EF /* Telemetry Parser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
