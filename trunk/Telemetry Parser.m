@@ -12,7 +12,6 @@
 {
 }
 
-
 /**************
  ** I N I T  **
  **************/
@@ -26,6 +25,19 @@
     return self;
 }
 
+- (void) dealloc
+{
+    if (dataPollingTimer) {
+        [dataPollingTimer invalidate];
+        dataPollingTimer = nil;
+        
+        // Need to wait until any currnet timer event execution completes, somehow -- because it's in a
+        // separate thread and code could stil be executing when our app goes away!
+        while (dataPollingTimerEventInProgress); // This seems to do the trick. But I think it's a little ugly.
+        // TODO:Investigate the return value, NSTerminateLater and how it is intended to operate.
+    }
+    // ARC will call [super dealloc]
+}
 
 /*
 * Open a serial port file descriptor (fd) using system open() function
@@ -70,6 +82,7 @@
     if (portOpenedOK) // set up pollingTimer
     {
         
+        // Initialise timer based polling for incoming serial data
         dataPollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                           target:self selector:@selector(dataPollingEvent:)
                                                         userInfo:nil repeats:YES];
@@ -102,25 +115,25 @@
 			[self parseTelemetryByte:(unsigned char)_telemetryDataBuffer[i] ];
 	}
     
-	[self.telemetryDataBufferUse setValue:[NSNumber numberWithInt:nbytes]];
+	_telemetryDataBufferUsage = nbytes;
     
 	if (nbytes == 0)
     {
 		timeoutCounter++;
 
 		if ((timeoutCounter >= 1) && (timeoutCounter < 10))
-			[self.telemtryDataStreamStatus setValue:[NSNumber numberWithInt:2]];    // pause in data stream detected
+			_telemtryDataStreamStatus = 2;    // pause in data stream detected
 
 		if (timeoutCounter >= 10)
         {
 			timeoutCounter--; // prevent counter going any higher and eventually wrapping around zero
-			[self.telemtryDataStreamStatus setValue:[NSNumber numberWithInt:3]];    // data stream has stopped (for too long)
+			_telemtryDataStreamStatus = 3;    // data stream has stopped (for too long)
 		}
 	}
     else
     {
 		timeoutCounter = 0;
-		[self.telemtryDataStreamStatus setValue:[NSNumber numberWithInt:1]];        // data stream is flowing nicely
+		_telemtryDataStreamStatus = 1;        // data stream is flowing nicely
 	}
 	
 	dataPollingTimerEventInProgress = NO;
@@ -138,7 +151,7 @@
     static unsigned char packetBuffer[FRSKY_TELEM_BUFFER_SIZE];
     static int packetByteCount;
     
-    FRSKY_DATA_STATE dataState = IDLE;
+    static FRSKY_DATA_STATE dataState = IDLE;
     
     switch (dataState)
     {
@@ -200,7 +213,7 @@
         case TELEM_PKT_TYPE_A2A:
         case TELEM_PKT_TYPE_A2B:
         {
-            struct FrskyAlarm *alarmptr;
+            struct FrskyAlarmData *alarmptr;
             
             // set alarmptr to address of _frskyAlarmsStruct[n],
             // where n is derived from the packet type in packetBuffer[0]
@@ -212,10 +225,17 @@
             break;
             
         case TELEM_PKT_TYPE_LINK: // A1/A2/RSSI[1/2] values
-            _frskyA1Value = packetBuffer[1];
-            _frskyA2Value = packetBuffer[2];
-            _frskyRSSI1 = packetBuffer[3];
-            _frskyRSSI2 = packetBuffer[4];
+            _frskyLinkData.frskyA1Value = packetBuffer[1];
+            _frskyLinkData.frskyA2Value = packetBuffer[2];
+            _frskyLinkData.frskyRSSI1 = packetBuffer[3];
+            _frskyLinkData.frskyRSSI2 = packetBuffer[4];
+
+            // Call delegate's frskyLinkDataArrivedInCStruct: (if it exists) to have something done with this new data
+            if ([self.delegate respondsToSelector:@selector(frskyLinkDataArrivedInCStruct:)] )
+            {
+                [self.delegate frskyLinkDataArrivedInCStruct: _frskyLinkData];
+            }
+            
             break;
             
 
@@ -223,17 +243,22 @@
         {
             int numBytes = 3 + (packetBuffer[1] & 0x07); // sanitize in case of data corruption leading to buffer overflow
             
-            for (int i=3; i < numBytes; i++)
+
+            // Ask our delegate if we shoul dbe processing Fr-Sky Hub data or not, at the moment
+            if ([self.delegate telemetryParserShouldProcessFrskyHubData]) // this one is a required protocol method. So not checking for responder.
             {
-                if (false /* TODO */)
-                {
-                    /* TODO: -- delgatge user data to view controller, for display */
-                }
-                else
+                for (int i=3; i < numBytes; i++)
                 {
                     [self parseTelemHubByte: packetBuffer[i] ];
                 }
-                
+            }
+            else
+            {
+                // Call delegate's frskyUserDataArrivedInString: (if it exists) to have something done with this new data
+                if ([self.delegate respondsToSelector:@selector(frskyUserDataArrivedInString:)] )
+                {
+                    [self.delegate frskyUserDataArrivedInString: [[NSString alloc] initWithBytes:packetBuffer length:numBytes encoding:NSASCIIStringEncoding]];
+                }
             }
         }
             break;
@@ -303,12 +328,37 @@ computeTelemHubIndex(unsigned char index)
     // All fields have a high byte, so this state should always be reached, once each packet has fully arrived
     ((unsigned char *)&_frskyHubDataStruct)[structPos+1] = thisByte;    // store the data byte in the struct
     
-    // TODO: Call delegate function, to have new data displayed on screen (or whatever)
-    //       This should probably pass along the type of packet that was just completed.
-    //       Or, we could have multiple delegates, one for each packet type -- prbably
-    //       best -- and pass along the related data in each case.
+
+    // Call delegate's function to do something with this new data
+    if ([self.delegate respondsToSelector:@selector(frskyHubDataArrivedInCStruct:)] )
+    {
+        [self.delegate frskyHubDataArrivedInCStruct: _frskyHubDataStruct];
+    }
+
     
     state = TS_IDLE;
     
 }
+
+- (void) sendPacket: (unsigned char *)packetBuf : (int)length
+{
+    // We can only send serial chars using pointers to buffers. So we need a couple buffered, const chars ...
+    char bufBYTE_STUFF = TELEM_BYTE_STUFF;
+    char bufSTART_STOP = TELEM_START_STOP;
+    
+	if (_serialPortFileDescriptor > 0) {
+		write(_serialPortFileDescriptor, &bufSTART_STOP, 1);
+		for (int i = 0; i < length; i++) {
+            if ((packetBuf[i] == TELEM_START_STOP) || (packetBuf[i] == TELEM_BYTE_STUFF))
+            {
+                write(_serialPortFileDescriptor, &bufBYTE_STUFF, 1);   // send (insert) byte-stuff char before buffered char
+                packetBuf[i] &= ~TELEM_STUFF_MASK;    // convert 0x7e or 0x7d char to 0x5e or 0x5d
+            }
+            write(_serialPortFileDescriptor, &packetBuf[i], 1);        // send the buffered char
+           
+		}
+		write(_serialPortFileDescriptor, &bufSTART_STOP, 1);
+	}
+}
+
 @end

@@ -45,7 +45,7 @@ struct FrskyHubData {
     int16_t  accelZ;           // 1/256th gram (-8g ~ +8g)
 };
 
-#define FRSKY_TELEM_BUFFER_SIZE 255
+#define FRSKY_TELEM_BUFFER_SIZE 1024
 #define FRSKY_USER_DATA_BUFFER_SIZE 255
 
 #define FRSKY_RX_PACKET_SIZE 19
@@ -81,11 +81,28 @@ typedef enum {
 } HUB_DATA_STATE;
 
 
-struct FrskyAlarm {
+struct FrskyAlarmData {
     uint8_t level;    // The alarm's 'urgency' level. 0=disabled, 1=yellow, 2=orange, 3=red
     uint8_t greater;  // 1 = 'if greater than'. 0 = 'if less than'
     uint8_t value;    // The threshold above or below which the alarm will sound
 };
+
+struct FrskyLinkData {
+    unsigned char frskyA1Value;                         // Holds most recently parsed Fr-Sky Receiver A1 analogue input port value
+    unsigned char frskyA2Value;                         // Holds most recently parsed Fr-Sky Receiver A2 analogue input port value
+    unsigned char frskyRSSI1;
+    unsigned char frskyRSSI2;
+};
+
+@protocol TelemtryParserDelegate <NSObject>
+- (BOOL) telemetryParserShouldProcessFrskyHubData;
+@optional
+- (void) frskyLinkDataArrivedInCStruct:(struct FrskyLinkData) linkData;
+- (void) frskyUserDataArrivedInString:(NSString *) userData;
+- (void) frskyHubDataArrivedInCStruct:(struct FrskyHubData) hubData;
+
+@end
+
 
 @interface Telemetry_Parser : NSObject
 {
@@ -96,31 +113,30 @@ struct FrskyAlarm {
     
     unsigned char _telemetryDataBuffer[FRSKY_TELEM_BUFFER_SIZE];
     
-    unsigned char _frskyA1Value;                         // Holds most recently parsed Fr-Sky Receiver A1 analogue input port value
-    unsigned char _frskyA2Value;                         // Holds most recently parsed Fr-Sky Receiver A2 analogue input port value
-    unsigned char _frskyRSSI1;
-    unsigned char _frskyRSSI2;
-    struct FrskyAlarm _frskyAlarmsStruct[4];
+    struct FrskyLinkData _frskyLinkData;
+    struct FrskyAlarmData _frskyAlarmsStruct[4];
     struct FrskyHubData _frskyHubDataStruct;
     
     NSTimer *dataPollingTimer;
-	BOOL dataPollingTimerEventInProgress;
+	BOOL dataPollingTimerEventInProgress;          
 
-    NSNumber *_telemetryDataBufferUse;                  // The number of bytes grabbed in last serial port read() operation (for buffer use display)
-    NSNumber *_telemtryDataStreamStatus;                // 3 = no data (in too long a time), 2 = pause in data data, 1 = data flowing in steadily
-
+    // id <TelemtryParserDelegate> _delegate;
 }
 
-@property (strong) NSNumber * telemetryDataBufferUse;
-@property (strong, readonly) NSNumber *telemtryDataStreamStatus;
+@property (readonly) NSInteger telemetryDataBufferUsage; // The number of bytes grabbed in last serial port read() operation (for buffer use display)
+@property (readonly) NSInteger telemtryDataStreamStatus; // 3 = no data (in too long a time), 2 = pause in data data, 1 = data flowing in steadily
 
+@property (strong) id <TelemtryParserDelegate> delegate;
 
 - (void) dataPollingEvent: (NSTimer *) theTimer;
-- (BOOL) openSerialPort:  (NSString *) deviceName;       // Device name should not include /dev/ prefix. Just the device basename.
+- (BOOL) openSerialPort: (NSString *) deviceName;       // Device name should not include /dev/ prefix. Just the device basename.
 - (void) closeSerialPort;
 
 - (void) parseTelemetryByte: (unsigned char) thisByte;
 - (void) parseFrskyPacket: (unsigned char *) packetBuffer withByteCount: (int) byteCount;
 - (void) parseTelemHubByte: (unsigned char) thisByte;
 
+- (void) sendPacket: (unsigned char *)packetBuf : (int)length;
+
 @end
+
