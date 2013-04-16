@@ -8,9 +8,7 @@
 
 #import "Telemetry Parser.h"
 
-@implementation Telemetry_Parser
-{
-}
+@implementation TelemetryParser
 
 /**************
  ** I N I T  **
@@ -20,24 +18,119 @@
     self = [super init];
     if (self)
     {
-        _serialPortFileDescriptor = -1;
+        [self refreshSerialDeviceList];
     }
     return self;
 }
 
-- (void) dealloc
+// Custom setter to effect delgate call when value changes
+- (void) setTelemtryDataStreamStatus:(NSInteger) newValue
 {
-    if (dataPollingTimer) {
-        [dataPollingTimer invalidate];
-        dataPollingTimer = nil;
-        
-        // Need to wait until any currnet timer event execution completes, somehow -- because it's in a
-        // separate thread and code could stil be executing when our app goes away!
-        while (dataPollingTimerEventInProgress); // This seems to do the trick. But I think it's a little ugly.
-        // TODO:Investigate the return value, NSTerminateLater and how it is intended to operate.
+    _telemtryDataStreamStatus = newValue;
+
+    // Notify delegate of that the value has changed
+    if ([self.delegate respondsToSelector:@selector(telemtryDataStreamStatusChangedTo:)] )
+    {
+        [self.delegate telemtryDataStreamStatusChangedTo:_telemtryDataStreamStatus ];
     }
-    // ARC will call [super dealloc]
+    
 }
+
+- (void) setTelemetryDataBufferUsage:(NSInteger)byteCount
+{
+    _telemetryDataBufferUsage = byteCount;
+
+    // Notify delegate of that the value has changed
+    if ([self.delegate respondsToSelector:@selector(telemetryParserBufferLevelNowAt:)] )
+    {
+        [self.delegate telemetryParserBufferLevelNowAt:_telemetryDataBufferUsage ];
+    }
+    
+}
+
+- (void) refreshSerialDeviceList
+{
+    // start with empty array
+    NSMutableArray *devices = [[NSMutableArray alloc] init];
+    
+    // Ask IOKit for a list (dictionary) of available serial ports
+    io_iterator_t   serialPortIterator;
+    kern_return_t   kernResult;
+    char            deviceFilePath[1024];
+    
+    mach_port_t     masterPort;
+    CFMutableDictionaryRef  classesToMatch;
+    
+    kernResult = IOMasterPort(MACH_PORT_NULL, &masterPort);
+    if (KERN_SUCCESS != kernResult)
+    {
+        NSLog(@"ERROR: IOMasterPort returned error code %d, during serial port device look-up", kernResult);
+        return;
+    }
+    
+    // Serial devices are instances of class IOSerialBSDClient.
+    classesToMatch = IOServiceMatching(kIOSerialBSDServiceValue);
+    if (classesToMatch == NULL)
+    {
+        NSLog(@"ERROR: IOServiceMatching returned a NULL dictionary, during serial port device look-up (no serial ports available?)");
+        return;
+    }
+    CFDictionarySetValue(classesToMatch,
+                         CFSTR(kIOSerialBSDTypeKey),
+                         CFSTR(kIOSerialBSDRS232Type));
+    
+    kernResult = IOServiceGetMatchingServices(masterPort, classesToMatch, &serialPortIterator);
+    if (KERN_SUCCESS != kernResult)
+    {
+        NSLog(@"IOServiceGetMatchingServices returned error code %d, during serial port device look-up", kernResult);
+        return;
+    }
+    
+    deviceFilePath[0] = '\0';
+    io_object_t serialPortService;
+    
+    // Load the file paths of all available serial ports from the dictionary into our port combobox
+    while ((serialPortService = IOIteratorNext(serialPortIterator)))
+    {
+        // obtain this device's file path from its IOCallOut property
+        CFTypeRef   deviceFilePathAsCFString;
+        deviceFilePathAsCFString = IORegistryEntryCreateCFProperty(serialPortService,
+                                                                   CFSTR(kIOCalloutDeviceKey),
+                                                                   kCFAllocatorDefault,
+                                                                   0);
+        
+        if (deviceFilePathAsCFString) // if we got a string ...
+        {
+            Boolean result = CFStringGetCString(deviceFilePathAsCFString,
+                                                deviceFilePath,
+                                                sizeof(deviceFilePath),
+                                                kCFStringEncodingASCII);
+            CFRelease(deviceFilePathAsCFString);    // free the memory allocated by CFStringGetCString
+            
+            if (result)
+            {
+                [devices addObject:[NSString stringWithCString:basename(deviceFilePath) encoding:NSUTF8StringEncoding]];
+            }
+        }
+    }
+    
+    _serialDevicesList = devices;
+
+}
+
+////////////////////////////////////////////
+/// NSComboBoxDataSource methods
+- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox
+{
+    return [self.serialDevicesList count];
+}
+
+- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index
+{
+    return [self.serialDevicesList objectAtIndex:index];
+}
+////////////////////////////////////////////
+
 
 /*
 * Open a serial port file descriptor (fd) using system open() function
@@ -83,7 +176,7 @@
     {
         
         // Initialise timer based polling for incoming serial data
-        dataPollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+        _dataPollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                           target:self selector:@selector(dataPollingEvent:)
                                                         userInfo:nil repeats:YES];
     }
@@ -94,7 +187,16 @@
 
 - (void) closeSerialPort
 {
-	if (_serialPortFileDescriptor > 0)
+    if (_dataPollingTimer) {
+        [_dataPollingTimer invalidate];
+        _dataPollingTimer = nil;
+        
+        // Need to wait until possible currnet timer event execution completes, somehow -- because it's in a
+        // separate thread and code could stil be executing when our app goes away!
+        while (_dataPollingTimerEventInProgress); // This seems to do the trick. But I think it's a little ugly.
+    }
+
+	if (_serialPortFileDescriptor)
     {
         close(_serialPortFileDescriptor);
         NSLog(@"Serial port closed");
@@ -105,7 +207,7 @@
 {
 	static int timeoutCounter = 0;
 	
-	dataPollingTimerEventInProgress = YES;    // used to prevent app quitting while this function is in progress
+	_dataPollingTimerEventInProgress = YES;    // used to prevent app quitting while this function is in progress
 	
     int nbytes;
 	if ((nbytes = read(_serialPortFileDescriptor, _telemetryDataBuffer, FRSKY_TELEM_BUFFER_SIZE)) > 0)
@@ -115,28 +217,28 @@
 			[self parseTelemetryByte:(unsigned char)_telemetryDataBuffer[i] ];
 	}
     
-	_telemetryDataBufferUsage = nbytes;
+	self.telemetryDataBufferUsage = nbytes;
     
 	if (nbytes == 0)
     {
 		timeoutCounter++;
 
 		if ((timeoutCounter >= 1) && (timeoutCounter < 10))
-			_telemtryDataStreamStatus = 2;    // pause in data stream detected
+			self.telemtryDataStreamStatus = 2;    // pause in data stream detected
 
 		if (timeoutCounter >= 10)
         {
 			timeoutCounter--; // prevent counter going any higher and eventually wrapping around zero
-			_telemtryDataStreamStatus = 3;    // data stream has stopped (for too long)
+			self.telemtryDataStreamStatus = 3;    // data stream has stopped (for too long)
 		}
 	}
     else
     {
 		timeoutCounter = 0;
-		_telemtryDataStreamStatus = 1;        // data stream is flowing nicely
+		self.telemtryDataStreamStatus = 1;        // data stream is flowing nicely
 	}
 	
-	dataPollingTimerEventInProgress = NO;
+	_dataPollingTimerEventInProgress = NO;
 }
 
 
@@ -213,14 +315,24 @@
         case TELEM_PKT_TYPE_A2A:
         case TELEM_PKT_TYPE_A2B:
         {
-            struct FrskyAlarmData *alarmptr;
+            struct FrskyAlarmData *alarmPtr;
             
             // set alarmptr to address of _frskyAlarmsStruct[n],
             // where n is derived from the packet type in packetBuffer[0]
-            alarmptr = &_frskyAlarmsStruct[(packetBuffer[0]-TELEM_PKT_TYPE_A2B/*0xf9*/)];
-            alarmptr->value = packetBuffer[1];
-            alarmptr->greater = packetBuffer[2] & 0x01;
-            alarmptr->level = packetBuffer[3] & 0x03;
+            int alarmIndex = (packetBuffer[0]-TELEM_PKT_TYPE_A2B/*0xf9*/);
+            alarmPtr = &_frskyAlarmsStruct[alarmIndex];
+            alarmPtr->value = packetBuffer[1];
+            alarmPtr->greater = packetBuffer[2] & 0x01;
+            alarmPtr->level = packetBuffer[3] & 0x03;
+            
+           
+            // Call delegate function to do something with the new alarm data
+            if ([self.delegate respondsToSelector:@selector(frskyAlarmDataArrivedInCStruct:forAlarmIndex:)] )
+            {
+                [self.delegate frskyAlarmDataArrivedInCStruct: *alarmPtr forAlarmIndex:alarmIndex];
+            }
+
+            
         }
             break;
             
@@ -340,7 +452,10 @@ computeTelemHubIndex(unsigned char index)
     
 }
 
-- (void) sendPacket: (unsigned char *)packetBuf : (int)length
+/*
+ * Sends a telemtry control packet (to the TX module) incuding byte stuffing (special character escaping)
+ */
+- (void) sendPacket: (unsigned char *)packetBuf withByteCount:(int)length
 {
     // We can only send serial chars using pointers to buffers. So we need a couple buffered, const chars ...
     char bufBYTE_STUFF = TELEM_BYTE_STUFF;
@@ -351,14 +466,51 @@ computeTelemHubIndex(unsigned char index)
 		for (int i = 0; i < length; i++) {
             if ((packetBuf[i] == TELEM_START_STOP) || (packetBuf[i] == TELEM_BYTE_STUFF))
             {
-                write(_serialPortFileDescriptor, &bufBYTE_STUFF, 1);   // send (insert) byte-stuff char before buffered char
-                packetBuf[i] &= ~TELEM_STUFF_MASK;    // convert 0x7e or 0x7d char to 0x5e or 0x5d
+                write(_serialPortFileDescriptor, &bufBYTE_STUFF, 1);    // send (insert) byte-stuff char before buffered char
+                packetBuf[i] &= ~TELEM_STUFF_MASK;                      // convert 0x7e or 0x7d char to 0x5e or 0x5d
             }
-            write(_serialPortFileDescriptor, &packetBuf[i], 1);        // send the buffered char
+            write(_serialPortFileDescriptor, &packetBuf[i], 1);         // send the buffered char
            
 		}
 		write(_serialPortFileDescriptor, &bufSTART_STOP, 1);
 	}
+}
+
+#define ALARM_CONTROL_PACKET_SIZE 9
+- (void) sendAlarmSetPacketWithHeaderByte:(unsigned char)headerByte usingAlarmDataCStruct:(struct FrskyAlarmData) alarmData
+{
+    unsigned char packet[ALARM_CONTROL_PACKET_SIZE];
+    int i = 0;
+
+    packet[i++] = headerByte;
+	packet[i++] = alarmData.value;
+	packet[i++] = alarmData.greater;
+	packet[i++] = alarmData.level;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	
+	[self sendPacket:packet withByteCount:ALARM_CONTROL_PACKET_SIZE];
+}
+
+- (void) requestAlarmSettings
+{
+    unsigned char packet[ALARM_CONTROL_PACKET_SIZE];
+	int i = 0;
+	
+	packet[i++] = 0xf8;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	packet[i++] = 0x00;
+	
+	[self sendPacket:packet withByteCount:ALARM_CONTROL_PACKET_SIZE];
 }
 
 @end

@@ -52,78 +52,12 @@
 #define DEBUG 0
 
 
-@interface FrSky_Terminal : NSObject <NSApplicationDelegate, NSComboBoxDelegate, TelemtryParserDelegate> {
+@interface FrSky_Terminal : NSObject <NSApplicationDelegate, NSComboBoxDelegate, TelemtryParserDelegate>
 
-    // Main view objects
-    NSComboBox *_serialDeviceCombo;
-	NSTextView *_userData;
-	NSTextField *_myLabel;
-	NSTextField *_textA1;
-	NSTextField *_textA2;
-	NSTextField *_textRSSI;
-	NSLevelIndicatorCell *_signalLevel;
-	NSLevelIndicatorCell *_bufferCount;
-	NSLevelIndicatorCell *_dataStreamIndicator;
-	NSPopUpButton *_displayMode;
-	NSPopUpButton *_alarmCh1ALevel;
-	NSPopUpButton *_alarmCh1BLevel;
-	NSPopUpButton *_alarmCh2ALevel;
-	NSPopUpButton *_alarmCh2BLevel;
-	NSPopUpButton *_alarmCh1AGreater;
-	NSPopUpButton *_alarmCh1BGreater;
-	NSPopUpButton *_alarmCh2AGreater;
-	NSPopUpButton *_alarmCh2BGreater;
-	NSTextField *_alarmCh1AValue;
-	NSTextField *_alarmCh1BValue;
-	NSTextField *_alarmCh2AValue;
-	NSTextField *_alarmCh2BValue;
-	NSStepper *_alarmCh1AStepper;
-	NSStepper *_alarmCh1BStepper;
-	NSStepper *_alarmCh2AStepper;
-	NSStepper *_alarmCh2BStepper;
-    NSScrollView *_userDataTextView;
-    NSBox *_telemetryBox;
-    NSBox *_frskyHubBox;
-
-    // Fr-Sky Hub data view objects
-    NSTextField *_frskyHubLattitude;
-    NSTextField *_frskyHubLongitude;
-    NSTextField *_frskyHubHeading;
-    NSTextField *_frskyHubSpeed;
-    NSTextField *_frskyHubAltitude;
-    NSTextField *_frskyHubFuel;
-    NSTextField *_frskyHubRPM;
-    NSTextField *_frskyHubVolts;
-    NSTextField *_frskyHubTemp1;
-    NSTextField *_frskyHubTemp2;
-    NSTextField *_frskyHubBaroAlt;
-    NSTextField *_frskyHubData;
-    
-    Telemetry_Parser *telemetryParser;
-
-}
-
-
-// Methods
-- (void) refreshSerialPortsList;
-- (void) clearUserDataText;
-
-// Action Methods
-- (IBAction) refreshButton:(id)sender;
-- (IBAction) alarmSetCh1A:(id)sender;
-- (IBAction) alarmSetCh1B:(id)sender;
-- (IBAction) alarmSetCh2A:(id)sender;
-- (IBAction) alarmSetCh2B:(id)sender;
-- (IBAction) alarmRefresh:(id)sender;
-- (IBAction) clearUserData:(id)sender;
-- (IBAction) dataModeSelected:(id)sender;
-
-// Xcode supplied property
 @property (assign) IBOutlet NSWindow *window;
 
-
-// The "new thing" (Xcode 4) is to make all our outlet objects into properties and use dot notation (self.blah)
-// Fortunately, Apple also added auto-synthesis magic to this scheme, so we don't have to do that tedium.
+// Declare our model -- an instance of the TelemtryParser class
+@property (strong) TelemetryParser *telemetryParser;
 
 // Main view object properties
 @property (strong) IBOutlet NSComboBox *serialDeviceCombo;
@@ -169,5 +103,17 @@
 @property (strong) IBOutlet NSTextField *frskyHubTemp2;
 @property (strong) IBOutlet NSTextField *frskyHubData;
 @property (strong) IBOutlet NSTextField *frskyHubBaroAlt;
+
+
+// Class methods
+- (void) clearUserDataText;
+
+// Interface Builder action methods
+- (IBAction) refreshButton:(id)sender;
+- (IBAction) alarmSet:(id)sender;
+- (IBAction) alarmRefresh:(id)sender;
+- (IBAction) clearUserData:(id)sender;
+- (IBAction) dataModeSelected:(id)sender;
+
 
 @end
