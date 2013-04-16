@@ -100,11 +100,13 @@ struct FrskyLinkData {
 - (void) frskyLinkDataArrivedInCStruct:(struct FrskyLinkData) linkData;
 - (void) frskyUserDataArrivedInString:(NSString *) userData;
 - (void) frskyHubDataArrivedInCStruct:(struct FrskyHubData) hubData;
-
+- (void) frskyAlarmDataArrivedInCStruct:(struct FrskyAlarmData) alarmData forAlarmIndex:(NSInteger)index;
+- (void) telemtryDataStreamStatusChangedTo:(NSInteger) newValue;
+- (void) telemetryParserBufferLevelNowAt:(NSInteger)byteCount;
 @end
 
 
-@interface Telemetry_Parser : NSObject
+@interface TelemetryParser : NSObject <NSComboBoxDataSource>
 {
     
     // Primitive C class variables
@@ -117,16 +119,18 @@ struct FrskyLinkData {
     struct FrskyAlarmData _frskyAlarmsStruct[4];
     struct FrskyHubData _frskyHubDataStruct;
     
-    NSTimer *dataPollingTimer;
-	BOOL dataPollingTimerEventInProgress;          
+    // No external access to these, so don't bother with prperties ...
+    NSTimer *_dataPollingTimer;
+	BOOL _dataPollingTimerEventInProgress;
 
-    // id <TelemtryParserDelegate> _delegate;
 }
 
-@property (readonly) NSInteger telemetryDataBufferUsage; // The number of bytes grabbed in last serial port read() operation (for buffer use display)
-@property (readonly) NSInteger telemtryDataStreamStatus; // 3 = no data (in too long a time), 2 = pause in data data, 1 = data flowing in steadily
+@property (nonatomic) NSInteger telemetryDataBufferUsage; // The number of bytes grabbed in last serial port read() operation (for buffer use display)
+@property (nonatomic) NSInteger telemtryDataStreamStatus; // 3 = no data (in too long a time), 2 = pause in data data, 1 = data flowing in steadily
 
-@property (strong) id <TelemtryParserDelegate> delegate;
+@property (nonatomic, weak) id <TelemtryParserDelegate> delegate;   // delegate instances should be weak, to avoid "reference cycles" with deallocated delegate objects
+
+@property (readonly) NSArray *serialDevicesList;        // custom getter will query the OS for the availble ports when (_serialDevicesList == nil);
 
 - (void) dataPollingEvent: (NSTimer *) theTimer;
 - (BOOL) openSerialPort: (NSString *) deviceName;       // Device name should not include /dev/ prefix. Just the device basename.
@@ -136,7 +140,15 @@ struct FrskyLinkData {
 - (void) parseFrskyPacket: (unsigned char *) packetBuffer withByteCount: (int) byteCount;
 - (void) parseTelemHubByte: (unsigned char) thisByte;
 
-- (void) sendPacket: (unsigned char *)packetBuf : (int)length;
+- (void) sendPacket: (unsigned char *)packetBuf withByteCount: (int)length;
+- (void) sendAlarmSetPacketWithHeaderByte:(unsigned char)headerByte usingAlarmDataCStruct:(struct FrskyAlarmData) alarmData;
+- (void) requestAlarmSettings;
+
+- (void) refreshSerialDeviceList;
+
+// NSComboBoxDataSource methods
+- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index;
+- (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox;
 
 @end
 

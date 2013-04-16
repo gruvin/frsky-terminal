@@ -26,120 +26,19 @@
 
 @implementation FrSky_Terminal
 
-// All our view property objects are auto-synthesized in Xcode 4. No need to labourously do that ourselves here, thank, umm Steve? :-P
-
-
-- (void) refreshSerialPortsList
-{
-    // Empty the current list
-    [self.serialDeviceCombo removeAllItems];
-    
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    // TODO: Refactor to model. Then maybe use the datasource mechanism to populate combo box?
-    //       Or just have the system level stuff moved to the model, call that and
-    //       then just pull the list back here in an array or dict, I guess. Easier.
-
-    // Ask IOKit for a list (dictionary) of available serial ports
-    io_iterator_t   serialPortIterator;
-    kern_return_t   kernResult;
-    char        deviceFilePath[1024];
-    
-    mach_port_t         masterPort;
-    CFMutableDictionaryRef  classesToMatch;
-    
-    kernResult = IOMasterPort(MACH_PORT_NULL, &masterPort);
-    if (KERN_SUCCESS != kernResult)
-    {
-        NSLog(@"ERROR: IOMasterPort returned error code %d, during serial port device look-up", kernResult);
-        return;
-    }
-    
-    // Serial devices are instances of class IOSerialBSDClient.
-    classesToMatch = IOServiceMatching(kIOSerialBSDServiceValue);
-    if (classesToMatch == NULL)
-    {
-        NSLog(@"ERROR: IOServiceMatching returned a NULL dictionary, during serial port device look-up (no serial ports available?)");
-        return;
-    }
-    CFDictionarySetValue(classesToMatch,
-                         CFSTR(kIOSerialBSDTypeKey),
-                         CFSTR(kIOSerialBSDRS232Type));
-
-    kernResult = IOServiceGetMatchingServices(masterPort, classesToMatch, &serialPortIterator);
-    if (KERN_SUCCESS != kernResult)
-    {
-        NSLog(@"IOServiceGetMatchingServices returned error code %d, during serial port device look-up", kernResult);
-        return;
-    }
-
-    deviceFilePath[0] = '\0';
-    io_object_t serialPortService;
-
-    // Load the file paths of all available serial ports from the dictionary into our port combobox
-    while ((serialPortService = IOIteratorNext(serialPortIterator)))
-    {
-        // obtain this device's file path from its IOCallOut property
-        CFTypeRef   deviceFilePathAsCFString;
-        deviceFilePathAsCFString = IORegistryEntryCreateCFProperty(serialPortService,
-                                                                   CFSTR(kIOCalloutDeviceKey),
-                                                                   kCFAllocatorDefault,
-                                                                   0);
-        
-        if (deviceFilePathAsCFString) // if we got a string ...
-        {
-            Boolean result = CFStringGetCString(deviceFilePathAsCFString,
-                                                deviceFilePath,
-                                                sizeof(deviceFilePath),
-                                                kCFStringEncodingASCII);
-            CFRelease(deviceFilePathAsCFString);    // free the memory allocated by CFStringGetCString
-            
-            if (result)
-            {
-                // TODO: This should update local model data only
-                // Add this device path's base name to the combo box. We'll prepend /dev/ again in openSerialPort:
-                [self.serialDeviceCombo addItemWithObjectValue:[NSString stringWithCString:basename(deviceFilePath) encoding:NSUTF8StringEncoding]];
-            }
-        }
-    }
-    // END TODO
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-   
-}
-
-// TODO: refactor to call a model method
-- (IBAction) refreshButton:(id)sender {
-    [self refreshSerialPortsList];
-}
-
-
-- (void) clearUserDataText
-{
-    [self.userData setEditable:YES]; // this is dumb. shouldn't have to set editable for progrmatic text input!
-    [self.userData setString:@""];
-    [self.userData setFont:[NSFont fontWithName:@"Monaco" size:12.0]];
-    [self.userData setEditable:NO];
-}
-
 - (void) applicationDidFinishLaunching:(NSNotification*)aNotification {
 
-    telemetryParser = [[Telemetry_Parser alloc] init];
-    [telemetryParser setDelegate:self]; // make us the delegate for telemetryParser's FrskyParserDelegate protocol methods 
+    self.telemetryParser = [[TelemetryParser alloc] init];
     
-    [self clearUserDataText];   // to set font, etc
+    [self.telemetryParser setDelegate:self]; // make us the delegate for telemetryParser's FrskyParserDelegate protocol methods
     
-    [self refreshSerialPortsList];
+    [self clearUserDataText];                // also sets font, etc
     
-	[self.serialDeviceCombo setStringValue:@"Select serial port ..."];
+    [self.serialDeviceCombo setDataSource:self.telemetryParser];
+	[self.serialDeviceCombo setStringValue:@"Select serial port ..."]; // and add a hint for the user
 
-	// [self alarmRefresh:self];
+	// [self alarmRefresh:self]; // TODO: This would make much more sense are part of openSerialPort (model-side)
 }
-
-- (void) comboBoxSelectionDidChange:(NSNotification *)notification
-{
-    [telemetryParser closeSerialPort];
-    [telemetryParser openSerialPort:[self.serialDeviceCombo objectValueOfSelectedItem]]; // assume the object is an NSString
-}
-
 
 // Make the app terminate (quit) if its main window is closed
 // NOTE: This delegate call happens AFTER the window has already closed
@@ -147,18 +46,27 @@
 	return YES;
 }
 
-// TODO: Is this needed -- or is applicationWillTerminate sufficient on its own?
-// NOTE: windowsShouldClose doesn't happen if app is directly Quit (as opposed to closing the main window)!
-- (BOOL) windowShouldClose:(id)sender
-{
-    [telemetryParser closeSerialPort];
-	return YES;
-}
-
 - (void) applicationWillTerminate:(NSNotification *)aNotification
 {
-	[telemetryParser closeSerialPort];
+	[self.telemetryParser closeSerialPort];
 }
+
+// TODO: refactor to call a model method. ALSO, use a more indicative name for the method.
+- (IBAction) refreshButton:(id)sender {
+    [self.telemetryParser refreshSerialDeviceList];
+    [self.serialDeviceCombo noteNumberOfItemsChanged]; // reloadData is not sufficient
+}
+
+- (void) clearUserDataText
+{
+    [self.userData setEditable:YES];
+    [self.userData setString:@""];
+    [self.userData setFont:[NSFont fontWithName:@"Monaco" size:12.0]];
+    [self.userData setEditable:NO];
+}
+
+
+/// IBAction methods
 
 - (IBAction) clearUserData:(id)sender {
     [self clearUserDataText];
@@ -180,8 +88,8 @@
     
 }
 
-/******************************/
-/** BEGIN DELEGATE FUNCTIONS **/
+/////////////////////////////////////
+/// BEGIN DELEGATE FUNCTIONS
 - (BOOL) telemetryParserShouldProcessFrskyHubData
 {
     return [self.displayMode indexOfSelectedItem] == 3; // hub view
@@ -196,11 +104,6 @@
     [self.textRSSI setIntValue:lastRSSI = (lastRSSI == 0) ? linkData.frskyRSSI1 :
      (lastRSSI = (linkData.frskyRSSI1 + ((unsigned int)lastRSSI * 15)) >> 4)]; // averaging filter to prevent RSSI figure from jumping about too much on screen
     [self.signalLevel setIntValue:((lastRSSI/2) < 16) ? 16 : lastRSSI / 2];
-    
-    // TODO: These two UI aesthetic view functions should really be in delegate function, called when they get updated in the model
-    [self.dataStreamIndicator setIntegerValue:(255/*IB max value*/ / FRSKY_TELEM_BUFFER_SIZE) * telemetryParser.telemtryDataStreamStatus];
-    [self.bufferCount setIntegerValue:telemetryParser.telemetryDataBufferUsage];
-    
 }
 
 - (void) frskyUserDataArrivedInString:(NSString *) userData
@@ -258,104 +161,116 @@
      [self.frskyHubVolts setStringValue:[NSString stringWithFormat:@"%5u", hubData.volts]];
      [self.frskyHubTemp1 setStringValue:[NSString stringWithFormat:@"%5d", hubData.temperature1]];
      [self.frskyHubTemp2 setStringValue:[NSString stringWithFormat:@"%5d", hubData.temperature2]];
-     [self.frskyHubBaroAlt setStringValue:[NSString stringWithFormat:@"%5d", -hubData.baroAltitude]];
+     [self.frskyHubBaroAlt setStringValue:[NSString stringWithFormat:@"%5d", hubData.baroAltitude]];
 
 }
 
-/**  END DELEGATE FUNCTIONS  **/
-/******************************/
-
-
-/*** TODO: Refactor all these ugly alarm set functions and move them to the model ****/
-- (IBAction) alarmSetCh1A:(id)sender
+- (void) frskyAlarmDataArrivedInCStruct:(struct FrskyAlarmData) alarmData forAlarmIndex:(NSInteger)index
 {
-	unsigned char packet[15];
-	int i = 0;
-	
-	packet[i++] = 0xfb; // A1 alarm A
-	packet[i++] = (unsigned char)[self.alarmCh1AValue intValue];
-	packet[i++] = (unsigned char)[self.alarmCh1AGreater indexOfSelectedItem];
-	packet[i++] = (unsigned char)[self.alarmCh1ALevel indexOfSelectedItem];
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	
-	[telemetryParser sendPacket:packet:9];
+    switch (index) {
+        case 0:
+            [self.alarmCh2ALevel selectItemAtIndex:alarmData.level];
+            [self.alarmCh2AGreater selectItemAtIndex:alarmData.greater];
+            [self.alarmCh2AValue setIntValue:alarmData.value];
+            [self.alarmCh2AStepper setIntValue:alarmData.value];
+            break;
+            
+        case 1:
+            [self.alarmCh2BLevel selectItemAtIndex:alarmData.level];
+            [self.alarmCh2BGreater selectItemAtIndex:alarmData.greater];
+            [self.alarmCh2BValue setIntValue:alarmData.value];
+            [self.alarmCh2BStepper setIntValue:alarmData.value];
+            break;
+            
+        case 2:
+            [self.alarmCh1ALevel selectItemAtIndex:alarmData.level];
+            [self.alarmCh1AGreater selectItemAtIndex:alarmData.greater];
+            [self.alarmCh1AValue setIntValue:alarmData.value];
+            [self.alarmCh1AStepper setIntValue:alarmData.value];
+            break;
+            
+        case 3:
+            [self.alarmCh1BLevel selectItemAtIndex:alarmData.level];
+            [self.alarmCh1BGreater selectItemAtIndex:alarmData.greater];
+            [self.alarmCh1BValue setIntValue:alarmData.value];
+            [self.alarmCh1BStepper setIntValue:alarmData.value];
+            
+    }
+
 }
 
-- (IBAction) alarmSetCh1B:(id)sender
+- (void) telemtryDataStreamStatusChangedTo:(NSInteger) newValue
 {
-	unsigned char packet[15];
-	int i = 0;
-	
-	packet[i++] = 0xfc; // A1 alarm B
-	packet[i++] = (unsigned char)[self.alarmCh1BValue intValue];
-	packet[i++] = (unsigned char)[self.alarmCh1BGreater indexOfSelectedItem];
-	packet[i++] = (unsigned char)[self.alarmCh1BLevel indexOfSelectedItem];
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	
-	[telemetryParser sendPacket:packet:9];
+    [self.dataStreamIndicator setIntegerValue:newValue];
 }
 
-- (IBAction) alarmSetCh2A:(id)sender
+- (void) telemetryParserBufferLevelNowAt:(NSInteger)byteCount
 {
-	unsigned char packet[15];
-	int i = 0;
-	
-	packet[i++] = 0xf9; // A2 alarm A
-	packet[i++] = (unsigned char)[self.alarmCh2AValue intValue];
-	packet[i++] = (unsigned char)[self.alarmCh2AGreater indexOfSelectedItem];
-	packet[i++] = (unsigned char)[self.alarmCh2ALevel indexOfSelectedItem];
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	
-	[telemetryParser sendPacket:packet:9];
+    [self.bufferCount setIntegerValue:byteCount * ([self.bufferCount maxValue] / FRSKY_TELEM_BUFFER_SIZE)];
 }
 
-- (IBAction) alarmSetCh2B:(id)sender
+///  END DELEGATE FUNCTIONS
+/////////////////////////////////////
+
+
+
+/////////////////////////////////////
+/// NSComboBoxDelegate method(s)
+- (void) comboBoxSelectionDidChange:(NSNotification *)notification
 {
-	unsigned char packet[15];
-	int i = 0;
-	
-	packet[i++] = 0xfa; // A2 alarm B
-	packet[i++] = (unsigned char)[self.alarmCh2BValue intValue];
-	packet[i++] = (unsigned char)[self.alarmCh2BGreater indexOfSelectedItem];
-	packet[i++] = (unsigned char)[self.alarmCh2BLevel indexOfSelectedItem];
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	
-	[telemetryParser sendPacket:packet:9];
-	
+    [self.telemetryParser closeSerialPort];
+    [self.telemetryParser openSerialPort:[[self.serialDeviceCombo dataSource] comboBox:self.serialDeviceCombo
+                                                             objectValueForItemAtIndex:[self.serialDeviceCombo indexOfSelectedItem]
+                                          ]]; // assume the object is an NSString
+
 }
+/////////////////////////////////////
+
+
+- (IBAction) alarmSet:(id)sender
+{
+	
+    unsigned char headerByte = 0;
+    struct FrskyAlarmData alarmData;
+    
+    // identified is set in Interface Builder (for each of the Set buttons)
+    if ([[sender identifier] isEqual:@"A1A"])
+    {
+        headerByte = 0xfb;
+        alarmData.value = (unsigned char)[self.alarmCh1AValue intValue];
+        alarmData.greater = (unsigned char)[self.alarmCh1AGreater indexOfSelectedItem];
+        alarmData.level = (unsigned char)[self.alarmCh1ALevel indexOfSelectedItem];
+    }
+    else if ([[sender identifier] isEqual:@"A1B"])
+    {
+        headerByte = 0xfc;
+        alarmData.value = (unsigned char)[self.alarmCh1BValue intValue];
+        alarmData.greater = (unsigned char)[self.alarmCh1BGreater indexOfSelectedItem];
+        alarmData.level = (unsigned char)[self.alarmCh1BLevel indexOfSelectedItem];
+    }
+    else if ([[sender identifier] isEqual:@"A2A"])
+    {
+        headerByte = 0xf9;
+        alarmData.value = (unsigned char)[self.alarmCh2AValue intValue];
+        alarmData.greater = (unsigned char)[self.alarmCh2AGreater indexOfSelectedItem];
+        alarmData.level = (unsigned char)[self.alarmCh2ALevel indexOfSelectedItem];
+    }
+    else if ([[sender identifier] isEqual:@"A2B"])
+    {
+        headerByte = 0xfa;
+        alarmData.value = (unsigned char)[self.alarmCh2BValue intValue];
+        alarmData.greater = (unsigned char)[self.alarmCh2BGreater indexOfSelectedItem];
+        alarmData.level = (unsigned char)[self.alarmCh2BLevel indexOfSelectedItem];
+    }
+    
+    [self.telemetryParser sendAlarmSetPacketWithHeaderByte:headerByte usingAlarmDataCStruct:alarmData];
+
+}
+
 
 - (IBAction) alarmRefresh:(id)sender
 {
-	unsigned char packet[15];
-	int i = 0;
-	
-	packet[i++] = 0xf8;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	packet[i++] = 0x00;
-	
-	[telemetryParser sendPacket:packet:9];
+    [self.telemetryParser requestAlarmSettings];
 }
 
 
