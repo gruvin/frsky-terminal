@@ -23,7 +23,7 @@
     return self;
 }
 
-// Custom setter to effect delgate call when value changes
+// Custom property setter to effect delgate call when value changes
 - (void) setTelemtryDataStreamStatus:(NSInteger) newValue
 {
     _telemtryDataStreamStatus = newValue;
@@ -33,10 +33,10 @@
     {
         [self.delegate telemtryDataStreamStatusChangedTo:_telemtryDataStreamStatus ];
     }
-    
 }
 
-- (void) setTelemetryDataBufferUsage:(NSInteger)byteCount
+// Custom property setter to effect delgate call when value changes
+- (void) setTelemetryDataBufferUsage:(NSInteger) byteCount
 {
     _telemetryDataBufferUsage = byteCount;
 
@@ -45,7 +45,6 @@
     {
         [self.delegate telemetryParserBufferLevelNowAt:_telemetryDataBufferUsage ];
     }
-    
 }
 
 - (void) refreshSerialDeviceList
@@ -209,7 +208,7 @@
 {
 	static int timeoutCounter = 0;
     
-	_dataPollingTimerEventInProgress = YES;    // used to prevent app quitting while this function is in progress
+	_dataPollingTimerEventInProgress = YES;
 	
     int nbytes;
 	if ((nbytes = read(_serialPortFileDescriptor, _telemetryDataBuffer, FRSKY_TELEM_BUFFER_SIZE)) > 0)
@@ -301,10 +300,10 @@
 }
 
 /*
- * Each complete Fr-Sky telemtry data packet is sent there for decoding and
+ * Each complete Fr-Sky telemtry data packet is sent here for decoding and
  * storing of its contained data. In the case of a User Data packet (data sent
- * into the RC receiver's User Data port at 9600 Baud) the data in said packet
- * is sent off to parseTelemHubByte: for parsing, one byte at a time.
+ * into the RC receiver's User Data port, at 9600 Baud) the data in said packet
+ * may be sent off to parseTelemHubByte: for parsing (one byte at a time).
  */
 - (void) parseFrskyPacket: (unsigned char *)packetBuffer withByteCount: (int) byteCount
 {
@@ -326,7 +325,6 @@
             alarmPtr->greater = packetBuffer[2] & 0x01;
             alarmPtr->level = packetBuffer[3] & 0x03;
             
-           
             // Call delegate function to do something with the new alarm data
             if ([self.delegate respondsToSelector:@selector(frskyAlarmDataArrivedInCStruct:forAlarmIndex:)] )
             {
@@ -371,9 +369,7 @@
             }
         }
             break;
-
     }
-
 }
 
 unsigned char
@@ -396,9 +392,10 @@ computeTelemHubIndex(unsigned char index)
 }
 
 /*
- * This state machine parses a single byte of Fr-Sky telemetry User Data, from parseFrskyPacket:withByteCount:.
- * When a complete Fr-Sky hub data packet is received, a delegate function is called, passwing the packet
- * data for processing elsewhere.
+ * This state machine parses a single byte of Fr-Sky telemetry User Data (from the receiver's 
+ * User Data port, where the Fr-Sky Hub plugs into), from parseFrskyPacket:withByteCount:. When 
+ * a complete Fr-Sky hub data packet is received, a delegate function is called, passwing the 
+ * packet data for processing elsewhere.
  */
 - (void) parseTelemHubByte: (unsigned char) thisByte
 {
