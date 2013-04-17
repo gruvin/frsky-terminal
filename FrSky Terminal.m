@@ -26,7 +26,8 @@
 
 @implementation FrSky_Terminal
 
-- (void) applicationDidFinishLaunching:(NSNotification*)aNotification {
+- (void) applicationDidFinishLaunching:(NSNotification*)aNotification
+{
 
     self.telemetryParser = [[TelemetryParser alloc] init];
     
@@ -42,7 +43,8 @@
 
 // Make the app terminate (quit) if its main window is closed
 // NOTE: This delegate call happens AFTER the window has already closed
-- (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
+- (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
+{
 	return YES;
 }
 
@@ -68,12 +70,14 @@
 
 /// IBAction methods
 
-- (IBAction) clearUserData:(id)sender {
+- (IBAction) clearUserData:(id)sender
+{
     [self clearUserDataText];
 }
 
 // Change views (if needed) when a different data display mode is selected
-- (IBAction) dataModeSelected:(id)sender {
+- (IBAction) dataModeSelected:(id)sender
+{
     if ([self.displayMode indexOfSelectedItem] == 3) // hub view
     {
         [self.frskyHubBox setFrame:[self.userDataTextView frame]];
@@ -85,7 +89,6 @@
         
         [self clearUserDataText];
     }
-    
 }
 
 /////////////////////////////////////
@@ -167,7 +170,8 @@
 
 - (void) frskyAlarmDataArrivedInCStruct:(struct FrskyAlarmData) alarmData forAlarmIndex:(NSInteger)index
 {
-    switch (index) {
+    switch (index)
+    {
         case 0:
             [self.alarmCh2ALevel selectItemAtIndex:alarmData.level];
             [self.alarmCh2AGreater selectItemAtIndex:alarmData.greater];
@@ -194,9 +198,7 @@
             [self.alarmCh1BGreater selectItemAtIndex:alarmData.greater];
             [self.alarmCh1BValue setIntValue:alarmData.value];
             [self.alarmCh1BStepper setIntValue:alarmData.value];
-            
     }
-
 }
 
 - (void) telemtryDataStreamStatusChangedTo:(NSInteger) newValue
@@ -264,7 +266,6 @@
     }
     
     [self.telemetryParser sendAlarmSetPacketWithHeaderByte:headerByte usingAlarmDataCStruct:alarmData];
-
 }
 
 
