@@ -25,16 +25,12 @@
 
 // APPLICATION STRUCTURE
 /*
-    This app was originally thrown together in a blur of trying to learn Xcode v3.2. It
-    was later updated to use Xcode 4 conventions, namely 'propertyizing' all outlets, etc.
- 
-    This app does NOT comply with MVC model ideals (at all) because to separate the low 
-    level comms data processing into a sepoarate model would have meant implementing 
-    protocols and notifications, just to keep the tony amount amount of data separate 
-    from the view controller. For a small app like this, that just didn't make an ounce 
-    of sense, to me. Doing so would have also made execution less efficient, by doubling 
-    up on data variables and needing more code to process it.
-                                                                             -- Gruvin.
+    This app was originally thrown together in a blur of trying to learn Xcode v3.2 and
+    Objective-C for the first time, in 2010. It was later updated to use newer Xcode 4 conventions, 
+    like automatic property synthesis and ARC instead of garbage collection,  etc. Later still 
+    (2013) the learning curve extended to making the program fully comply with the MVC design 
+    pattern -- enabled for the most part by protocols and delegates.
+                                                                                    -- Gruvin.
  */
 
 
@@ -50,7 +46,6 @@
 
 
 #define DEBUG 0
-
 
 @interface FrSky_Terminal : NSObject <NSApplicationDelegate, NSComboBoxDelegate, TelemtryParserDelegate>
 

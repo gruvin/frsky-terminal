@@ -72,6 +72,11 @@ typedef enum {
 #define TELEM_PKT_TYPE_RSSI1    0xf7 /* what's this for? This data is part of LINK packet. */
 #define TELEM_PKT_TYPE_RSSI2    0xf6 /* what's this for? This data is part of LINK packet. */
 
+
+#define DATA_STREAM_STOPPED 3
+#define DATA_STREAM_PAUSED  2
+#define DATA_STREAM_FLOWING 1
+
 typedef enum {
     TS_IDLE = 0,  // waiting for 0x5e frame marker
     TS_DATA_ID,   // waiting for dataID

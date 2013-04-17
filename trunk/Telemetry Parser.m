@@ -113,9 +113,8 @@
             }
         }
     }
-    
-    _serialDevicesList = devices;
 
+    _serialDevicesList = devices;
 }
 
 ////////////////////////////////////////////
@@ -172,13 +171,13 @@
 		portOpenedOK = YES;
 	}
     
-    if (portOpenedOK) // set up pollingTimer
+    if (portOpenedOK)
     {
-        
-        // Initialise timer based polling for incoming serial data
+ 
+        // Initialise timer-based polling, for incoming serial data
         _dataPollingTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                          target:self selector:@selector(dataPollingEvent:)
-                                                        userInfo:nil repeats:YES];
+                                                             target:self selector:@selector(dataPollingEvent:)
+                                                           userInfo:nil repeats:YES];
     }
 
     return portOpenedOK;
@@ -187,13 +186,16 @@
 
 - (void) closeSerialPort
 {
+
+    // Stop the dataPolling timer
     if (_dataPollingTimer) {
+        
         [_dataPollingTimer invalidate];
         _dataPollingTimer = nil;
         
-        // Need to wait until possible currnet timer event execution completes, somehow -- because it's in a
-        // separate thread and code could stil be executing when our app goes away!
-        while (_dataPollingTimerEventInProgress); // This seems to do the trick. But I think it's a little ugly.
+        // Need to wait until any current dataPollingEvent: execution completes, because it's in a
+        // separate thread and could return after we're gone! (I think?)
+        while (_dataPollingTimerEventInProgress); // This seems to do the trick. But I it seems a little ugly.
     }
 
 	if (_serialPortFileDescriptor)
@@ -206,13 +208,13 @@
 - (void) dataPollingEvent: (NSTimer *) theTimer
 {
 	static int timeoutCounter = 0;
-	
+    
 	_dataPollingTimerEventInProgress = YES;    // used to prevent app quitting while this function is in progress
 	
     int nbytes;
 	if ((nbytes = read(_serialPortFileDescriptor, _telemetryDataBuffer, FRSKY_TELEM_BUFFER_SIZE)) > 0)
     {
-        // parse all bytes thus far received ...
+        // parse all bytes so far received ...
 		for(int i = 0; i < nbytes; i++)
 			[self parseTelemetryByte:(unsigned char)_telemetryDataBuffer[i] ];
 	}
@@ -224,18 +226,18 @@
 		timeoutCounter++;
 
 		if ((timeoutCounter >= 1) && (timeoutCounter < 10))
-			self.telemtryDataStreamStatus = 2;    // pause in data stream detected
+			self.telemtryDataStreamStatus = DATA_STREAM_PAUSED;
 
 		if (timeoutCounter >= 10)
         {
-			timeoutCounter--; // prevent counter going any higher and eventually wrapping around zero
-			self.telemtryDataStreamStatus = 3;    // data stream has stopped (for too long)
+			timeoutCounter--; // prevent timeoutCounter from going higher
+			self.telemtryDataStreamStatus = DATA_STREAM_STOPPED;
 		}
 	}
     else
     {
 		timeoutCounter = 0;
-		self.telemtryDataStreamStatus = 1;        // data stream is flowing nicely
+		self.telemtryDataStreamStatus = DATA_STREAM_FLOWING;
 	}
 	
 	_dataPollingTimerEventInProgress = NO;
@@ -243,9 +245,9 @@
 
 
 /*
- * Each telemtry bytes received is sent through this state machine, in turn.
+ * Each telemtry byte received is sent through this data parsing state machine.
  * Eventually, we expect to have built a complete Fr-Sky telemetry data packet,
- * which is this handed off (synchornously) to parseFrskyPacket:withByteCount:
+ * which is this handed off (synchronously) to parseFrskyPacket:withByteCount:
  */
 - (void) parseTelemetryByte: (unsigned char)thisByte
 {
@@ -295,7 +297,6 @@
                 dataState = START;
             }
             break;
-            
     }
 }
 
@@ -331,8 +332,6 @@
             {
                 [self.delegate frskyAlarmDataArrivedInCStruct: *alarmPtr forAlarmIndex:alarmIndex];
             }
-
-            
         }
             break;
             
@@ -342,12 +341,10 @@
             _frskyLinkData.frskyRSSI1 = packetBuffer[3];
             _frskyLinkData.frskyRSSI2 = packetBuffer[4];
 
-            // Call delegate's frskyLinkDataArrivedInCStruct: (if it exists) to have something done with this new data
             if ([self.delegate respondsToSelector:@selector(frskyLinkDataArrivedInCStruct:)] )
             {
                 [self.delegate frskyLinkDataArrivedInCStruct: _frskyLinkData];
             }
-            
             break;
             
 
@@ -447,9 +444,7 @@ computeTelemHubIndex(unsigned char index)
         [self.delegate frskyHubDataArrivedInCStruct: _frskyHubDataStruct];
     }
 
-    
     state = TS_IDLE;
-    
 }
 
 /*
