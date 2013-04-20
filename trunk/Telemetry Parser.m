@@ -23,7 +23,7 @@
     return self;
 }
 
-// Custom property setter to effect delgate call when value changes
+// Custom property setter to effect delegate call when value changes
 - (void) setTelemtryDataStreamStatus:(NSInteger) newValue
 {
     _telemtryDataStreamStatus = newValue;
@@ -35,7 +35,7 @@
     }
 }
 
-// Custom property setter to effect delgate call when value changes
+// Custom property setter to effect delegate call when value changes
 - (void) setTelemetryDataBufferUsage:(NSInteger) byteCount
 {
     _telemetryDataBufferUsage = byteCount;
@@ -88,7 +88,7 @@
     deviceFilePath[0] = '\0';
     io_object_t serialPortService;
     
-    // Load the file paths of all available serial ports from the dictionary into our port combobox
+    // Load the file paths of all available serial ports from the dictionary into our port combo box
     while ((serialPortService = IOIteratorNext(serialPortIterator)))
     {
         // obtain this device's file path from its IOCallOut property
@@ -131,7 +131,7 @@
 
 
 /*
-* Open a serial port file descriptor (fd) using system open() function
+* Open a serial port file descriptor using system open() function
 * to obtain granular control of baud rate, stop bits, parity, etc.
 */
 #define DEVICE_PATH_BUFFER_SIZE 1024
@@ -158,7 +158,7 @@
 		options.c_cflag |= (CLOCAL | CREAD);
 		options.c_cflag &= ~CSIZE;                          // mask the character size bits
 		options.c_cflag |= CS8;                             // 8 data bits
-		options.c_cflag &= ~CRTSCTS;                        // diasble hardware flow control
+		options.c_cflag &= ~CRTSCTS;                        // disable hardware flow control
 		options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); // raw input
 		options.c_oflag &= ~OPOST;                          // raw output
 		options.c_cc[VMIN] = 0;
@@ -244,7 +244,7 @@
 
 
 /*
- * Each telemtry byte received is sent through this data parsing state machine.
+ * Each telemetry byte received is sent through this data parsing state machine.
  * Eventually, we expect to have built a complete Fr-Sky telemetry data packet,
  * which is this handed off (synchronously) to parseFrskyPacket:withByteCount:
  */
@@ -300,7 +300,7 @@
 }
 
 /*
- * Each complete Fr-Sky telemtry data packet is sent here for decoding and
+ * Each complete Fr-Sky telemetry data packet is sent here for decoding and
  * storing of its contained data. In the case of a User Data packet (data sent
  * into the RC receiver's User Data port, at 9600 Baud) the data in said packet
  * may be sent off to parseTelemHubByte: for parsing (one byte at a time).
@@ -348,7 +348,7 @@
 
         case TELEM_PKT_TYPE_USER:   // User Data packet
         {
-            int numBytes = 3 + (packetBuffer[1] & 0x07); // sanitize in case data corruption leads to buffer overflow
+            int numBytes = 3 + (packetBuffer[1] & 0x07); // sanitise in case data corruption leads to buffer overflow
             
             // Ask delegate if we should be processing Fr-Sky Hub data or not, at the moment
             if ([self.delegate respondsToSelector:@selector(telemetryParserShouldProcessFrskyHubData)]
@@ -376,7 +376,7 @@ unsigned char
 computeTelemHubIndex(unsigned char index)
 {
 /*
-    This is the openTx project's trick to point to the right structure element, using 
+    This is the openTx project's trick to point to the right structure element, using
     only the data-type header code from the Fr-Sky hub packet data. It just saves
     code resource on the 8-bit controller and is copied here, verbatim.
 */
@@ -394,8 +394,8 @@ computeTelemHubIndex(unsigned char index)
 /*
  * This state machine parses a single byte of Fr-Sky telemetry User Data (from the receiver's 
  * User Data port, where the Fr-Sky Hub plugs into), from parseFrskyPacket:withByteCount:. When 
- * a complete Fr-Sky hub data packet is received, a delegate function is called, passwing the 
- * packet data for processing elsewhere.
+ * a complete Fr-Sky hub data packet is received, a delegate function is called with the
+ * packet data, for processing elsewhere.
  */
 - (void) parseTelemHubByte: (unsigned char) thisByte
 {
@@ -445,7 +445,7 @@ computeTelemHubIndex(unsigned char index)
 }
 
 /*
- * Sends a telemtry control packet (to the TX module) incuding byte stuffing (special character escaping)
+ * Sends a telemetry control packet (to the TX module) including byte stuffing (special character escaping)
  */
 - (void) sendPacket: (unsigned char *)packetBuf withByteCount:(int)length
 {

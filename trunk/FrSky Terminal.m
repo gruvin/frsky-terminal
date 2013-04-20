@@ -26,7 +26,7 @@
 
 @implementation FrSky_Terminal
 
-// Custom getter to effect automatic lazy instatiation
+// Custom getter to effect automatic lazy instantiation
 - (TelemetryParser *)telemetryParser
 {
     if (!_telemetryParser) _telemetryParser = [[TelemetryParser alloc] init];
@@ -143,11 +143,13 @@
 {
     [self.telemetryParser requestAlarmSettings];
 }
+
 ///
 /////////////////////////
 
 /////////////////////////////////////
 /// DELEGATE METHODS
+
 - (BOOL) telemetryParserShouldProcessFrskyHubData
 {
     return [self.displayMode indexOfSelectedItem] == 3; // hub view
@@ -274,6 +276,7 @@
                                           ]]; // assume the object is an NSString
 
 }
+
 /// DELEGATE METHODS
 /////////////////////////////////////
 

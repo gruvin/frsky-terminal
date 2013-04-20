@@ -135,7 +135,7 @@ struct FrskyLinkData {
 
 @property (nonatomic, weak) id <TelemtryParserDelegate> delegate;   // delegate instances should be weak, to avoid "reference cycles" with deallocated delegate objects
 
-@property (readonly) NSArray *serialDevicesList;        // custom getter will query the OS for the availble ports when (_serialDevicesList == nil);
+@property (readonly) NSArray *serialDevicesList;        // custom getter will query the OS for the available ports when (_serialDevicesList == nil);
 
 - (void) dataPollingEvent: (NSTimer *) theTimer;
 - (BOOL) openSerialPort: (NSString *) deviceName;       // Device name should not include /dev/ prefix. Just the device basename.
