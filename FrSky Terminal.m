@@ -98,7 +98,6 @@
     }
 }
 
-// TODO: Should use an OutletCollection to simply this mess ...
 - (IBAction) alarmSet:(id)sender
 {
 	
