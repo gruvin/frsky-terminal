@@ -55,17 +55,27 @@
 // Lazy instantiation occurs in the getter for this property.
 @property (strong, nonatomic) TelemetryParser *telemetryParser;
 
-// Main view object properties
+/////////////////////
+// OUTLETS
 @property (weak, nonatomic) IBOutlet NSComboBox *serialDeviceCombo;
-@property (unsafe_unretained) IBOutlet NSTextView *userData; // TextViews cannot be 'weak, nonatomic'. IB uses unsafe_unretained, instead.
-@property (weak, nonatomic) IBOutlet NSTextField *myLabel;
+
+@property (weak, nonatomic) IBOutlet NSLevelIndicatorCell *signalLevel;
 @property (weak, nonatomic) IBOutlet NSTextField *textA1;
 @property (weak, nonatomic) IBOutlet NSTextField *textA2;
 @property (weak, nonatomic) IBOutlet NSTextField *textRSSI;
-@property (weak, nonatomic) IBOutlet NSLevelIndicatorCell *signalLevel;
-@property (weak, nonatomic) IBOutlet NSLevelIndicatorCell *bufferCount;
 @property (weak, nonatomic) IBOutlet NSLevelIndicatorCell *dataStreamIndicator;
+@property (weak, nonatomic) IBOutlet NSLevelIndicatorCell *bufferCount;
 @property (weak, nonatomic) IBOutlet NSPopUpButton *displayMode;
+
+@property (weak, nonatomic) IBOutlet NSBox *telemetryBox;
+
+@property (strong, nonatomic) IBOutlet NSScrollView *userDataTextView;
+@property (unsafe_unretained) IBOutlet NSTextView *userData; // TextViews cannot be 'weak, nonatomic'. IB uses unsafe_unretained, instead.
+
+@property (strong, nonatomic) IBOutlet NSBox *frskyHubBox;
+
+// Alarm settings outlets
+
 @property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh1ALevel;
 @property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh1BLevel;
 @property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh2ALevel;
@@ -82,11 +92,8 @@
 @property (weak, nonatomic) IBOutlet NSStepper *alarmCh1BStepper;
 @property (weak, nonatomic) IBOutlet NSStepper *alarmCh2AStepper;
 @property (weak, nonatomic) IBOutlet NSStepper *alarmCh2BStepper;
-@property (weak, nonatomic) IBOutlet NSBox *telemetryBox;
-@property (weak, nonatomic) IBOutlet NSScrollView *userDataTextView;
-@property (weak, nonatomic) IBOutlet NSBox *frskyHubBox;
 
-// Hub Data view properties
+// Hub Data view outlets
 @property (weak, nonatomic) IBOutlet NSTextField *frskyHubLattitude;
 @property (weak, nonatomic) IBOutlet NSTextField *frskyHubLongitude;
 @property (weak, nonatomic) IBOutlet NSTextField *frskyHubHeading;
@@ -99,7 +106,8 @@
 @property (weak, nonatomic) IBOutlet NSTextField *frskyHubTemp2;
 @property (weak, nonatomic) IBOutlet NSTextField *frskyHubData;
 @property (weak, nonatomic) IBOutlet NSTextField *frskyHubBaroAlt;
-
+///
+/////////////////////
 
 // Class methods
 - (void) clearUserDataText;

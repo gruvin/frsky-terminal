@@ -143,7 +143,6 @@
 {
     [self.telemetryParser requestAlarmSettings];
 }
-
 ///
 /////////////////////////
 

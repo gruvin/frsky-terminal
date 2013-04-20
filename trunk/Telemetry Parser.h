@@ -100,8 +100,8 @@ struct FrskyLinkData {
 };
 
 @protocol TelemtryParserDelegate <NSObject>
-- (BOOL) telemetryParserShouldProcessFrskyHubData;
 @optional
+- (BOOL) telemetryParserShouldProcessFrskyHubData;
 - (void) frskyLinkDataArrivedInCStruct:(struct FrskyLinkData) linkData;
 - (void) frskyUserDataArrivedInString:(NSString *) userData;
 - (void) frskyHubDataArrivedInCStruct:(struct FrskyHubData) hubData;

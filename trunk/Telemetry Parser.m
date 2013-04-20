@@ -348,22 +348,22 @@
 
         case TELEM_PKT_TYPE_USER:   // User Data packet
         {
-            int numBytes = 3 + (packetBuffer[1] & 0x07); // sanitize in case of data corruption leading to buffer overflow
+            int numBytes = 3 + (packetBuffer[1] & 0x07); // sanitize in case data corruption leads to buffer overflow
             
-
-            // Ask our delegate if we shoul dbe processing Fr-Sky Hub data or not, at the moment
-            if ([self.delegate telemetryParserShouldProcessFrskyHubData]) // this one is a required protocol method. So not checking for responder.
+            // Ask delegate if we should be processing Fr-Sky Hub data or not, at the moment
+            if ([self.delegate respondsToSelector:@selector(telemetryParserShouldProcessFrskyHubData)]
+                && [self.delegate telemetryParserShouldProcessFrskyHubData])
             {
                 for (int i=3; i < numBytes; i++)
                 {
                     [self parseTelemHubByte: packetBuffer[i] ];
                 }
             }
-            else
+            else // there was no delegate method or the answer was NO
             {
-                // Call delegate's frskyUserDataArrivedInString: (if it exists) to have something done with this new data
-                if ([self.delegate respondsToSelector:@selector(frskyUserDataArrivedInString:)] )
+                if ([self.delegate respondsToSelector:@selector(frskyUserDataArrivedInString:)])
                 {
+                    // Call delegate's frskyUserDataArrivedInString: (if it exists) to have something done with this new
                     [self.delegate frskyUserDataArrivedInString: [[NSString alloc] initWithBytes:packetBuffer length:numBytes encoding:NSASCIIStringEncoding]];
                 }
             }
