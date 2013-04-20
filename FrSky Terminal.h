@@ -51,7 +51,7 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
-// Declare our model -- an instance of the TelemtryParser class.
+// Declare our model -- an instance of the TelemetryParser class.
 // Lazy instantiation occurs in the getter for this property.
 @property (strong, nonatomic) TelemetryParser *telemetryParser;
 
