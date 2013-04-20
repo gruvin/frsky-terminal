@@ -51,53 +51,54 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
-// Declare our model -- an instance of the TelemtryParser class
-@property (strong) TelemetryParser *telemetryParser;
+// Declare our model -- an instance of the TelemtryParser class.
+// Lazy instantiation occurs in the getter for this property.
+@property (strong, nonatomic) TelemetryParser *telemetryParser;
 
 // Main view object properties
-@property (strong) IBOutlet NSComboBox *serialDeviceCombo;
-@property (strong) IBOutlet NSTextView *userData;
-@property (strong) IBOutlet NSTextField *myLabel;
-@property (strong) IBOutlet NSTextField *textA1;
-@property (strong) IBOutlet NSTextField *textA2;
-@property (strong) IBOutlet NSTextField *textRSSI;
-@property (strong) IBOutlet NSLevelIndicatorCell *signalLevel;
-@property (strong) IBOutlet NSLevelIndicatorCell *bufferCount;
-@property (strong) IBOutlet NSLevelIndicatorCell *dataStreamIndicator;
-@property (strong) IBOutlet NSPopUpButton *displayMode;
-@property (strong) IBOutlet NSPopUpButton *alarmCh1ALevel;
-@property (strong) IBOutlet NSPopUpButton *alarmCh1BLevel;
-@property (strong) IBOutlet NSPopUpButton *alarmCh2ALevel;
-@property (strong) IBOutlet NSPopUpButton *alarmCh2BLevel;
-@property (strong) IBOutlet NSPopUpButton *alarmCh1AGreater;
-@property (strong) IBOutlet NSPopUpButton *alarmCh1BGreater;
-@property (strong) IBOutlet NSPopUpButton *alarmCh2AGreater;
-@property (strong) IBOutlet NSPopUpButton *alarmCh2BGreater;
-@property (strong) IBOutlet NSTextField *alarmCh1AValue;
-@property (strong) IBOutlet NSTextField *alarmCh1BValue;
-@property (strong) IBOutlet NSTextField *alarmCh2AValue;
-@property (strong) IBOutlet NSTextField *alarmCh2BValue;
-@property (strong) IBOutlet NSStepper *alarmCh1AStepper;
-@property (strong) IBOutlet NSStepper *alarmCh1BStepper;
-@property (strong) IBOutlet NSStepper *alarmCh2AStepper;
-@property (strong) IBOutlet NSStepper *alarmCh2BStepper;
-@property (strong) IBOutlet NSBox *telemetryBox;
-@property (strong) IBOutlet NSScrollView *userDataTextView;
-@property (strong) IBOutlet NSBox *frskyHubBox;
+@property (weak, nonatomic) IBOutlet NSComboBox *serialDeviceCombo;
+@property (unsafe_unretained) IBOutlet NSTextView *userData; // TextViews cannot be 'weak, nonatomic'. IB uses unsafe_unretainedi, instead.
+@property (weak, nonatomic) IBOutlet NSTextField *myLabel;
+@property (weak, nonatomic) IBOutlet NSTextField *textA1;
+@property (weak, nonatomic) IBOutlet NSTextField *textA2;
+@property (weak, nonatomic) IBOutlet NSTextField *textRSSI;
+@property (weak, nonatomic) IBOutlet NSLevelIndicatorCell *signalLevel;
+@property (weak, nonatomic) IBOutlet NSLevelIndicatorCell *bufferCount;
+@property (weak, nonatomic) IBOutlet NSLevelIndicatorCell *dataStreamIndicator;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *displayMode;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh1ALevel;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh1BLevel;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh2ALevel;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh2BLevel;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh1AGreater;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh1BGreater;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh2AGreater;
+@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh2BGreater;
+@property (weak, nonatomic) IBOutlet NSTextField *alarmCh1AValue;
+@property (weak, nonatomic) IBOutlet NSTextField *alarmCh1BValue;
+@property (weak, nonatomic) IBOutlet NSTextField *alarmCh2AValue;
+@property (weak, nonatomic) IBOutlet NSTextField *alarmCh2BValue;
+@property (weak, nonatomic) IBOutlet NSStepper *alarmCh1AStepper;
+@property (weak, nonatomic) IBOutlet NSStepper *alarmCh1BStepper;
+@property (weak, nonatomic) IBOutlet NSStepper *alarmCh2AStepper;
+@property (weak, nonatomic) IBOutlet NSStepper *alarmCh2BStepper;
+@property (weak, nonatomic) IBOutlet NSBox *telemetryBox;
+@property (weak, nonatomic) IBOutlet NSScrollView *userDataTextView;
+@property (weak, nonatomic) IBOutlet NSBox *frskyHubBox;
 
 // Hub Data view properties
-@property (strong) IBOutlet NSTextField *frskyHubLattitude;
-@property (strong) IBOutlet NSTextField *frskyHubLongitude;
-@property (strong) IBOutlet NSTextField *frskyHubHeading;
-@property (strong) IBOutlet NSTextField *frskyHubSpeed;
-@property (strong) IBOutlet NSTextField *frskyHubAltitude;
-@property (strong) IBOutlet NSTextField *frskyHubFuel;
-@property (strong) IBOutlet NSTextField *frskyHubRPM;
-@property (strong) IBOutlet NSTextField *frskyHubVolts;
-@property (strong) IBOutlet NSTextField *frskyHubTemp1;
-@property (strong) IBOutlet NSTextField *frskyHubTemp2;
-@property (strong) IBOutlet NSTextField *frskyHubData;
-@property (strong) IBOutlet NSTextField *frskyHubBaroAlt;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubLattitude;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubLongitude;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubHeading;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubSpeed;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubAltitude;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubFuel;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubRPM;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubVolts;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubTemp1;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubTemp2;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubData;
+@property (weak, nonatomic) IBOutlet NSTextField *frskyHubBaroAlt;
 
 
 // Class methods
