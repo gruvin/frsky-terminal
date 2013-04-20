@@ -54,10 +54,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				93499A15171564AF003369D9 /* FrSky Terminal.m */,
-				93A3D63612A1F192004946BD /* FrSky Terminal.h */,
-				93A76407171B9871000C89EF /* Telemetry Parser.h */,
-				93A76408171B9871000C89EF /* Telemetry Parser.m */,
+				9328354E1722CCCA00C21AC2 /* Controller */,
+				9328354F1722CCD900C21AC2 /* Model */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -129,6 +127,24 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9328354E1722CCCA00C21AC2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				93A3D63612A1F192004946BD /* FrSky Terminal.h */,
+				93499A15171564AF003369D9 /* FrSky Terminal.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9328354F1722CCD900C21AC2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				93A76407171B9871000C89EF /* Telemetry Parser.h */,
+				93A76408171B9871000C89EF /* Telemetry Parser.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
