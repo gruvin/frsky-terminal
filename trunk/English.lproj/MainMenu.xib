@@ -1519,7 +1519,6 @@
 											<string key="NSFrame">{{117, 6}, {260, 32}}</string>
 											<reference key="NSSuperview" ref="373613192"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="636354588">
 												<int key="NSCellFlags">67108864</int>
@@ -2263,7 +2262,7 @@
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 			<object class="NSBox" id="252372559">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">4096</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSView" id="704618385">
@@ -2812,7 +2811,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{457, 225}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="704618385"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="NSOffsets">{0, 0}</string>
@@ -3305,22 +3303,6 @@
 					<int key="connectionID">1197</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">userData</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="149352282"/>
-					</object>
-					<int key="connectionID">1201</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">test</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="833175665"/>
-					</object>
-					<int key="connectionID">1202</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">alarmSet:</string>
 						<reference key="source" ref="566249779"/>
@@ -3351,6 +3333,14 @@
 						<reference key="destination" ref="175542968"/>
 					</object>
 					<int key="connectionID">1210</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">userData</string>
+						<reference key="source" ref="566249779"/>
+						<reference key="destination" ref="149352282"/>
+					</object>
+					<int key="connectionID">1213</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -5341,7 +5331,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1210</int>
+			<int key="maxID">1213</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

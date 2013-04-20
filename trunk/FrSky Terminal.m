@@ -26,11 +26,19 @@
 
 @implementation FrSky_Terminal
 
+// Custom getter to effect automatic lazy instatiation
+- (TelemetryParser *)telemetryParser
+{
+    if (!_telemetryParser) _telemetryParser = [[TelemetryParser alloc] init];
+    return _telemetryParser;
+}
+
+/////////////////////////
+//  S T A R T  -  U P  //
+/////////////////////////
 - (void) applicationDidFinishLaunching:(NSNotification*)aNotification
 {
 
-    self.telemetryParser = [[TelemetryParser alloc] init];
-    
     [self.telemetryParser setDelegate:self]; // make us the delegate for telemetryParser's FrskyParserDelegate protocol methods
     
     [self clearUserDataText];                // also sets font, etc
@@ -41,8 +49,7 @@
 	// [self alarmRefresh:self]; // TODO: This would make much more sense are part of openSerialPort (model-side)
 }
 
-// Make the app terminate (quit) if its main window is closed
-// NOTE: This delegate call happens AFTER the window has already closed
+// Make the app terminate if its main window is closed.
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
 {
 	return YES;
@@ -53,7 +60,6 @@
 	[self.telemetryParser closeSerialPort];
 }
 
-// TODO: refactor to call a model method. ALSO, use a more indicative name for the method.
 - (IBAction) refreshButton:(id)sender {
     [self.telemetryParser refreshSerialDeviceList];
     [self.serialDeviceCombo noteNumberOfItemsChanged]; // reloadData is not sufficient
@@ -68,7 +74,8 @@
 }
 
 
-/// IBAction methods
+/////////////////////////
+/// ACTION METHODS
 
 - (IBAction) clearUserData:(id)sender
 {
@@ -91,8 +98,57 @@
     }
 }
 
+// TODO: Should use an OutletCollection to simply this mess ...
+- (IBAction) alarmSet:(id)sender
+{
+	
+    unsigned char headerByte = 0;
+    struct FrskyAlarmData alarmData;
+    
+    // identified is set in Interface Builder (for each of the Set buttons)
+    if ([[sender identifier] isEqual:@"A1A"])
+    {
+        headerByte = 0xfb;
+        alarmData.value = (unsigned char)[self.alarmCh1AValue intValue];
+        alarmData.greater = (unsigned char)[self.alarmCh1AGreater indexOfSelectedItem];
+        alarmData.level = (unsigned char)[self.alarmCh1ALevel indexOfSelectedItem];
+    }
+    else if ([[sender identifier] isEqual:@"A1B"])
+    {
+        headerByte = 0xfc;
+        alarmData.value = (unsigned char)[self.alarmCh1BValue intValue];
+        alarmData.greater = (unsigned char)[self.alarmCh1BGreater indexOfSelectedItem];
+        alarmData.level = (unsigned char)[self.alarmCh1BLevel indexOfSelectedItem];
+    }
+    else if ([[sender identifier] isEqual:@"A2A"])
+    {
+        headerByte = 0xf9;
+        alarmData.value = (unsigned char)[self.alarmCh2AValue intValue];
+        alarmData.greater = (unsigned char)[self.alarmCh2AGreater indexOfSelectedItem];
+        alarmData.level = (unsigned char)[self.alarmCh2ALevel indexOfSelectedItem];
+    }
+    else if ([[sender identifier] isEqual:@"A2B"])
+    {
+        headerByte = 0xfa;
+        alarmData.value = (unsigned char)[self.alarmCh2BValue intValue];
+        alarmData.greater = (unsigned char)[self.alarmCh2BGreater indexOfSelectedItem];
+        alarmData.level = (unsigned char)[self.alarmCh2BLevel indexOfSelectedItem];
+    }
+    
+    [self.telemetryParser sendAlarmSetPacketWithHeaderByte:headerByte usingAlarmDataCStruct:alarmData];
+}
+
+
+- (IBAction) alarmRefresh:(id)sender
+{
+    [self.telemetryParser requestAlarmSettings];
+}
+
+///
+/////////////////////////
+
 /////////////////////////////////////
-/// BEGIN DELEGATE FUNCTIONS
+/// DELEGATE METHODS
 - (BOOL) telemetryParserShouldProcessFrskyHubData
 {
     return [self.displayMode indexOfSelectedItem] == 3; // hub view
@@ -211,13 +267,6 @@
     [self.bufferCount setIntegerValue:byteCount * ([self.bufferCount maxValue] / FRSKY_TELEM_BUFFER_SIZE)];
 }
 
-///  END DELEGATE FUNCTIONS
-/////////////////////////////////////
-
-
-
-/////////////////////////////////////
-/// NSComboBoxDelegate method(s)
 - (void) comboBoxSelectionDidChange:(NSNotification *)notification
 {
     [self.telemetryParser closeSerialPort];
@@ -226,53 +275,10 @@
                                           ]]; // assume the object is an NSString
 
 }
+/// DELEGATE METHODS
 /////////////////////////////////////
 
 
-- (IBAction) alarmSet:(id)sender
-{
-	
-    unsigned char headerByte = 0;
-    struct FrskyAlarmData alarmData;
-    
-    // identified is set in Interface Builder (for each of the Set buttons)
-    if ([[sender identifier] isEqual:@"A1A"])
-    {
-        headerByte = 0xfb;
-        alarmData.value = (unsigned char)[self.alarmCh1AValue intValue];
-        alarmData.greater = (unsigned char)[self.alarmCh1AGreater indexOfSelectedItem];
-        alarmData.level = (unsigned char)[self.alarmCh1ALevel indexOfSelectedItem];
-    }
-    else if ([[sender identifier] isEqual:@"A1B"])
-    {
-        headerByte = 0xfc;
-        alarmData.value = (unsigned char)[self.alarmCh1BValue intValue];
-        alarmData.greater = (unsigned char)[self.alarmCh1BGreater indexOfSelectedItem];
-        alarmData.level = (unsigned char)[self.alarmCh1BLevel indexOfSelectedItem];
-    }
-    else if ([[sender identifier] isEqual:@"A2A"])
-    {
-        headerByte = 0xf9;
-        alarmData.value = (unsigned char)[self.alarmCh2AValue intValue];
-        alarmData.greater = (unsigned char)[self.alarmCh2AGreater indexOfSelectedItem];
-        alarmData.level = (unsigned char)[self.alarmCh2ALevel indexOfSelectedItem];
-    }
-    else if ([[sender identifier] isEqual:@"A2B"])
-    {
-        headerByte = 0xfa;
-        alarmData.value = (unsigned char)[self.alarmCh2BValue intValue];
-        alarmData.greater = (unsigned char)[self.alarmCh2BGreater indexOfSelectedItem];
-        alarmData.level = (unsigned char)[self.alarmCh2BLevel indexOfSelectedItem];
-    }
-    
-    [self.telemetryParser sendAlarmSetPacketWithHeaderByte:headerByte usingAlarmDataCStruct:alarmData];
-}
-
-
-- (IBAction) alarmRefresh:(id)sender
-{
-    [self.telemetryParser requestAlarmSettings];
-}
 
 
 @end
