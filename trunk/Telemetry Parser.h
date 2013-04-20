@@ -104,7 +104,8 @@ struct FrskyHubData {
 - (void) frskyLinkDataArrivedInCStruct:(struct FrskyLinkData) linkData;
 - (void) frskyUserDataArrivedInString:(NSString *) userData;
 - (void) frskyHubDataArrivedInCStruct:(struct FrskyHubData) hubData;
-- (void) frskyAlarmDataArrivedInCStruct:(struct FrskyAlarmData) alarmData forAlarmIndex:(NSInteger)index;
+- (void) frskyAlarmDataArrivedInCStruct:(struct FrskyAlarmData) alarmData
+                          forAlarmIndex:(NSInteger)index;
 - (void) telemtryDataStreamStatusChangedTo:(NSInteger) newValue;
 - (void) telemetryParserBufferLevelNowAt:(NSInteger)byteCount;
 @end
@@ -112,10 +113,9 @@ struct FrskyHubData {
 
 @interface TelemetryParser : NSObject <NSComboBoxDataSource>
 {
-    
     // Primitive C class variables
-    int _serialPortFileDescriptor;                       // System file descriptor for serial port device access
-	char _serialPortDevicePath[1024];                    // holds full path to /dev/tty.* serial device file
+    int _serialPortFileDescriptor;       // System file descriptor for serial port device access
+	char _serialPortDevicePath[1024];    // holds full path to /dev/tty.* serial device file
     
     unsigned char _telemetryDataBuffer[FRSKY_TELEM_BUFFER_SIZE];
     
@@ -123,28 +123,27 @@ struct FrskyHubData {
     struct FrskyAlarmData _frskyAlarmsStruct[4];
     struct FrskyHubData _frskyHubDataStruct;
     
-    // No external access to these, so don't bother with prperties ...
-    NSTimer *_dataPollingTimer;
+    // Doesn't make sense to me to have setter/getters for these ... (so they're not properties)
+    NSTimer *_dataPollingTimer; // initialised in openSerialPort, destroyed in closeSerialPort
 	BOOL _dataPollingTimerEventInProgress;
-
 }
 
-@property (nonatomic) NSInteger telemetryDataBufferUsage; // The number of bytes grabbed in last serial port read() operation (for buffer use display)
+@property (nonatomic) NSInteger telemetryDataBufferUsage;   // in bytes
 
-@property (nonatomic) NSInteger telemtryDataStreamStatus;   // 3 = no data (in too long a time)
-                                                            // 2 = pause in data data
-                                                            // 1 = data flowing in steadily
+@property (nonatomic) NSInteger telemtryDataStreamStatus;   // DATA_STREAM_STOPPED
+                                                            // DATA_STREAM_PAUSED
+                                                            // DATA_STREAM_FLOWING
 
 // delegate instances should be weak, to avoid "reference cycles" with deallocated delegate objects
 @property (nonatomic, weak) id <TelemtryParserDelegate> delegate;
 
 - (void) refreshSerialDeviceList;
-- (BOOL) openSerialPort: (NSString *) deviceName;  // Device file's basename
+- (BOOL) openSerialPort: (NSString *) deviceName;  // serial device file's path basename
 - (void) closeSerialPort;
 
-- (void) sendAlarmSetPacketWithHeaderByte:(unsigned char)headerByte usingAlarmDataCStruct:(struct FrskyAlarmData) alarmData;
+- (void) sendAlarmSetPacketWithHeaderByte:(unsigned char)headerByte
+                    usingAlarmDataCStruct:(struct FrskyAlarmData) alarmData;
 - (void) requestAlarmSettings;
-
 
 // NSComboBoxDataSource methods
 - (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index;
