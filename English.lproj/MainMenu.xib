@@ -1519,7 +1519,6 @@
 											<string key="NSFrame">{{76, 6}, {344, 32}}</string>
 											<reference key="NSSuperview" ref="373613192"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="636354588">
 												<int key="NSCellFlags">67108864</int>
@@ -1953,7 +1952,7 @@
 															<string key="NSFrameSize">{440, 223}</string>
 															<reference key="NSSuperview" ref="699332242"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="468478412"/>
+															<reference key="NSNextKeyView" ref="278886850"/>
 															<object class="NSTextContainer" key="NSTextContainer" id="832047717">
 																<object class="NSLayoutManager" key="NSLayoutManager">
 																	<object class="NSTextStorage" key="NSTextStorage">
@@ -2079,7 +2078,7 @@
 											<string key="NSFrame">{{18, 9}, {457, 225}}</string>
 											<reference key="NSSuperview" ref="363295638"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="278886850"/>
+											<reference key="NSNextKeyView" ref="699332242"/>
 											<int key="NSsFlags">133138</int>
 											<reference key="NSVScroller" ref="468478412"/>
 											<reference key="NSHScroller" ref="278886850"/>
@@ -3048,14 +3047,6 @@
 					<int key="connectionID">818</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">alarmRefresh:</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="824679099"/>
-					</object>
-					<int key="connectionID">821</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">alarmCh1AStepper</string>
 						<reference key="source" ref="566249779"/>
@@ -3334,6 +3325,14 @@
 						<reference key="destination" ref="149352282"/>
 					</object>
 					<int key="connectionID">1213</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">alarmRefresh:</string>
+						<reference key="source" ref="566249779"/>
+						<reference key="destination" ref="824679099"/>
+					</object>
+					<int key="connectionID">1215</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -5325,7 +5324,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1213</int>
+			<int key="maxID">1215</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5338,6 +5337,7 @@
 						<string key="clearUserData:">id</string>
 						<string key="dataModeSelected:">id</string>
 						<string key="refreshButton:">id</string>
+						<string key="testAction:">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="alarmRefresh:">
@@ -5359,6 +5359,10 @@
 						<object class="IBActionInfo" key="refreshButton:">
 							<string key="name">refreshButton:</string>
 							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="testAction:">
+							<string key="name">testAction:</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
