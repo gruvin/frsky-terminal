@@ -24,6 +24,16 @@
 
 #import "FrSky Terminal.h"
 
+
+// Private properties/methods
+@interface FrSky_Terminal()
+@property (assign) IBOutlet NSWindow *window;
+
+// Declare our model -- an instance of the TelemetryParser class.
+// Lazy instantiation occurs in the getter for this property.
+@property (strong, nonatomic) TelemetryParser *telemetryParser;
+@end
+
 @implementation FrSky_Terminal
 
 // Custom getter to effect automatic lazy instantiation
@@ -225,7 +235,8 @@
 
 }
 
-- (void) frskyAlarmDataArrivedInCStruct:(struct FrskyAlarmData) alarmData forAlarmIndex:(NSInteger)index
+- (void) frskyAlarmDataArrivedInCStruct:(struct FrskyAlarmData)
+                alarmData forAlarmIndex:(NSInteger)index
 {
     switch (index)
     {
@@ -270,11 +281,16 @@
 
 - (void) comboBoxSelectionDidChange:(NSNotification *)notification
 {
+    // We only have a single combo box in this controller/delegate's care, but we could
+    // set an identifier in Interface Builder and ...
+    // if ([[[notification object] identifier] isEqualToString:@"serialDeviceList"])
+    // {
     [self.telemetryParser closeSerialPort];
-    [self.telemetryParser openSerialPort:[[self.serialDeviceCombo dataSource] comboBox:self.serialDeviceCombo
-                                                             objectValueForItemAtIndex:[self.serialDeviceCombo indexOfSelectedItem]
-                                          ]]; // assume the object is an NSString
-
+    [self.telemetryParser openSerialPort:[
+        [self.serialDeviceCombo dataSource] comboBox:self.serialDeviceCombo
+                           objectValueForItemAtIndex:[self.serialDeviceCombo indexOfSelectedItem]
+                                          ]]; // assume returned objectValue is an NSString
+    // }
 }
 
 /// DELEGATE METHODS
