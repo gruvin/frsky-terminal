@@ -21,17 +21,13 @@
 //  along with FrSky Terminal in a file named COPYING.  
 //	If not, see <http://www.gnu.org/licenses/>.
 //
-
-
-// APPLICATION STRUCTURE
-/*
-    This app was originally thrown together in a blur of trying to learn Xcode v3.2 and
-    Objective-C for the first time, in 2010. It was later updated to use newer Xcode 4 conventions, 
-    like automatic property synthesis and ARC instead of garbage collection,  etc. Later still 
-    (2013) the learning curve extended to making the program fully comply with the MVC design 
-    pattern -- enabled for the most part by protocols and delegates.
-                                                                                    -- Gruvin.
- */
+// AUTHOR NOTES:
+// This app was originally thrown together in a blur of trying to learn Xcode v3.2 and
+// Objective-C for the first time, in 2010. It was later updated to use newer Xcode 4 conventions,
+// like automatic property synthesis and ARC instead of garbage collection,  etc. Later still
+// (2013) the learning curve extended to making the program fully comply with the MVC design
+// pattern -- enabled for the most part by using protocols and delegates.
+//                                                                                    -- Gruvin.
 
 
 #import <Cocoa/Cocoa.h>
@@ -49,14 +45,9 @@
 
 @interface FrSky_Terminal : NSObject <NSApplicationDelegate, NSComboBoxDelegate, TelemtryParserDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
-
-// Declare our model -- an instance of the TelemetryParser class.
-// Lazy instantiation occurs in the getter for this property.
-@property (strong, nonatomic) TelemetryParser *telemetryParser;
-
 /////////////////////
 // OUTLETS
+
 @property (weak, nonatomic) IBOutlet NSComboBox *serialDeviceCombo;
 
 @property (weak, nonatomic) IBOutlet NSLevelIndicatorCell *signalLevel;
@@ -106,6 +97,7 @@
 @property (weak, nonatomic) IBOutlet NSTextField *frskyHubTemp2;
 @property (weak, nonatomic) IBOutlet NSTextField *frskyHubData;
 @property (weak, nonatomic) IBOutlet NSTextField *frskyHubBaroAlt;
+
 ///
 /////////////////////
 

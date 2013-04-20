@@ -131,25 +131,21 @@ struct FrskyLinkData {
 }
 
 @property (nonatomic) NSInteger telemetryDataBufferUsage; // The number of bytes grabbed in last serial port read() operation (for buffer use display)
-@property (nonatomic) NSInteger telemtryDataStreamStatus; // 3 = no data (in too long a time), 2 = pause in data data, 1 = data flowing in steadily
 
-@property (nonatomic, weak) id <TelemtryParserDelegate> delegate;   // delegate instances should be weak, to avoid "reference cycles" with deallocated delegate objects
+@property (nonatomic) NSInteger telemtryDataStreamStatus;   // 3 = no data (in too long a time)
+                                                            // 2 = pause in data data
+                                                            // 1 = data flowing in steadily
 
-@property (readonly) NSArray *serialDevicesList;        // custom getter will query the OS for the available ports when (_serialDevicesList == nil);
+// delegate instances should be weak, to avoid "reference cycles" with deallocated delegate objects
+@property (nonatomic, weak) id <TelemtryParserDelegate> delegate;
 
-- (void) dataPollingEvent: (NSTimer *) theTimer;
-- (BOOL) openSerialPort: (NSString *) deviceName;       // Device name should not include /dev/ prefix. Just the device basename.
+- (void) refreshSerialDeviceList;
+- (BOOL) openSerialPort: (NSString *) deviceName;  // Device file's basename
 - (void) closeSerialPort;
 
-- (void) parseTelemetryByte: (unsigned char) thisByte;
-- (void) parseFrskyPacket: (unsigned char *) packetBuffer withByteCount: (int) byteCount;
-- (void) parseTelemHubByte: (unsigned char) thisByte;
-
-- (void) sendPacket: (unsigned char *)packetBuf withByteCount: (int)length;
 - (void) sendAlarmSetPacketWithHeaderByte:(unsigned char)headerByte usingAlarmDataCStruct:(struct FrskyAlarmData) alarmData;
 - (void) requestAlarmSettings;
 
-- (void) refreshSerialDeviceList;
 
 // NSComboBoxDataSource methods
 - (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index;

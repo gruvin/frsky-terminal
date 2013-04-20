@@ -1519,6 +1519,7 @@
 											<string key="NSFrame">{{76, 6}, {344, 32}}</string>
 											<reference key="NSSuperview" ref="373613192"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="636354588">
 												<int key="NSCellFlags">67108864</int>
@@ -1952,7 +1953,7 @@
 															<string key="NSFrameSize">{440, 223}</string>
 															<reference key="NSSuperview" ref="699332242"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="278886850"/>
+															<reference key="NSNextKeyView" ref="468478412"/>
 															<object class="NSTextContainer" key="NSTextContainer" id="832047717">
 																<object class="NSLayoutManager" key="NSLayoutManager">
 																	<object class="NSTextStorage" key="NSTextStorage">
@@ -2078,7 +2079,7 @@
 											<string key="NSFrame">{{18, 9}, {457, 225}}</string>
 											<reference key="NSSuperview" ref="363295638"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="699332242"/>
+											<reference key="NSNextKeyView" ref="278886850"/>
 											<int key="NSsFlags">133138</int>
 											<reference key="NSVScroller" ref="468478412"/>
 											<reference key="NSHScroller" ref="278886850"/>
@@ -5317,6 +5318,7 @@
 				<string key="895.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<dictionary class="NSMutableDictionary" key="906.IBAttributePlaceholdersKey"/>
 				<string key="906.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="906.userInterfaceItemIdentifier">serialDeviceList</string>
 				<string key="907.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>

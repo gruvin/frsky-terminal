@@ -8,6 +8,18 @@
 
 #import "Telemetry Parser.h"
 
+// Priate properties/methods
+@interface TelemetryParser()
+@property (readonly) NSArray *serialDevicesList;        // custom getter will query the OS for the available ports when (_serialDevicesList == nil);
+
+- (void) dataPollingEvent: (NSTimer *) theTimer;
+- (void) parseTelemetryByte: (unsigned char) thisByte;
+- (void) parseFrskyPacket: (unsigned char *) packetBuffer withByteCount: (int) byteCount;
+- (void) parseTelemHubByte: (unsigned char) thisByte;
+- (void) sendPacket: (unsigned char *)packetBuf withByteCount: (int)length;
+
+@end
+
 @implementation TelemetryParser
 
 /**************
