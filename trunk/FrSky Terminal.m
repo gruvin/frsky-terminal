@@ -104,7 +104,8 @@
     unsigned char headerByte = 0;
     struct FrskyAlarmData alarmData;
     
-    // identified is set in Interface Builder (for each of the Set buttons)
+    // identifier is set in Interface Builder (for each of the Set buttons)
+    // sender is one of the "Set" buttons
     if ([[sender identifier] isEqual:@"A1A"])
     {
         headerByte = 0xfb;

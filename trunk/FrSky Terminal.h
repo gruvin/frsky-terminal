@@ -57,7 +57,7 @@
 
 // Main view object properties
 @property (weak, nonatomic) IBOutlet NSComboBox *serialDeviceCombo;
-@property (unsafe_unretained) IBOutlet NSTextView *userData; // TextViews cannot be 'weak, nonatomic'. IB uses unsafe_unretainedi, instead.
+@property (unsafe_unretained) IBOutlet NSTextView *userData; // TextViews cannot be 'weak, nonatomic'. IB uses unsafe_unretained, instead.
 @property (weak, nonatomic) IBOutlet NSTextField *myLabel;
 @property (weak, nonatomic) IBOutlet NSTextField *textA1;
 @property (weak, nonatomic) IBOutlet NSTextField *textA2;
