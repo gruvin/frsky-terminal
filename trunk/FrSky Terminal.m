@@ -166,7 +166,7 @@
     [(NSTextField *)[[self.alarmSettingsBox contentView] viewWithTag:tagOfRelatedTextField]
         setIntValue:[sender intValue]];
     
-    [self alarmSet:sender];
+    [self alarmSet:sender]; // to have this change sent to the Fr-Sky Tx module
     
 }
 
@@ -176,25 +176,21 @@
     unsigned char headerByte = 0;
     struct FrskyAlarmData alarmData;
     
-    /* tags are set on alarm setting UI "Alarm Settings" views, disabled/enaabled, less/greater, value, stepper ...
-       tags =
-              9  10  11  12
-             13  14  15  16
-              1   2   3   4
-              5   6   7   8                                  */
-    // 'sender' is any one of those same views:
+    /* tags are set on alarm setting UI "Alarm Settings" views, disabled/enaabled, less/greater, value, stepper
+       as follows ...
+              Ch1 Alarm A tags=  9  10  11  12
+              Ch1 Alarm B tags= 13  14  15  16
+              Ch2 Alarm A tags=  1   2   3   4
+              Ch2 Alarm B tags=  5   6   7   8                              */
+    // 'sender' is any one of those same views, including the steppers.
 
     NSView *alarmViews = [self.alarmSettingsBox contentView];
 
-    NSUInteger tagOfFirstViewOnThisRow = ((([sender tag]-1) / 4) * 4) + 1;      // tag of first UI view in sender's layout row
-
+    NSUInteger tagOfFirstViewOnThisRow = ((([sender tag]-1) / 4) * 4) + 1;
+    
     NSUInteger rowNumber = (([sender tag]-1) / 4);
-    
-    NSStepper *thisRowsStepper = [alarmViews viewWithTag:tagOfFirstViewOnThisRow+3];
-    
     headerByte = (unsigned char)(0xf9 + rowNumber);
 
-    
     // Set the C Struct values
     alarmData.level   = (unsigned char)[(NSPopUpButton *)[alarmViews
                                viewWithTag:tagOfFirstViewOnThisRow + 0] indexOfSelectedItem];
@@ -206,11 +202,14 @@
                                viewWithTag:tagOfFirstViewOnThisRow + 2] intValue];
 
     // Update this row's stepper value to the same as the text field's intValue
+    NSStepper *thisRowsStepper = [alarmViews viewWithTag:tagOfFirstViewOnThisRow+3];
     [thisRowsStepper setIntValue:(int)alarmData.value];
     
     if (DEBUG) NSLog(@"AlarmData=H:%02x %d, %d, %d", headerByte, alarmData.level, alarmData.greater, alarmData.value);
     
+    // Send new settings to the Fr-Sky Tx moudle
     [self.telemetryParser sendAlarmSetPacketWithHeaderByte:headerByte usingAlarmDataCStruct:alarmData];
+
 }
 
 
