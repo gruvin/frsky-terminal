@@ -63,6 +63,7 @@
 @property (weak, nonatomic) IBOutlet NSStepper *alarmCh1BStepper;
 @property (weak, nonatomic) IBOutlet NSStepper *alarmCh2AStepper;
 @property (weak, nonatomic) IBOutlet NSStepper *alarmCh2BStepper;
+@property (weak, nonatomic) IBOutlet NSBox *alarmSettingsBox;
 
 // Hub Data view outlets
 @property (weak, nonatomic) IBOutlet NSTextField *frskyHubLattitude;
@@ -158,42 +159,56 @@
     }
 }
 
+- (IBAction)stepperValueHasChanged:(NSStepper *)sender {
+    
+    NSUInteger tagOfRelatedTextField = ((([sender tag]-1) / 4) * 4) + 3;
+    
+    [(NSTextField *)[[self.alarmSettingsBox contentView] viewWithTag:tagOfRelatedTextField]
+        setIntValue:[sender intValue]];
+    
+    [self alarmSet:sender];
+    
+}
+
 - (IBAction) alarmSet:(id)sender
 {
 	
     unsigned char headerByte = 0;
     struct FrskyAlarmData alarmData;
     
-    // identifier is set in Interface Builder (for each of the Set buttons)
-    // sender is one of the "Set" buttons
-    if ([[sender identifier] isEqual:@"A1A"])
-    {
-        headerByte = 0xfb;
-        alarmData.value = (unsigned char)[self.alarmCh1AValue intValue];
-        alarmData.greater = (unsigned char)[self.alarmCh1AGreater indexOfSelectedItem];
-        alarmData.level = (unsigned char)[self.alarmCh1ALevel indexOfSelectedItem];
-    }
-    else if ([[sender identifier] isEqual:@"A1B"])
-    {
-        headerByte = 0xfc;
-        alarmData.value = (unsigned char)[self.alarmCh1BValue intValue];
-        alarmData.greater = (unsigned char)[self.alarmCh1BGreater indexOfSelectedItem];
-        alarmData.level = (unsigned char)[self.alarmCh1BLevel indexOfSelectedItem];
-    }
-    else if ([[sender identifier] isEqual:@"A2A"])
-    {
-        headerByte = 0xf9;
-        alarmData.value = (unsigned char)[self.alarmCh2AValue intValue];
-        alarmData.greater = (unsigned char)[self.alarmCh2AGreater indexOfSelectedItem];
-        alarmData.level = (unsigned char)[self.alarmCh2ALevel indexOfSelectedItem];
-    }
-    else if ([[sender identifier] isEqual:@"A2B"])
-    {
-        headerByte = 0xfa;
-        alarmData.value = (unsigned char)[self.alarmCh2BValue intValue];
-        alarmData.greater = (unsigned char)[self.alarmCh2BGreater indexOfSelectedItem];
-        alarmData.level = (unsigned char)[self.alarmCh2BLevel indexOfSelectedItem];
-    }
+    /* tags are set on alarm setting UI "Alarm Settings" views, disabled/enaabled, less/greater, value, stepper ...
+       tags =
+              9  10  11  12
+             13  14  15  16
+              1   2   3   4
+              5   6   7   8                                  */
+    // 'sender' is any one of those same views:
+
+    NSView *alarmViews = [self.alarmSettingsBox contentView];
+
+    NSUInteger tagOfFirstViewOnThisRow = ((([sender tag]-1) / 4) * 4) + 1;      // tag of first UI view in sender's layout row
+
+    NSUInteger rowNumber = (([sender tag]-1) / 4);
+    
+    NSStepper *thisRowsStepper = [alarmViews viewWithTag:tagOfFirstViewOnThisRow+3];
+    
+    headerByte = (unsigned char)(0xf9 + rowNumber);
+
+    
+    // Set the C Struct values
+    alarmData.level   = (unsigned char)[(NSPopUpButton *)[alarmViews
+                               viewWithTag:tagOfFirstViewOnThisRow + 0] indexOfSelectedItem];
+
+    alarmData.greater = (unsigned char)[(NSPopUpButton *)[alarmViews
+                               viewWithTag:tagOfFirstViewOnThisRow + 1] indexOfSelectedItem];
+
+    alarmData.value   = (unsigned char)[(NSTextField *)[alarmViews
+                               viewWithTag:tagOfFirstViewOnThisRow + 2] intValue];
+
+    // Update this row's stepper value to the same as the text field's intValue
+    [thisRowsStepper setIntValue:(int)alarmData.value];
+    
+    if (DEBUG) NSLog(@"AlarmData=H:%02x %d, %d, %d", headerByte, alarmData.level, alarmData.greater, alarmData.value);
     
     [self.telemetryParser sendAlarmSetPacketWithHeaderByte:headerByte usingAlarmDataCStruct:alarmData];
 }
