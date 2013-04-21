@@ -1440,7 +1440,7 @@
 										<object class="NSButton" id="824679099">
 											<reference key="NSNextResponder" ref="373613192"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{79, 7}, {344, 32}}</string>
+											<string key="NSFrame">{{74, 7}, {344, 32}}</string>
 											<reference key="NSSuperview" ref="373613192"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="336514373"/>
@@ -1475,7 +1475,7 @@
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Alarm Programming</string>
+								<string key="NSContents">Alarm Settings</string>
 								<object class="NSFont" key="NSSupport" id="26">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">11</double>
@@ -2877,134 +2877,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh1ALevel</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="566881816"/>
-					</object>
-					<int key="connectionID">807</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh1BLevel</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="333990369"/>
-					</object>
-					<int key="connectionID">808</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh2ALevel</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="127577203"/>
-					</object>
-					<int key="connectionID">809</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh2BLevel</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="686108679"/>
-					</object>
-					<int key="connectionID">810</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh1AGreater</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="599471834"/>
-					</object>
-					<int key="connectionID">811</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh1BGreater</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="504813263"/>
-					</object>
-					<int key="connectionID">812</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh2AGreater</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="765763452"/>
-					</object>
-					<int key="connectionID">813</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh2BGreater</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="920176479"/>
-					</object>
-					<int key="connectionID">814</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh1AValue</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="833175665"/>
-					</object>
-					<int key="connectionID">815</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh1BValue</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="420779491"/>
-					</object>
-					<int key="connectionID">816</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh2AValue</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="473082237"/>
-					</object>
-					<int key="connectionID">817</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh2BValue</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="538036968"/>
-					</object>
-					<int key="connectionID">818</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh1AStepper</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="563731260"/>
-					</object>
-					<int key="connectionID">824</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh1BStepper</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="322421120"/>
-					</object>
-					<int key="connectionID">825</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh2AStepper</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="765951960"/>
-					</object>
-					<int key="connectionID">826</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">alarmCh2BStepper</string>
-						<reference key="source" ref="566249779"/>
-						<reference key="destination" ref="336514373"/>
-					</object>
-					<int key="connectionID">827</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">signalLevel</string>
 						<reference key="source" ref="566249779"/>
 						<reference key="destination" ref="801478583"/>
@@ -3631,11 +3503,11 @@
 							<reference ref="473082237"/>
 							<reference ref="336514373"/>
 							<reference ref="538036968"/>
-							<reference ref="824679099"/>
 							<reference ref="236318294"/>
 							<reference ref="919923729"/>
 							<reference ref="891105129"/>
 							<reference ref="986363287"/>
+							<reference ref="824679099"/>
 						</array>
 						<reference key="parent" ref="439893737"/>
 					</object>
@@ -5261,23 +5133,6 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="alarmCh1AGreater">NSPopUpButton</string>
-						<string key="alarmCh1ALevel">NSPopUpButton</string>
-						<string key="alarmCh1AStepper">NSStepper</string>
-						<string key="alarmCh1AValue">NSTextField</string>
-						<string key="alarmCh1BGreater">NSPopUpButton</string>
-						<string key="alarmCh1BLevel">NSPopUpButton</string>
-						<string key="alarmCh1BStepper">NSStepper</string>
-						<string key="alarmCh1BValue">NSTextField</string>
-						<string key="alarmCh2AGreater">NSPopUpButton</string>
-						<string key="alarmCh2ALevel">NSPopUpButton</string>
-						<string key="alarmCh2AStepper">NSStepper</string>
-						<string key="alarmCh2AValue">NSTextField</string>
-						<string key="alarmCh2BGreater">NSPopUpButton</string>
-						<string key="alarmCh2BLevel">NSPopUpButton</string>
-						<string key="alarmCh2BStepper">NSStepper</string>
-						<string key="alarmCh2BValue">NSTextField</string>
-						<string key="alarmSettingsBox">NSBox</string>
 						<string key="bufferCount">NSLevelIndicatorCell</string>
 						<string key="dataStreamIndicator">NSLevelIndicatorCell</string>
 						<string key="displayMode">NSPopUpButton</string>
@@ -5305,74 +5160,6 @@
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="alarmCh1AGreater">
-							<string key="name">alarmCh1AGreater</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh1ALevel">
-							<string key="name">alarmCh1ALevel</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh1AStepper">
-							<string key="name">alarmCh1AStepper</string>
-							<string key="candidateClassName">NSStepper</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh1AValue">
-							<string key="name">alarmCh1AValue</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh1BGreater">
-							<string key="name">alarmCh1BGreater</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh1BLevel">
-							<string key="name">alarmCh1BLevel</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh1BStepper">
-							<string key="name">alarmCh1BStepper</string>
-							<string key="candidateClassName">NSStepper</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh1BValue">
-							<string key="name">alarmCh1BValue</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh2AGreater">
-							<string key="name">alarmCh2AGreater</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh2ALevel">
-							<string key="name">alarmCh2ALevel</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh2AStepper">
-							<string key="name">alarmCh2AStepper</string>
-							<string key="candidateClassName">NSStepper</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh2AValue">
-							<string key="name">alarmCh2AValue</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh2BGreater">
-							<string key="name">alarmCh2BGreater</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh2BLevel">
-							<string key="name">alarmCh2BLevel</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh2BStepper">
-							<string key="name">alarmCh2BStepper</string>
-							<string key="candidateClassName">NSStepper</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmCh2BValue">
-							<string key="name">alarmCh2BValue</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="alarmSettingsBox">
-							<string key="name">alarmSettingsBox</string>
-							<string key="candidateClassName">NSBox</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="bufferCount">
 							<string key="name">bufferCount</string>
 							<string key="candidateClassName">NSLevelIndicatorCell</string>
@@ -5477,6 +5264,24 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/FrSky_Terminal.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSTextView</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">toggleQuickLookPreviewPanel:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">toggleQuickLookPreviewPanel:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">toggleQuickLookPreviewPanel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSTextView.h</string>
 					</object>
 				</object>
 			</array>

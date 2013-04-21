@@ -47,22 +47,6 @@
 @property (strong, nonatomic) IBOutlet NSBox *frskyHubBox;
 
 // Alarm settings outlets
-@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh1ALevel;
-@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh1BLevel;
-@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh2ALevel;
-@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh2BLevel;
-@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh1AGreater;
-@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh1BGreater;
-@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh2AGreater;
-@property (weak, nonatomic) IBOutlet NSPopUpButton *alarmCh2BGreater;
-@property (weak, nonatomic) IBOutlet NSTextField *alarmCh1AValue;
-@property (weak, nonatomic) IBOutlet NSTextField *alarmCh1BValue;
-@property (weak, nonatomic) IBOutlet NSTextField *alarmCh2AValue;
-@property (weak, nonatomic) IBOutlet NSTextField *alarmCh2BValue;
-@property (weak, nonatomic) IBOutlet NSStepper *alarmCh1AStepper;
-@property (weak, nonatomic) IBOutlet NSStepper *alarmCh1BStepper;
-@property (weak, nonatomic) IBOutlet NSStepper *alarmCh2AStepper;
-@property (weak, nonatomic) IBOutlet NSStepper *alarmCh2BStepper;
 @property (weak, nonatomic) IBOutlet NSBox *alarmSettingsBox;
 
 // Hub Data view outlets
@@ -299,38 +283,21 @@
 
 }
 
+/*
+ * Updates UI with newly received alarm settings from Fr-Sky Tx module
+ */
 - (void) frskyAlarmDataArrivedInCStruct:(struct FrskyAlarmData)
                 alarmData forAlarmIndex:(NSInteger)index
 {
-    switch (index)
-    {
-        case 0:
-            [self.alarmCh2ALevel selectItemAtIndex:alarmData.level];
-            [self.alarmCh2AGreater selectItemAtIndex:alarmData.greater];
-            [self.alarmCh2AValue setIntValue:alarmData.value];
-            [self.alarmCh2AStepper setIntValue:alarmData.value];
-            break;
-            
-        case 1:
-            [self.alarmCh2BLevel selectItemAtIndex:alarmData.level];
-            [self.alarmCh2BGreater selectItemAtIndex:alarmData.greater];
-            [self.alarmCh2BValue setIntValue:alarmData.value];
-            [self.alarmCh2BStepper setIntValue:alarmData.value];
-            break;
-            
-        case 2:
-            [self.alarmCh1ALevel selectItemAtIndex:alarmData.level];
-            [self.alarmCh1AGreater selectItemAtIndex:alarmData.greater];
-            [self.alarmCh1AValue setIntValue:alarmData.value];
-            [self.alarmCh1AStepper setIntValue:alarmData.value];
-            break;
-            
-        case 3:
-            [self.alarmCh1BLevel selectItemAtIndex:alarmData.level];
-            [self.alarmCh1BGreater selectItemAtIndex:alarmData.greater];
-            [self.alarmCh1BValue setIntValue:alarmData.value];
-            [self.alarmCh1BStepper setIntValue:alarmData.value];
-    }
+    NSView *alarmViews = [self.alarmSettingsBox contentView];
+    
+    NSUInteger tagForIndex = (index * 4) + 1; // first view in alarmsettings row for this index
+
+    [(NSPopUpButton *)[alarmViews viewWithTag:tagForIndex + 0] selectItemAtIndex:alarmData.level];
+    [(NSPopUpButton *)[alarmViews viewWithTag:tagForIndex + 1] selectItemAtIndex:alarmData.greater];
+    [(NSTextField *)[alarmViews viewWithTag:tagForIndex + 2] setIntValue:alarmData.value];
+    [(NSStepper *)[alarmViews viewWithTag:tagForIndex + 3] setIntValue:alarmData.value];
+
 }
 
 - (void) telemtryDataStreamStatusChangedTo:(NSInteger) newValue
