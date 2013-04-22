@@ -42,7 +42,8 @@
 @property (weak, nonatomic) IBOutlet NSBox *telemetryBox;
 
 @property (strong, nonatomic) IBOutlet NSScrollView *userDataTextView;
-@property (unsafe_unretained) IBOutlet NSTextView *userData; // TextViews cannot be 'weak, nonatomic'. IB uses unsafe_unretained, instead.
+@property (unsafe_unretained) IBOutlet NSTextView *userData; // TextViews cannot be 'weak, nonatomic'.
+                                                             // IB uses unsafe_unretained, instead.
 
 @property (strong, nonatomic) IBOutlet NSBox *frskyHubBox;
 
@@ -67,6 +68,8 @@
 // Lazy instantiation occurs in the getter for this property.
 @property (strong, nonatomic) TelemetryParser *telemetryParser;
 
+@property (strong, nonatomic) NSMutableString *userDataString;
+
 @end
 
 @implementation FrSky_Terminal
@@ -78,6 +81,15 @@
     return _telemetryParser;
 }
 
+- (NSMutableString *)userDataString
+{
+    if (!_userDataString)
+    {
+        _userDataString = [[NSMutableString alloc] init];
+    }
+    return _userDataString;
+}
+
 /////////////////////////
 //  S T A R T  -  U P  //
 /////////////////////////
@@ -85,9 +97,7 @@
 {
 
     [self.telemetryParser setDelegate:self]; // make us the delegate for telemetryParser's FrskyParserDelegate protocol methods
-    
-    [self clearUserDataText];                // also sets font, etc
-    
+    [self clearUserData:self];
     [self.serialDeviceCombo setDataSource:self.telemetryParser];
 	[self.serialDeviceCombo setStringValue:@"Select serial port ..."]; // and add a hint for the user
 
@@ -110,21 +120,13 @@
     [self.serialDeviceCombo noteNumberOfItemsChanged]; // reloadData is not sufficient
 }
 
-- (void) clearUserDataText
-{
-    [self.userData setEditable:YES];
-    [self.userData setString:@""];
-    [self.userData setFont:[NSFont fontWithName:@"Monaco" size:12.0]];
-    [self.userData setEditable:NO];
-}
-
 
 /////////////////////////
 /// ACTION METHODS
 
 - (IBAction) clearUserData:(id)sender
 {
-    [self clearUserDataText];
+    [self.userData setString:@""];
 }
 
 // Change views (if needed) when a different data display mode is selected
@@ -139,7 +141,7 @@
     {
         [self.telemetryBox replaceSubview:self.frskyHubBox with:self.userDataTextView];
         
-        [self clearUserDataText];
+        [self clearUserData:sender];
     }
 }
 
@@ -226,28 +228,38 @@
 
 - (void) frskyUserDataArrivedInString:(NSString *) userData
 {
-    [self.userData setEditable:YES];
+
+    NSMutableString *newText = [[NSMutableString alloc] init];
+    
     switch ([self.displayMode indexOfSelectedItem])
     {
         case 0:
-            [self.userData insertText:userData];
+            [newText setString:userData];
             break;
             
         case 1: // HEX
             for (int i=0; i < [userData length]; i++)
-                [self.userData insertText:[NSString stringWithFormat:@"%02x ", [userData characterAtIndex: i]]];
+                [newText setString:[NSString stringWithFormat:@"%02X ", [userData characterAtIndex: i]]];
             break;
             
         case 2: // BCD
             for (int i=0; i < [userData length]; i++) {
                 unsigned char theByte = [userData characterAtIndex: i];
-                [self.userData insertText:[NSString stringWithFormat:@"%1u", (theByte&0x0f)]];
-                [self.userData insertText:[NSString stringWithFormat:@":%1u ", ((theByte&0xf0)>>4)]];
+                [newText setString:[NSString stringWithFormat:@"%1u", (theByte&0x07)]];
+                [newText appendString:[NSString stringWithFormat:@"%1u ", ((theByte&0x70)>>4)]];
             }
             break;
     }
     
-    [self.userData setEditable:NO];
+    // NSTextView's textStorage property is a sub-class of NSMutableAttributedString. We
+    // can thus use appendAttributedString to add text to our 'userData' NSTextView.
+    // (Ultimately, I intend having custom views to better display each data format.)
+    NSMutableAttributedString *textToAppend = [[NSMutableAttributedString alloc] initWithString:newText];
+    NSFont *font = [NSFont fontWithName:@"Monaco" size:13.0f];
+    NSRange range = NSMakeRange(0, [newText length]);
+    [textToAppend addAttribute:NSFontAttributeName value:font range:range];
+    [self.userData.textStorage appendAttributedString:textToAppend];
+
 }
 
 - (void) frskyHubDataArrivedInCStruct:(struct FrskyHubData) hubData
