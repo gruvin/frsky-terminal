@@ -228,24 +228,23 @@
 - (void) frskyUserDataArrivedInString:(NSString *) userData
 {
 
-    NSMutableString *newText = [[NSMutableString alloc] init];
+    NSString *newText = nil;
     
     switch ([self.displayMode indexOfSelectedItem])
     {
         case 0:
-            [newText setString:userData];
+            newText = userData;
             break;
             
         case 1: // HEX
             for (int i=0; i < [userData length]; i++)
-                [newText setString:[NSString stringWithFormat:@"%02X ", [userData characterAtIndex: i]]];
+                newText = [[NSString alloc] initWithFormat:@"%02X ", [userData characterAtIndex: i]];
             break;
             
         case 2: // BCD
             for (int i=0; i < [userData length]; i++) {
                 unsigned char theByte = [userData characterAtIndex: i];
-                [newText setString:[NSString stringWithFormat:@"%1u", (theByte&0x07)]];
-                [newText appendString:[NSString stringWithFormat:@"%1u ", ((theByte&0x70)>>4)]];
+                newText = [[NSString alloc] initWithFormat:@"%1u%1u", (theByte&0x07), ((theByte&0x70)>>4)];
             }
             break;
     }
