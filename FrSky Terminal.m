@@ -96,12 +96,11 @@
 - (void) applicationDidFinishLaunching:(NSNotification*)aNotification
 {
 
-    [self.telemetryParser setDelegate:self]; // make us the delegate for telemetryParser's FrskyParserDelegate protocol methods
+    [self.telemetryParser setDelegate:self]; // make us the delegate for telemetryParser
     [self clearUserData:self];
     [self.serialDeviceCombo setDataSource:self.telemetryParser];
 	[self.serialDeviceCombo setStringValue:@"Select serial port ..."]; // and add a hint for the user
 
-	// [self alarmRefresh:self]; // TODO: This would make much more sense are part of openSerialPort (model-side)
 }
 
 // Make the app terminate if its main window is closed.
