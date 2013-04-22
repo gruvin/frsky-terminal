@@ -244,7 +244,7 @@
         case 2: // BCD
             for (int i=0; i < [userData length]; i++) {
                 unsigned char theByte = [userData characterAtIndex: i];
-                newText = [NSString stringWithFormat:@"%1u%1u", (theByte&0x07), ((theByte&0x70)>>4)];
+                newText = [NSString stringWithFormat:@"%1u%1u ", (theByte&0x07), ((theByte&0x70)>>4)];
             }
             break;
     }
