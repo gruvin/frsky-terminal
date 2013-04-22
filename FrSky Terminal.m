@@ -238,19 +238,19 @@
             
         case 1: // HEX
             for (int i=0; i < [userData length]; i++)
-                newText = [[NSString alloc] initWithFormat:@"%02X ", [userData characterAtIndex: i]];
+                newText = [NSString stringWithFormat:@"%02X ", [userData characterAtIndex: i]];
             break;
             
         case 2: // BCD
             for (int i=0; i < [userData length]; i++) {
                 unsigned char theByte = [userData characterAtIndex: i];
-                newText = [[NSString alloc] initWithFormat:@"%1u%1u", (theByte&0x07), ((theByte&0x70)>>4)];
+                newText = [NSString stringWithFormat:@"%1u%1u", (theByte&0x07), ((theByte&0x70)>>4)];
             }
             break;
     }
     
-    // NSTextView's textStorage property is a sub-class of NSMutableAttributedString. We
-    // can thus use appendAttributedString to add text to our 'userData' NSTextView.
+    // NSTextView's textStorage property is a sub-class of NSMutableAttributedString. We can thus use
+    // appendAttributedString to add text to our 'userData' NSTextView.
     // (Ultimately, I intend having custom views to better display each data format.)
     NSMutableAttributedString *textToAppend = [[NSMutableAttributedString alloc] initWithString:newText];
     NSFont *font = [NSFont fontWithName:@"Monaco" size:13.0f];
